@@ -109,7 +109,7 @@ if pacman -Qi $package &> /dev/null; then
 
 else
 
-	sudo pacman -S --noconfirm --needed grep sed bash curl pacman jshon expac wget git
+	sudo pacman -S --noconfirm --needed grep sed bash curl pacman jshon expac
 
 	[ -d /tmp/packer ] && rm -rf /tmp/packer
 
@@ -189,13 +189,13 @@ echo "################################################################"
 
 #software from 'normal' repositories
 sudo pacman -S --noconfirm --needed curl bash-completion vim
-sudo pacman -S --noconfirm --needed evince firefox
+sudo pacman -S --noconfirm --needed evince firefox xorg-xbacklight
 sudo pacman -S --noconfirm --needed gimp git gksu glances
-sudo pacman -S --noconfirm --needed gnome-font-viewer
-sudo pacman -S --noconfirm --needed gparted
-sudo pacman -S --noconfirm --needed hardinfo hddtemp htop irssi
+sudo pacman -S --noconfirm --needed gnome-font-viewer python-psutil
+sudo pacman -S --noconfirm --needed gparted cmus mpc python-netifaces
+sudo pacman -S --noconfirm --needed hardinfo hddtemp htop irssi python-requests
 sudo pacman -S --noconfirm --needed lm_sensors lsb-release mpv
-sudo pacman -S --noconfirm --needed numlockx 
+sudo pacman -S --noconfirm --needed numlockx xorg-xset libnotify
 sudo pacman -S --noconfirm --needed redshift ristretto sane screenfetch scrot 
 sudo pacman -S --noconfirm --needed simple-scan simplescreenrecorder sysstat 
 sudo pacman -S --noconfirm --needed transmission-cli transmission-gtk rxvt-unicode
