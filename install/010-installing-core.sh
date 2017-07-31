@@ -147,7 +147,7 @@ rm /mnt/020-configuring-core.sh
 print_message "Complete"
 
 clear
-print_message "Rebooting"
-sleep 1
+print_message "Rebooting, please wait..."
+sleep 10
 
 reboot

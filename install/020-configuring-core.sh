@@ -166,6 +166,8 @@ useradd -m -g users -G wheel,storage,power -s /bin/bash $NEW_USER_NAME
 passwd $NEW_USER_NAME
 sed -i "0,/# %wheel/s//%wheel/" /etc/sudoers
 
+printf "\n"
+
 cd "/home/$NEW_USER_NAME"
 git clone https://github.com/BardFusion/ArchConfig.git >> /home/install.log
 chmod +x "/home/$NEW_USER_NAME/ArchConfig/install/030-installing-base.sh"
