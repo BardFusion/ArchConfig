@@ -219,6 +219,8 @@ sudo pacman -S --noconfirm --needed arandr
 sudo pacman -S --noconfirm --needed xorg-xrandr
 sudo pacman -S --noconfirm --needed gvfs
 sudo pacman -S --noconfirm --needed volumeicon
+sudo pacman -S --noconfirm --needed rofi 
+sudo pacman -S --noconfirm --needed udevil 
 
 # installation of zippers and unzippers
 sudo pacman -S --noconfirm --needed unrar zip unzip sharutils
@@ -257,3 +259,18 @@ sudo pacman -S --noconfirm --needed ttf-inconsolata
 echo "################################################################"
 echo "#########   distro specific software installed  ################"
 echo "################################################################"
+
+packer -S ttf-font-awesome
+
+# clone
+git clone https://github.com/powerline/fonts.git
+# install
+cd fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts
+
+cd $HOME"/.config/i3"
+
+git clone git://github.com/tobi-wan-kenobi/bumblebee-status

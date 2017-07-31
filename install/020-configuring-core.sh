@@ -116,8 +116,6 @@ print_message "Complete"
 clear
 print_message "Installing bootloader"
 
-pacman -S --noconfirm udevil >> /home/install.log
-
 if [[ "$boot_type" == "BIOS" ]]
 then
     print_message "Generating cpio init"

@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-scrot /tmp/screen.png
+# Take a screenshot
+scrot /tmp/screen_locked.png
 
-convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
-[[ -f ~/.config/i3/lock.png ]] && convert /tmp/screen.png  ~/.config/i3/lock.png -gravity center -composite -matte /tmp/screen.png
+# Pixellate it 50x
+mogrify -scale 10% -scale 1000% /tmp/screen_locked.png
 
-i3lock -e -i /tmp/screen.png
+# Lock the screen, displaying the pixellated image
+i3lock -e -i /tmp/screen_locked.png
+
+# Turn the screen off after a delay
+sleep 60; pgrep i3lock && xset dpms force off
