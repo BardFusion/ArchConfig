@@ -1,41 +1,47 @@
-*foreground: #00cc00
-*foreground_bold: #a8a19f
-*cursor: #a8a19f
-!!background      = #1b1918
-!!*background: rgba(0, 0, 0, .7)
+! special
+*.foreground:   #93a1a1
+*.background:   #002b36
+*.cursorColor:  #93a1a1
 
-!! black
-*color0: #1b1918
-*color8: #766e6b
-!! red
-*color1: #f22c40
-*color9: #f22c40
-!! green
-*color2: #5ab738
-*color10: #5ab738
-!! yellow
-*color3: #d5911a
-*color11: #d5911a
-!! blue
-*color4: #407ee7
-*color12: #407ee7
-!! magenta
-*color5: #6666ea
-*color13: #6666ea
-!! cyan
-*color6: #00ad9c
-*color14: #00ad9c
-!! white
-*color7: #a8a19f
-*color15: #f1efee
+! black
+*.color0:       #002b36
+*.color8:       #657b83
 
-URxvt.intensityStyles:	false
-URxvt.background:       [70]#000000
-URxvt.depth:		32
-URxvt.scrollBar:	false
-URxvt.cursorColor:	white
-URxvt.url-launcher:	/usr/bin/xdg-open
-URxvt.matcher.button:	1
+! red
+*.color1:       #dc322f
+*.color9:       #dc322f
+
+! green
+*.color2:       #859900
+*.color10:      #859900
+
+! yellow
+*.color3:       #b58900
+*.color11:      #b58900
+
+! blue
+*.color4:       #268bd2
+*.color12:      #268bd2
+
+! magenta
+*.color5:       #6c71c4
+*.color13:      #6c71c4
+
+! cyan
+*.color6:       #2aa198
+*.color14:      #2aa198
+
+! white
+*.color7:       #93a1a1
+*.color15:      #fdf6e3
+
+URxvt.intensityStyles:	    false
+URxvt.background:           black
+URxvt.depth:		        32
+URxvt.scrollBar:	        false
+URxvt.cursorColor:	        white
+URxvt.url-launcher:	        /usr/bin/xdg-open
+URxvt.matcher.button:	    1
 URxvt.resize-font.smaller:	C-Down
 URxvt.resize-font.bigger:	C-Up
-URxvt.colorUL:		#4682B4
+URxvt.colorUL:		        blue
