@@ -164,6 +164,7 @@ else
 	cp $HOME"/ArchConfig/config/i3/lock.sh" $HOME"/.config/i3/"
 	chmod +x $HOME"/.config/i3/lock.sh"
 	cp $HOME"/ArchConfig/config/compton.conf" $HOME"/.config/"
+	cp -r $HOME"/ArchConfig/config/wallpapers" $HOME"/Pictures/"
 
 	cp $HOME"/ArchConfig/config/.xinitrc" $HOME"/"
 	cp $HOME"/ArchConfig/config/.bash_profile" $HOME"/"
