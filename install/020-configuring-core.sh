@@ -107,7 +107,7 @@ sed -i "s/localhost./tmp./g" /etc/hosts
 sed -i "s/localhost/localhost ${HOST_NAME}/g" /etc/hosts
 sed -i "s/tmp./localhost./g" /etc/hosts
 
-pacman -S --noconfirm networkmanager >> /home/install.log
+pacman -S --noconfirm networkmanager git wget >> /home/install.log
 printf "\n"
 systemctl enable NetworkManager
 
@@ -165,6 +165,9 @@ useradd -m -g users -G wheel,storage,power -s /bin/bash $NEW_USER_NAME
 
 passwd $NEW_USER_NAME
 sed -i "0,/# %wheel/s//%wheel/" /etc/sudoers
+
+cd "/home/$NEW_USER_NAME"
+git clone https://github.com/BardFusion/ArchConfig.git
 
 print_message "Complete"
 
