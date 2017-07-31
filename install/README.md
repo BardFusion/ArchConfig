@@ -1,8 +1,3 @@
-# Introduction
-
-Over the years i have blablabla
-blablabla this is now the result
-
 ## Installation
 
 Currently based on the 2017.07.01-x86\_64.iso
