@@ -89,7 +89,7 @@ case $GPU_TYPE in
 esac
 
 # Custom LibInput touchpad driver settings 
-sudo cp ../config/30-touchpad.conf /etc/X11/xorg.conf.d/
+sudo cp $HOME"/ArchConfig/config/30-touchpad.conf" /etc/X11/xorg.conf.d/
 
 echo "################################################################"
 echo "###################    xorg installed     ######################"
@@ -160,14 +160,14 @@ else
 	if pacman -Qi $package &> /dev/null; then
 	
 	mkdir -p $HOME"/.config/i3"
-	cp ../config/i3/config $HOME"/.config/i3/"
-	cp ../config/i3/lock.sh $HOME"/.config/i3/"
+	cp $HOME"/ArchConfig/config/i3/config" $HOME"/.config/i3/"
+	cp $HOME"/ArchConfig/config/i3/lock.sh" $HOME"/.config/i3/"
 	chmod +x $HOME"/.config/i3/lock.sh"
-	cp ../config/compton.conf $HOME"/.config/"
+	cp $HOME"/ArchConfig/config/compton.conf" $HOME"/.config/"
 
-	cp ../config/.xinitrc $HOME"/"
-	cp ../config/.bash_profile $HOME"/"
-	cp ../config/.Xdefaults $HOME"/"
+	cp $HOME"/ArchConfig/config/.xinitrc" $HOME"/"
+	cp $HOME"/ArchConfig/config/.bash_profile" $HOME"/"
+	cp $HOME"/ArchConfig/config/.Xdefaults" $HOME"/"
 	
 	echo "################################################################"
 	echo "#########  "$package" has been installed"

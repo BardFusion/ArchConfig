@@ -167,7 +167,9 @@ passwd $NEW_USER_NAME
 sed -i "0,/# %wheel/s//%wheel/" /etc/sudoers
 
 cd "/home/$NEW_USER_NAME"
-git clone https://github.com/BardFusion/ArchConfig.git
+git clone https://github.com/BardFusion/ArchConfig.git >> /home/install.log
+chmod +x "/home/$NEW_USER_NAME/ArchConfig/install/030-installing-base.sh"
+chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
 
 print_message "Complete"
 
