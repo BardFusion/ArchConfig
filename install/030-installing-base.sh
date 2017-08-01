@@ -205,13 +205,20 @@ sudo pacman -S --noconfirm --needed vnstat wget unclutter network-manager-applet
 sudo systemctl enable vnstat
 sudo systemctl start vnstat
 
-# Laptop power savings
-sudo pacman -S --noconfirm --needed tlp tlp-rdw acpi_call smartmontools ethtool
+printf "\n"
+read -p "Install laptop specific power savings? (y/N): " POWER_INSTALL
+printf "\n"
 
-sudo systemctl enable tlp.service
-sudo systemctl enable tlp-sleep.service
-sudo systemctl mask systemd-rfkill.service
-sudo systemctl mask systemd-rfkill.socket
+if [[ "$POWER_INSTALL" == "y" ]]
+then 
+	# Laptop power savings
+	sudo pacman -S --noconfirm --needed tlp tlp-rdw acpi_call smartmontools ethtool
+
+	sudo systemctl enable tlp.service
+	sudo systemctl enable tlp-sleep.service
+	sudo systemctl mask systemd-rfkill.service
+	sudo systemctl mask systemd-rfkill.socket
+fi
 
 #Utilities
 sudo pacman -S --noconfirm --needed feh
