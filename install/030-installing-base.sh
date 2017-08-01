@@ -163,7 +163,6 @@ else
 	cp $HOME"/ArchConfig/config/i3/config" $HOME"/.config/i3/"
 	cp $HOME"/ArchConfig/config/i3/lock.sh" $HOME"/.config/i3/"
 	chmod +x $HOME"/.config/i3/lock.sh"
-	cp $HOME"/ArchConfig/config/compton.conf" $HOME"/.config/"
 	cp -r $HOME"/ArchConfig/config/wallpapers" $HOME"/Pictures/"
 
 	cp $HOME"/ArchConfig/config/.xinitrc" $HOME"/"
@@ -266,6 +265,9 @@ sudo pacman -S --noconfirm --needed ttf-inconsolata
 echo "################################################################"
 echo "#########   distro specific software installed  ################"
 echo "################################################################"
+
+sleep 5
+sudo reboot
 
 # packer -S ttf-font-awesome
 
