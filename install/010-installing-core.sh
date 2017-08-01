@@ -74,13 +74,15 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 print_message "Complete"
 
-mv 020-configuring-core.sh /mnt
+cp 020-configuring-core.sh /mnt
+cp 999-print-functions.sh /mnt
 mv install.log /mnt/home
 arch-chroot /mnt ./020-configuring-core.sh
 clear
 print_message "Cleaning up"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/install.log
 rm /mnt/020-configuring-core.sh
+rm /mnt/999-print-functions.sh
 print_message "Complete"
 
 clear
