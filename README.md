@@ -5,7 +5,8 @@ blablabla this is now the result
 
 ## TODO
 
-0. Inspect / copy files from laptop that are different
+9. categorize needed software
+0. Inspect / copy files from laptop that are different      ### DONE ###
 1. Bumblebee status install / python tweaks
 2. Redshift install / config
 3. General base install review packages needed
@@ -25,3 +26,8 @@ blablabla this is now the result
 12. i3wm manual on website check
 13. scrap conky from install if possible
 14. inspect i3-extras git
+15. Laptop specific delimitations
+16. IRSSI install / config
+17. mpv / youtubedl install /config
+18. chromium / firefox install / config
+19. Mutt email install / config

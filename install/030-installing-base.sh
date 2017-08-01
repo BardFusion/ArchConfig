@@ -260,17 +260,17 @@ echo "################################################################"
 echo "#########   distro specific software installed  ################"
 echo "################################################################"
 
-packer -S ttf-font-awesome
+# packer -S ttf-font-awesome
 
 # clone
-git clone https://github.com/powerline/fonts.git
+# git clone https://github.com/powerline/fonts.git
 # install
-cd fonts
-./install.sh
+# cd fonts
+# ./install.sh
 # clean-up a bit
-cd ..
-rm -rf fonts
+# cd ..
+# rm -rf fonts
 
-cd $HOME"/.config/i3"
+# cd $HOME"/.config/i3"
 
-git clone git://github.com/tobi-wan-kenobi/bumblebee-status
+# git clone git://github.com/tobi-wan-kenobi/bumblebee-status
