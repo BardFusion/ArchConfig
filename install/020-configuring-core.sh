@@ -6,11 +6,7 @@ source ./999-print-functions.sh
 boot_type=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 
 clear
-print_multiline_message "Continueing $boot_type installation" "output is captured in the file '/home/install.log'"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> /home/install.log
-sleep 4
-
-clear
 print_message "Configuring locales"
 
 sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/g' /etc/locale.gen

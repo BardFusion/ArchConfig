@@ -2,7 +2,14 @@
 
 set -e
 
-echo "Creating all folders"
+source ./999-print-functions.sh
+
+clear
+print_message "Installing and configuring base system"
+read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
+
+clear
+print_message "Creating all folders"
 
 [ -d $HOME"/Documents" ] || mkdir -p $HOME"/Documents"
 [ -d $HOME"/Downloads" ] || mkdir -p $HOME"/Downloads"
@@ -10,13 +17,12 @@ echo "Creating all folders"
 [ -d $HOME"/Pictures" ] || mkdir -p $HOME"/Pictures"
 [ -d $HOME"/Videos" ] || mkdir -p $HOME"/Videos"
 
-echo "################################################################"
-echo "#########       personal folders copied         ################"
-echo "################################################################"
+print_message "Complete"
+
+clear
+print_message "Updating mirrorlist"
 
 sudo pacman -S --noconfirm --needed reflector
-
-# finding the fastest archlinux servers
 
 sudo reflector -l 100 -f 50 --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist && sudo cp /tmp/mirrorlist /etc/pacman.d
 
@@ -24,168 +30,83 @@ cat /etc/pacman.d/mirrorlist
 
 sudo pacman -Syu
 
-echo "################################################################"
-echo "###############       mirrorlist updated      ###################"
-echo "################################################################"
+print_message "Complete"
 
-# Xserver install
+clear
+print_message "Installing XORG Server"
 
-echo    "################################################################"
-echo    "####################   1. ATI       ############################"
-echo    "####################   2. NVIDIA    ############################"
-echo    "####################   3. INTEL     ############################"
-echo    "####################   4. VIRTUAL   ############################"
-echo    "####################   5. NONE      ############################"
-echo -e "################################################################\n"
-read -p "Choose the target GPU system: " GPU_TYPE
+print_multiline_message "Available targets:" "1. ATI\t2. NVIDIA\t3. INTEL\t4. VIRTUALBOX\t5. NONE"
+read -p "Choose the target GPU driver: " GPU_TYPE
 
 case $GPU_TYPE in
     1)
-        echo "This is the opensource driver for ATI"
-
-        echo " Xserver setup"
-
-        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit xorg-twm xterm
+        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit
         sudo pacman -S --noconfirm --needed xf86-video-ati 
         ;;
     2)
-        echo "This is the opensource driver for NVIDIA"
-
-        echo " Xserver setup"
-
-        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit xorg-twm xterm
+        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit
         sudo pacman -S --noconfirm --needed xf86-video-nouveau
         ;;
     3)
-        echo "This is the opensource driver for INTEL"
-
-        echo " Xserver setup"
-
-        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit xorg-twm xterm
+        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit
         sudo pacman -S --noconfirm --needed xf86-video-intel
         ;;
     4)
-        echo "This is the opensource driver for VIRTUALBOX"
-
-        echo " Xserver setup"
-
-        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit xorg-twm xterm 
-        echo
-        echo "################################################################"
-        echo "choose virtualbox-guest-modules-arch in the next installation"
-        echo "################################################################"
-
-        sleep 2
-
+        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit 
         sudo pacman -S virtualbox-guest-utils
         ;; 
 	5)
-		echo "This is the base XORG install"
-
-		echo " Xserver setup"
-
-		sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit xorg-twm xterm
+		sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit
 		;;
 esac
 
-# Custom LibInput touchpad driver settings 
-sudo cp $HOME"/ArchConfig/config/30-touchpad.conf" /etc/X11/xorg.conf.d/
-
-echo "################################################################"
-echo "###################    xorg installed     ######################"
-echo "################################################################"
-
-package="packer"
-command="packer"
-
-#----------------------------------------------------------------------------------
-
-#checking if application is already installed or else install with aur helpers
-if pacman -Qi $package &> /dev/null; then
-
-	echo "################################################################"
-	echo "################## "$package" is already installed"
-	echo "################################################################"
-
-else
-
-	sudo pacman -S --noconfirm --needed grep sed bash curl pacman jshon expac
-
-	[ -d /tmp/packer ] && rm -rf /tmp/packer
-
-	mkdir /tmp/packer
-
-	wget https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=packer
-
-	mv PKGBUILD\?h\=packer /tmp/packer/PKGBUILD
-
-	cd /tmp/packer
-
-	makepkg -i /tmp/packer --noconfirm
-
-	[ -d /tmp/packer ] && rm -rf /tmp/packer
-
-	# Just checking if installation was successful
-	if pacman -Qi $package &> /dev/null; then
-	
-	echo "################################################################"
-	echo "#########  "$package" has been installed"
-	echo "################################################################"
-
-	else
-
-	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-	echo "!!!!!!!!!  "$package" has NOT been installed"
-	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
-	fi
-
+if [[ "$LAPTOP_INSTALL" == "y" ]]
+then 
+	# Custom LibInput touchpad driver settings 
+	sudo cp $HOME"/ArchConfig/config/30-touchpad.conf" /etc/X11/xorg.conf.d/
 fi
 
-package="i3-gaps-git"
+print_message "Complete"
 
+clear
+print_message "Installing Packer AUR helper"
+
+sudo pacman -S --noconfirm --needed curl expac grep jshon sed git
+
+[ -d /tmp/packer ] && rm -rf /tmp/packer
+mkdir /tmp/packer
+wget https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=packer
+mv PKGBUILD\?h\=packer /tmp/packer/PKGBUILD
+cd /tmp/packer
+makepkg -i /tmp/packer --noconfirm
+[ -d /tmp/packer ] && rm -rf /tmp/packer
+
+print_message "Complete"
+
+clear
+print_message "Installing i3 window manager with gaps"
+
+packer -S --noconfirm --noedit "i3-gaps-git"
+
+print_message "Moving config files"
+
+mkdir -p $HOME"/.config/i3"
+cp $HOME"/ArchConfig/config/i3/config" $HOME"/.config/i3/"
+cp $HOME"/ArchConfig/config/i3/lock.sh" $HOME"/.config/i3/"
+chmod +x $HOME"/.config/i3/lock.sh"
+cp -r $HOME"/ArchConfig/config/wallpapers" $HOME"/Pictures/"
+
+cp $HOME"/ArchConfig/config/.xinitrc" $HOME"/"
+cp $HOME"/ArchConfig/config/.bash_profile" $HOME"/"
+cp $HOME"/ArchConfig/config/.Xdefaults" $HOME"/"
+
+# Additional required i3 software
 sudo pacman -S --noconfirm --needed i3blocks i3lock i3status
 
-#checking if application is already installed or else install with aur helpers
-if pacman -Qi $package &> /dev/null; then
+print_message "Complete"
 
-	echo "################################################################"
-	echo "################## "$package" is already installed"
-	echo "################################################################"
-
-else
-	packer -S --noconfirm --noedit  $package
-
-	# Just checking if installation was successful
-	if pacman -Qi $package &> /dev/null; then
-	
-	mkdir -p $HOME"/.config/i3"
-	cp $HOME"/ArchConfig/config/i3/config" $HOME"/.config/i3/"
-	cp $HOME"/ArchConfig/config/i3/lock.sh" $HOME"/.config/i3/"
-	chmod +x $HOME"/.config/i3/lock.sh"
-	cp -r $HOME"/ArchConfig/config/wallpapers" $HOME"/Pictures/"
-
-	cp $HOME"/ArchConfig/config/.xinitrc" $HOME"/"
-	cp $HOME"/ArchConfig/config/.bash_profile" $HOME"/"
-	cp $HOME"/ArchConfig/config/.Xdefaults" $HOME"/"
-	
-	echo "################################################################"
-	echo "#########  "$package" has been installed"
-	echo "################################################################"
-
-	else
-
-	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-	echo "!!!!!!!!!  "$package" has NOT been installed"
-	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
-	fi
-
-fi
-
-echo "################################################################"
-echo "###################    i3 core installed  ######################"
-echo "################################################################"
+clear
+print_message "Installing additional software"
 
 #software from 'normal' repositories+
 sudo pacman -S --noconfirm --needed curl bash-completion vim
@@ -204,11 +125,7 @@ sudo pacman -S --noconfirm --needed vnstat wget unclutter network-manager-applet
 sudo systemctl enable vnstat
 sudo systemctl start vnstat
 
-printf "\n"
-read -p "Install laptop specific power savings? (y/N): " POWER_INSTALL
-printf "\n"
-
-if [[ "$POWER_INSTALL" == "y" ]]
+if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
 	# Laptop power savings
 	sudo pacman -S --noconfirm --needed tlp tlp-rdw acpi_call smartmontools ethtool
@@ -231,55 +148,26 @@ sudo pacman -S --noconfirm --needed udevil
 # installation of zippers and unzippers
 sudo pacman -S --noconfirm --needed unrar zip unzip sharutils
 
-
-echo "################################################################"
-echo "###################    core software installed  ################"
-echo "################################################################"
-
 sudo pacman -S --noconfirm --needed cups cups-pdf ghostscript gsfonts libcups hplip system-config-printer 
 
 systemctl enable org.cups.cupsd.service
 systemctl start org.cups.cupsd.service
-
-
-echo "################################################################"
-echo "#########   printer management software installed     ##########"
-echo "################################################################"
 
 #Sound
 sudo pacman -S --noconfirm --needed pulseaudio pulseaudio-alsa pavucontrol
 sudo pacman -S --noconfirm --needed alsa-utils alsa-plugins alsa-lib alsa-firmware
 sudo pacman -S --noconfirm --needed gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly gstreamer
 
-echo "################################################################"
-echo "#########   sound software software installed   ################"
-echo "################################################################"
-
 #Fonts
-
 sudo pacman -S --noconfirm --needed noto-fonts 
 sudo pacman -S --noconfirm --needed ttf-ubuntu-font-family
 sudo pacman -S --noconfirm --needed ttf-droid --noconfirm
 sudo pacman -S --noconfirm --needed ttf-inconsolata
 
-echo "################################################################"
-echo "#########   distro specific software installed  ################"
-echo "################################################################"
+print_message "Complete"
 
-sleep 5
+clear
+print_message "Rebooting, please wait..."
+sleep 10
+
 sudo reboot
-
-# packer -S ttf-font-awesome
-
-# clone
-# git clone https://github.com/powerline/fonts.git
-# install
-# cd fonts
-# ./install.sh
-# clean-up a bit
-# cd ..
-# rm -rf fonts
-
-# cd $HOME"/.config/i3"
-
-# git clone git://github.com/tobi-wan-kenobi/bumblebee-status
