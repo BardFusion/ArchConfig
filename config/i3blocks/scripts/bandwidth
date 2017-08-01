@@ -2,7 +2,8 @@
 # Source: http://www.onlamp.com/pub/a/linux/2000/11/16/LinuxAdmin.html
 
 INTERFACE="$(ip route get 8.8.8.8 | grep -Po '(?<=(dev )).*(?= src)')"
-echo $INTERFACE
+INSTANCE="${BLOCK_INSTANCE}"
+echo $INSTANCE
 
 # ONE_KB=1024
 # ONE_MB=$(echo "${ONE_KB}*1024" | bc -l)
