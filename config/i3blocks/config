@@ -53,11 +53,9 @@ interval=60
 interval=5
 
 [bandwidth-in]
-instance=in
 interval=1
 
 [bandwidth-out]
-instance=out
 interval=1
 
 # [battery]
