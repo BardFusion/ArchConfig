@@ -102,14 +102,11 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# start terminal
-bindsym $mod+Return             exec i3-sensible-terminal
-
 # lock i3 with i3lock
-bindsym $mod+x                  exec $HOME/.config/i3/i3lock-wrapper
+bindsym $mod+x exec $HOME/.config/i3/i3lock-wrapper
 
 # start rofi launcher
-bindsym  $mod+d exec 		rofi -show run -lines 5 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bc "$base01" -bg "$base01" -fg "$base07" -hlbg "$base01" -hlfg "#9575cd" font "System San FRancisco Display 20"
+bindsym  $mod+d exec rofi -show run -lines 5 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bc "$base01" -bg "$base01" -fg "$base07" -hlbg "$base01" -hlfg "#9575cd" font "System San FRancisco Display 20"
 
 #shutdown-menu
 bindsym Control+Mod1+Delete exec /usr/lib/i3blocks/shutdown_menu
@@ -211,7 +208,6 @@ mode "$mode_gaps_outer" {
 # Start i3bar to display a workspace bar
 # Bar
 bar {
-	font pango: System San Francisco Display, FontAwesome 13
 	status_command i3blocks
 	tray_output none
 	position top
@@ -219,11 +215,11 @@ bar {
 		separator 	$base03
 		background 	$base01
     		statusline 	$base05
-		#			border	background	text
-		focused_workspace	$base01 $base01    	$base07
-		active_workspace	$base01 $base02    	$base03
-		inactive_workspace	$base01 $base01    	$base03
-		urgent_workspace	$base01 $base01    	$base08
+		#			border	        background	text
+		focused_workspace	$base01         $base01    	$base07
+		active_workspace	$base01         $base02    	$base03
+		inactive_workspace	$base01         $base01    	$base03
+		urgent_workspace	$base01         $base01    	$base08
   }
 }
 

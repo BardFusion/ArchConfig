@@ -29,17 +29,16 @@
 *color7: #a8a19f
 *color15: #f1efee
 
-URxvt.intensityStyles:	false
-URxvt.background:       [85]#000000
-URxvt.depth:		32
-URxvt.font: 		xft:monospace:size=14
-URxvt.scrollBar:	false
-URxvt.cursorColor:	white
-URxvt.perl-ext-common:	default,matcher,resize-font
-URxvt.perl-lib:		$HOME/.config/Scripts
-URxvt.url-launcher:	/usr/bin/xdg-open
-URxvt.matcher.button:	1
+URxvt.intensityStyles:	    false
+URxvt.background:           [85]#000000
+URxvt.depth:		        32
+URxvt.font: 		        xft:monospace:size=14
+URxvt.scrollBar:	        false
+URxvt.cursorColor:	        white
+URxvt.perl-ext-common:	    default,matcher,resize-font
+URxvt.perl-lib:		        $HOME/.config/Scripts
+URxvt.url-launcher:	        /usr/bin/xdg-open
+URxvt.matcher.button:	    1
 URxvt.resize-font.smaller:	C-Down
 URxvt.resize-font.bigger:	C-Up
-
-URxvt.colorUL:		#4682B4
+URxvt.colorUL:		        #4682B4

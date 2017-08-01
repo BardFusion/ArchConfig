@@ -90,7 +90,12 @@ packer -S --noconfirm --noedit "i3-gaps-git"
 
 print_message "Moving config files"
 
+sudo mkdir -p  /usr/lib/i3blocks
+sudo cp $HOME"/ArchConfig/config/i3blocks/scripts/*" /usr/lib/i3blocks/
+
 mkdir -p $HOME"/.config/i3"
+mkdir -p $HOME"/.config/i3blocks"
+cp $HOME"/ArchConfig/config/i3blocks/config" $HOME"/.config/i3blocks/"
 cp $HOME"/ArchConfig/config/i3/config" $HOME"/.config/i3/"
 cp $HOME"/ArchConfig/config/i3/lock.sh" $HOME"/.config/i3/"
 chmod +x $HOME"/.config/i3/lock.sh"

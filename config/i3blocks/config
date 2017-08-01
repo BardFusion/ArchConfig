@@ -1,0 +1,53 @@
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+
+command=/usr/lib/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[volume]
+label=V
+command=/usr/lib/i3blocks/volume
+interval=once
+signal=1
+color="#CFD2DE"
+
+[wifi]
+interval=2
+label=W 
+
+[iface]
+interval=2
+markup=pango
+
+[disk]
+interval=2
+label=D
+
+[cpu_freq]
+interval=1
+label=C 
+
+[cpu_usage]
+interval=persist
+min_width=M 99%
+markup=pango
+
+[batterybar]
+command=/usr/lib/i3blocks/batterybar -c "#5294E2" -f "#CFD2DE" -a "#EEEEEE" -1 "#EC819E" -2 orange -3 orange -4 yellow -5 yellow -6 "#00FF00" -7 "#00FF00" -8 "#00FF00" -t "#FF0000"
+interval=persist
+markup=pango
+
+[date]
+command=date "+%d-%m-%y"
+interval=10
+label=D 
+
+[time]
+command=date "+%H:%M:%S"
+interval=1 
+label=T
+
+[shutdown_menu]
+full_text=H
+command=/usr/lib/i3blocks/shutdown_menu && echo "P"
