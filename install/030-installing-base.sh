@@ -2,7 +2,7 @@
 
 set -e
 
-source ./999-print-functions.sh
+source ./ArchConfig/install/999-print-functions.sh
 
 clear
 print_message "Installing and configuring base system"
