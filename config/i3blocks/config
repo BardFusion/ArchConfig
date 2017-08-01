@@ -32,13 +32,13 @@ markup=none
 label=VOL
 interval=5
 
-[temperature]
-instance=Core
-interval=5
-
 [cpu]
 label=CPU
 interval=2
+
+[temperature]
+instance=Core
+interval=5
 
 [memory]
 label=RAM
@@ -52,15 +52,13 @@ interval=60
 [time]
 interval=5
 
-# [bandwidth]
-# instance=wlp3s0;in
-# label=
-# interval=1
+[bandwidth-in]
+display=in
+interval=1
 
-# [bandwidth]
-# instance=wlp3s0;out
-# label=
-# interval=1
+[bandwidth-out]
+display=out
+interval=1
 
 # [battery]
 # label=
