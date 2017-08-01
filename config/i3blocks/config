@@ -28,9 +28,28 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-# Part 1
-
 [audio]
+label=VOL
+interval=5
+
+[temperature]
+instance=Core
+interval=5
+
+[cpu]
+label=CPU
+interval=2
+
+[memory]
+label=RAM
+instance=mem;used
+interval=30
+
+[date]
+label=
+interval=60
+
+[time]
 interval=5
 
 # [bandwidth]
@@ -63,24 +82,10 @@ interval=5
 # label=
 # interval=1
 
-# Part 3
-
-[cpu]
-label=CPU
-interval=2
-
-[date]
-label=
-interval=60
-
-[time]
-interval=5
-
 # [display]
 # label=
 # interval=5
 
-# Part 4
 # [feed]
 # instance=http://goo.gl/bR2hcp
 # label=
@@ -93,8 +98,6 @@ interval=5
 # [ip-address]
 # label=
 # interval=60
-
-# Part 5
 
 # [keystate]
 # label=
@@ -114,8 +117,6 @@ interval=5
 # label=
 # interval=10
 
-# Part 6
-
 # [locale]
 # label=
 # interval=once
@@ -125,17 +126,10 @@ interval=5
 # instance=~/.gmx-private
 # interval=60
 
-[memory]
-label=RAM
-instance=mem;used
-interval=30
-
 # [memory]
 # label=
 # instance=swap;total
 # interval=30
-
-# Part 7
 
 # [microphone]
 # label=
@@ -154,8 +148,6 @@ interval=30
 # [packages]
 # label=
 # interval=300
-
-# Part 8
 
 # [playerctl]
 # label=
@@ -176,22 +168,13 @@ interval=30
 # instance=/pub
 # interval=30
 
-# Part 9
-
 # [ssid]
 # label=
 # interval=60
 
-[temperature]
-instance=Core
-label=TEMP
-interval=5
-
 # [user]
 # label=
 # interval=once
-
-# Part 10
 
 # [vpn]
 # label=
@@ -205,7 +188,6 @@ interval=5
 # label=
 # interval=5
 
-# Part 11
 # [usb]
 # instance=PhotoSmart
 # label=
@@ -220,8 +202,6 @@ interval=5
 # label=
 # markup=pango
 # interval=repeat
-
-# Part 12
 
 # [window]
 # command=~/.i3-blocks/blocks/scroll $BLOCK_NAME
