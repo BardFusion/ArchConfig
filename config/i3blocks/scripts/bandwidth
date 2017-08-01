@@ -53,10 +53,10 @@ if [[ "${PREV_IN}" != "" ]] && [[ "${PREV_OUT}" != "" ]]; then
   USAGE_IN=$(FormatNumber "${DIFF_IN}")
   USAGE_OUT=$(FormatNumber "${DIFF_OUT}")
 
-  if [[ "${DISPLAY}" = "in" ]]; then
+  if [[ "${BLOCK_INSTANCE}" = "in" ]]; then
     echo "${USAGE_IN} IN"
     DIFF_TOTAL=$((DIFF_TOTAL+DIFF_IN))
-  elif [[ "${DISPLAY}" = "out" ]]; then
+  elif [[ "${BLOCK_INSTANCE}" = "out" ]]; then
     echo "${USAGE_OUT} OUT"
     DIFF_TOTAL=$((DIFF_TOTAL+DIFF_OUT))
   fi
