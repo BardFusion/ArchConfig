@@ -11,11 +11,11 @@ read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
 clear
 print_message "Creating all folders"
 
-[ -d $HOME"/Documents" ] || mkdir -p $HOME"/Documents"
-[ -d $HOME"/Downloads" ] || mkdir -p $HOME"/Downloads"
-[ -d $HOME"/Music" ] || mkdir -p $HOME"/Music"
-[ -d $HOME"/Pictures" ] || mkdir -p $HOME"/Pictures"
-[ -d $HOME"/Videos" ] || mkdir -p $HOME"/Videos"
+[ -d $HOME/Documents ] || mkdir -p $HOME/Documents
+[ -d $HOME/Downloads ] || mkdir -p $HOME/Downloads
+[ -d $HOME/Music ] || mkdir -p $HOME/Music
+[ -d $HOME/Pictures ] || mkdir -p $HOME/Pictures
+[ -d $HOME/Videos ] || mkdir -p $HOME/Videos
 
 print_message "Complete"
 
@@ -63,7 +63,7 @@ esac
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
 	# Custom LibInput touchpad driver settings 
-	sudo cp $HOME"/ArchConfig/config/30-touchpad.conf" /etc/X11/xorg.conf.d/
+	sudo cp $HOME/ArchConfig/config/30-touchpad.conf /etc/X11/xorg.conf.d/
 fi
 
 print_message "Complete"
@@ -91,19 +91,19 @@ packer -S --noconfirm --noedit "i3-gaps-git"
 print_message "Moving config files"
 
 sudo mkdir -p  /usr/lib/i3blocks
-sudo cp $HOME"/ArchConfig/config/i3blocks/scripts/*" /usr/lib/i3blocks/
+sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
 
-mkdir -p $HOME"/.config/i3"
-mkdir -p $HOME"/.config/i3blocks"
-cp $HOME"/ArchConfig/config/i3blocks/config" $HOME"/.config/i3blocks/"
-cp $HOME"/ArchConfig/config/i3/config" $HOME"/.config/i3/"
-cp $HOME"/ArchConfig/config/i3/lock.sh" $HOME"/.config/i3/"
-chmod +x $HOME"/.config/i3/lock.sh"
-cp -r $HOME"/ArchConfig/config/wallpapers" $HOME"/Pictures/"
+mkdir -p $HOME/.config/i3
+mkdir -p $HOME/.config/i3blocks
+cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
+cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
+cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
+chmod +x $HOME/.config/i3/lock.sh
+cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
 
-cp $HOME"/ArchConfig/config/.xinitrc" $HOME"/"
-cp $HOME"/ArchConfig/config/.bash_profile" $HOME"/"
-cp $HOME"/ArchConfig/config/.Xdefaults" $HOME"/"
+cp $HOME/ArchConfig/config/.xinitrc $HOME/
+cp $HOME/ArchConfig/config/.bash_profile $HOME/
+cp $HOME/ArchConfig/config/.Xdefaults $HOME/
 
 # Additional required i3 software
 sudo pacman -S --noconfirm --needed i3blocks i3lock i3status
