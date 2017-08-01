@@ -31,7 +31,6 @@ markup=none
 # Part 1
 
 [audio]
-label=Audio
 interval=5
 
 # [bandwidth]
@@ -70,8 +69,11 @@ interval=5
 label=CPU
 interval=2
 
-[datetime]
-label=Date
+[date]
+label=
+interval=60
+
+[time]
 interval=5
 
 # [display]
