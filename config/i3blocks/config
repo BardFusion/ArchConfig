@@ -52,10 +52,12 @@ interval=60
 [time]
 interval=5
 
-[bandwidth-in]
+[bandwidth]
+instance=in
 interval=1
 
-[bandwidth-out]
+[bandwidth]
+instance=out
 interval=1
 
 # [battery]
