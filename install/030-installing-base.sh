@@ -88,6 +88,12 @@ print_message "Installing i3 window manager with gaps"
 
 packer -S --noconfirm --noedit "i3-gaps-git"
 
+# Additional required i3 software
+sudo pacman -S --noconfirm --needed i3blocks i3lock i3status
+
+print_message "Complete"
+
+clear
 print_message "Moving config files"
 
 sudo mkdir -p  /usr/lib/i3blocks
@@ -104,9 +110,6 @@ cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
 cp $HOME/ArchConfig/config/.xinitrc $HOME/
 cp $HOME/ArchConfig/config/.bash_profile $HOME/
 cp $HOME/ArchConfig/config/.Xdefaults $HOME/
-
-# Additional required i3 software
-sudo pacman -S --noconfirm --needed i3blocks i3lock i3status
 
 print_message "Complete"
 
