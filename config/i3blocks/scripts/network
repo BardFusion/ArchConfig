@@ -1,23 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-device="${BLOCK_INSTANCE:-wlan0}"
-status=$(cat /sys/class/net/${device}/operstate)
+DEVICE="$(ifconfig | grep -o -P "\b\w+(?=: flags=\d{1,4}<UP,BROADCAST)")"
+DEVICE="$(echo $DEVICE | awk -F " " '{print $1}')"
+# Check if there are devices running
+if [[ ${#DEVICE} == 0 ]]; then exit 1; fi
+
+STATUS=$(cat /sys/class/net/${DEVICE}/operstate)
 
 URGENT_VALUE=20
 
-if [[ "${status}" == "up" ]]; then
-  if [[ -d "/sys/class/net/${device}/wireless" ]]; then
-    quality=$(grep ${device} /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
-    echo "${quality}%"
-    echo "${quality}%"
-    echo ""
+if [[ "${STATUS}" == "up" ]]; then
+  if [[ -d "/sys/class/net/${DEVICE}/wireless" ]]; then
+    QUALITY=$(grep ${DEVICE} /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
+    echo "${DEVICE} ${QUALITY}%"
 
-    if [[ "${quality}" -le "${URGENT_VALUE}" ]]; then
+    if [[ "${QUALITY}" -le "${URGENT_VALUE}" ]]; then
       exit 33
     fi
   else
-    echo "on"
-    echo "on"
-    echo ""
+    echo "${DEVICE} UP"
   fi
 fi

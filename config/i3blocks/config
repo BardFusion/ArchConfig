@@ -88,10 +88,10 @@ interval=60
 [time]
 interval=5
 
-# [network]
-# label=
-# instance=enp4s0f2
-# interval=10
+[network]
+interval=10
+min_width=110
+align=center
 
 # [network]
 # label=
