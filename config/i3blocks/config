@@ -57,19 +57,19 @@ interval=60
 
 [audio]
 label=VOL
-interval=1
+interval=2
 min_width=90
 align=center
 
 [microphone]
 label=MIC
-interval=1
+interval=5
 min_width=90
 align=center
 
 [brightness]
 label=BRT
-interval=1
+interval=5
 min_width=90
 align=center
 
@@ -86,7 +86,7 @@ align=center
 
 [battery]
 label=BAT
-interval=10
+interval=30
 min_width=90
 align=center
 

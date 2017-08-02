@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # One of the following: xrandr, xbacklight, kernel
-METHOD="kernel"
+METHOD="xbacklight"
 
 # Check if xbacklight is installed for probing brightness levels
 command -v xbacklight >/dev/null 2>&1 || { exit 1; }
