@@ -57,19 +57,19 @@ interval=60
 
 [audio]
 label=VOL
-interval=5
+interval=1
 min_width=90
 align=center
 
 [microphone]
 label=MIC
-interval=5
+interval=1
 min_width=90
 align=center
 
 [brightness]
 label=BRT
-interval=5
+interval=1
 min_width=90
 align=center
 
