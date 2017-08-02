@@ -110,6 +110,8 @@ cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
 cp $HOME/ArchConfig/config/.xinitrc $HOME/
 cp $HOME/ArchConfig/config/.bash_profile $HOME/
 cp $HOME/ArchConfig/config/.Xdefaults $HOME/
+cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
+cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
 
 print_message "Complete"
 

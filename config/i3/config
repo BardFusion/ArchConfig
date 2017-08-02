@@ -220,3 +220,6 @@ exec --no-startup-id feh --bg-scale $wallpaper
 
 # Start the compositor
 exec --no-startup-id compton
+
+# Start redshift color manager
+exec --no-startup-id redshift
