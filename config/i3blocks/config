@@ -32,13 +32,13 @@ markup=none
 instance=in
 interval=2
 min_width=110
-align=right
+align=center
 
 [bandwidth]
 instance=out
 interval=2
 min_width=110
-align=right
+align=center
 
 [audio]
 label=VOL
