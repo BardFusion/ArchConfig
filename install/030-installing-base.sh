@@ -136,7 +136,7 @@ sudo systemctl start vnstat
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
 	# Laptop power savings
-	sudo pacman -S --noconfirm --needed tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight
+	sudo pacman -S --noconfirm --needed tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight acpi
 
 	sudo systemctl enable tlp.service
 	sudo systemctl enable tlp-sleep.service

@@ -8,10 +8,10 @@ command -v xbacklight >/dev/null 2>&1 || { exit 1; }
 
 # Left click
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-  xbacklight -inc 5
+  xbacklight -inc 10
 # Right click
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
-  xbacklight -dec 5
+  xbacklight -dec 10
 fi
 
 URGENT_VALUE=10
