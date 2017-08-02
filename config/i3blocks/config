@@ -61,11 +61,11 @@ interval=5
 min_width=90
 align=center
 
-# [microphone]
-# label=MIC
-# interval=5
-# min_width=90
-# align=center
+[microphone]
+label=MIC
+interval=5
+min_width=90
+align=center
 
 [brightness]
 label=BRT
@@ -84,12 +84,12 @@ interval=5
 min_width=50
 align=center
 
-# [memory]
-# label=RAM
-# instance=mem;used
-# interval=30
-# min_width=110
-# align=center
+[memory]
+label=RAM
+instance=mem;used
+interval=30
+min_width=110
+align=center
 
 [battery]
 label=BAT
@@ -97,53 +97,8 @@ interval=10
 min_width=90
 align=center
 
-# [date]
-# interval=60
+[date]
+interval=60
 
-# [time]
-# interval=5
-
-# [ssid]
-# label=
-# interval=60
-
-# [user]
-# label=
-# interval=once
-
-# [vpn]
-# label=
-# interval=5
-
-# [weather]
-# instance=2910831
-# interval=60
-
-# [webcam]
-# label=
-# interval=5
-
-# [usb]
-# instance=PhotoSmart
-# label=
-# interval=10
-
-# [trash]
-# label=
-# interval=10
-
-# [cmus]
-# command=~/.i3-blocks/blocks/scroll $BLOCK_NAME
-# label=
-# markup=pango
-# interval=repeat
-
-# [window]
-# command=~/.i3-blocks/blocks/scroll $BLOCK_NAME
-# label=
-# markup=pango
-# interval=repeat
-
-# [keymap]
-# label=
-# interval=10
+[time]
+interval=5
