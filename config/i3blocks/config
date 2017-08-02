@@ -30,13 +30,13 @@ markup=none
 
 [bandwidth]
 instance=in
-interval=1
+interval=2
 min_width=100
 align=right
 
 [bandwidth]
 instance=out
-interval=1
+interval=2
 min_width=110
 align=right
 
@@ -46,7 +46,7 @@ interval=5
 
 [cpu]
 label=CPU
-interval=2
+interval=1
 
 [temperature]
 instance=Core
@@ -57,6 +57,9 @@ label=RAM
 instance=mem;used
 interval=30
 
+[battery]
+interval=10
+
 [date]
 label=
 interval=60
@@ -64,10 +67,7 @@ interval=60
 [time]
 interval=5
 
-# [battery]
-# label=
-# instance=0
-# interval=5
+
 
 # Part 2
 
