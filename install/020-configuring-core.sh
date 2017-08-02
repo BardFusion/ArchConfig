@@ -65,13 +65,18 @@ printf "\n"
 if [[ "$boot_type" == "UEFI" ]]
 then
     read -p "Enter the root partition: " DEVICE_ID
+    read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
     printf "\n"
 
     bootctl install >> /home/install.log
-    pacman -S --noconfirm intel-ucode >> /home/install.log
-
+    if [[ "$INTEL_INSTALL" == "y" ]]
+    then 
+        pacman -S --noconfirm intel-ucode >> /home/install.log
+        echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /intel-ucode.img\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
+    else
+        echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
+    fi
     echo -e "default arch\ntimeout 4\neditor 0" > /boot/loader/loader.conf
-    echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /intel-ucode.img\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
 else
     read -p "Enter the device for bootloader install: " DEVICE_ID
     printf "\n"
