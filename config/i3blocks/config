@@ -45,6 +45,16 @@ interval=2
 min_width=110
 align=center
 
+[space]
+label=ROOT
+instance=/;perc
+interval=60
+
+[space]
+label=HOME
+instance=/home;perc
+interval=60
+
 [audio]
 label=VOL
 interval=5
@@ -87,39 +97,11 @@ interval=10
 min_width=90
 align=center
 
-[date]
-interval=60
+# [date]
+# interval=60
 
-[time]
-interval=5
-
-# [network]
-# label=
-# instance=wlp3s0
-# interval=10
-
-# [packages]
-# label=
-# interval=300
-
-# [playerctl]
-# label=
-# instance=rhythmbox
+# [time]
 # interval=5
-
-# [process]
-# instance=http
-# label=
-# interval=10
-
-# [space]
-# label=
-# interval=30
-
-# [space]
-# label=
-# instance=/pub
-# interval=30
 
 # [ssid]
 # label=
