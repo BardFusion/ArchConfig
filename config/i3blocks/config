@@ -28,6 +28,11 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=10
 markup=none
 
+[network]
+interval=10
+min_width=110
+align=center
+
 [bandwidth]
 instance=in
 interval=2
@@ -46,11 +51,11 @@ interval=5
 min_width=90
 align=center
 
-[microphone]
-label=MIC
-interval=5
-min_width=90
-align=center
+# [microphone]
+# label=MIC
+# interval=5
+# min_width=90
+# align=center
 
 [brightness]
 label=BRT
@@ -69,12 +74,12 @@ interval=5
 min_width=50
 align=center
 
-[memory]
-label=RAM
-instance=mem;used
-interval=30
-min_width=110
-align=center
+# [memory]
+# label=RAM
+# instance=mem;used
+# interval=30
+# min_width=110
+# align=center
 
 [battery]
 label=BAT
@@ -87,11 +92,6 @@ interval=60
 
 [time]
 interval=5
-
-[network]
-interval=10
-min_width=110
-align=center
 
 # [network]
 # label=
