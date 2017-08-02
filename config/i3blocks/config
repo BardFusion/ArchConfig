@@ -36,13 +36,13 @@ align=center
 [bandwidth]
 instance=in
 interval=2
-min_width=110
+min_width=130
 align=center
 
 [bandwidth]
 instance=out
 interval=2
-min_width=110
+min_width=130
 align=center
 
 [space]
