@@ -54,20 +54,26 @@ fi
 if [[ "${DISPLAY}" != "perc" ]]; then
   # Convert KB meminfo to bytes
   MEMINFO=$(echo "${MEMINFO}*${ONE_KB}" | bc -l)
+  SIGNIFIER="?"
 
   if [[ "${MEMINFO}" -ge "${ONE_TB}" ]]; then
-    MEMINFO=$(echo "scale=3;${MEMINFO}/${ONE_TB}" | bc -l)"T"
+    MEMINFO=$(echo "scale=3;${MEMINFO}/${ONE_TB}" | bc -l)
+    SIGNIFIER="T"
   elif [[ "${MEMINFO}" -ge "${ONE_GB}" ]]; then
-    MEMINFO=$(echo "scale=2;${MEMINFO}/${ONE_GB}" | bc -l)"G"
+    MEMINFO=$(echo "scale=2;${MEMINFO}/${ONE_GB}" | bc -l)
+    SIGNIFIER="G"
   elif [[ "${MEMINFO}" -ge "${ONE_MB}" ]]; then
-    MEMINFO=$(echo "scale=1;${MEMINFO}/${ONE_MB}" | bc -l)"M"
+    MEMINFO=$(echo "scale=1;${MEMINFO}/${ONE_MB}" | bc -l)
+    SIGNIFIER="M"
   else
-    MEMINFO=$(echo "scale=0;${MEMINFO}/${ONE_KB}" | bc -l)"K"
+    MEMINFO=$(echo "scale=0;${MEMINFO}/${ONE_KB}" | bc -l)
+    SIGNIFIER="K"
   fi
 fi
 
-#echo "${MEMINFO}"
-echo "${MEMINFO}" | awk -F. '{print $1}'
+# Take the output until the '.' and add the signifier
+MEMINFO=$(echo $MEMINFO | awk -F. '{print $1}')
+echo "$MEMINFO$SIGNIFIER"
 
 if [[ "${SOURCE_PERC}" -gt "${URGENT_VALUE}" ]]; then
   exit 33
