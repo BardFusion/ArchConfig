@@ -6,6 +6,9 @@ command -v sensors >/dev/null 2>&1 || { exit 1; }
 TEMP_DEVICE="${BLOCK_INSTANCE:-Core}"
 TEMP_OUTPUT=$(sensors | grep "${TEMP_DEVICE}")
 
+# Check if there is sensor output available
+if [[ ${#TEMP_OUTPUT} == 0 ]]; then exit 1; fi
+
 IS_URGENT=0
 
 TOTAL_TEMP=0
