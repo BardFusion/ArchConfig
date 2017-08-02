@@ -118,7 +118,7 @@ print_message "Installing additional software"
 
 #software from 'normal' repositories+
 sudo pacman -S --noconfirm --needed curl bash-completion vim
-sudo pacman -S --noconfirm --needed evince firefox
+sudo pacman -S --noconfirm --needed evince firefox youtube-dl
 sudo pacman -S --noconfirm --needed gimp git gksu glances compton
 sudo pacman -S --noconfirm --needed gnome-font-viewer python-psutil
 sudo pacman -S --noconfirm --needed gparted cmus mpc python-netifaces
