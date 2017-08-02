@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# Check if lm_sensors is installed for probing battery
+command -v sensors >/dev/null 2>&1 || { exit 1; }
 
 TEMP_DEVICE="${BLOCK_INSTANCE:-Core}"
 TEMP_OUTPUT=$(sensors | grep "${TEMP_DEVICE}")
@@ -27,8 +30,6 @@ if [[ "${TOTAL_COUNT}" -gt 1 ]]; then
 fi
 
 echo "${AVERAGE_TEMP}°C"
-echo "${AVERAGE_TEMP}°C"
-echo ""
 
 if [[ "${IS_URGENT}" -eq 1 ]]; then
   exit 33
