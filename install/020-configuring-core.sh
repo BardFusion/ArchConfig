@@ -91,14 +91,20 @@ print_message "Complete"
 clear
 print_message "Enter root password"
 
-passwd
+until passwd
+do 
+    printf "\nPlease try again\n"
+done
 
 print_message "Adding new user"
 
 read -p "Username: " NEW_USER_NAME
 useradd -m -g users -G wheel,storage,power -s /bin/bash $NEW_USER_NAME
 
-passwd $NEW_USER_NAME
+until passwd $NEW_USER_NAME
+do 
+    printf "\nPlease try again\n"
+done
 sed -i "0,/# %wheel/s//%wheel/" /etc/sudoers
 
 printf "\n"
