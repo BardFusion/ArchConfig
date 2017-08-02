@@ -1,11 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Left click
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
   amixer -q sset Capture 5%+
-# Middle click
-elif [[ "${BLOCK_BUTTON}" -eq 2 ]]; then
-  amixer -q sset Capture toggle
 # Right click
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
   amixer -q sset Capture 5%-
@@ -17,10 +14,6 @@ volume=$(echo "${statusLine}" | awk -F ' ' '{print $5}' | tr -d '[]%')
 
 if [[ "${status}" == "on" ]]; then
   echo "${volume}%"
-  echo "${volume}%"
-  echo ""
 else
   echo "off"
-  echo "off"
-  echo ""
 fi
