@@ -118,7 +118,7 @@ print_message "Installing additional software"
 
 #software from 'normal' repositories+
 sudo pacman -S --noconfirm --needed curl bash-completion vim
-sudo pacman -S --noconfirm --needed evince firefox xorg-xbacklight
+sudo pacman -S --noconfirm --needed evince firefox
 sudo pacman -S --noconfirm --needed gimp git gksu glances compton
 sudo pacman -S --noconfirm --needed gnome-font-viewer python-psutil
 sudo pacman -S --noconfirm --needed gparted cmus mpc python-netifaces
@@ -136,7 +136,7 @@ sudo systemctl start vnstat
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
 	# Laptop power savings
-	sudo pacman -S --noconfirm --needed tlp tlp-rdw acpi_call smartmontools ethtool
+	sudo pacman -S --noconfirm --needed tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight
 
 	sudo systemctl enable tlp.service
 	sudo systemctl enable tlp-sleep.service

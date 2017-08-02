@@ -52,6 +52,12 @@ interval=5
 min_width=90
 align=center
 
+[brightness]
+label=BRT
+interval=5
+min_width=90
+align=center
+
 [cpu]
 label=CPU
 interval=5
@@ -81,10 +87,6 @@ interval=60
 
 [time]
 interval=5
-
-# [brightness]
-# label=
-# interval=5
 
 # [network]
 # label=

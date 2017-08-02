@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Check if lm_sensors is installed for probing battery
+# Check if lm_sensors is installed for probing temperatures
 command -v sensors >/dev/null 2>&1 || { exit 1; }
 
 TEMP_DEVICE="${BLOCK_INSTANCE:-Core}"
