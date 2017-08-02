@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DEVICE="$(ifconfig | grep -o -P "\b\w+(?=: flags=\d{1,4}<UP,BROADCAST)")"
+DEVICE="$(ip a | grep -o -P "\b\w+(?=: <BROADCAST,MULTICAST,UP)")"
 DEVICE="$(echo $DEVICE | awk -F " " '{print $1}')"
 # Check if there are devices running
 if [[ ${#DEVICE} == 0 ]]; then exit 1; fi
