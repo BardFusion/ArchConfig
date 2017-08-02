@@ -27,11 +27,6 @@ while read RESULT_LINE; do
 done <<< "$(echo -e "$TEMP_OUTPUT")"
 
 AVERAGE_TEMP=$(echo "scale=0;${TOTAL_TEMP}/${TOTAL_COUNT}" | bc -l)
-
-if [[ "${TOTAL_COUNT}" -gt 1 ]]; then
-  AVERAGE_TEMP="~ ${AVERAGE_TEMP}"
-fi
-
 echo "${AVERAGE_TEMP}°C"
 
 if [[ "${IS_URGENT}" -eq 1 ]]; then
