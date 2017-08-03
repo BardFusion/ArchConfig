@@ -118,12 +118,14 @@ clear
 print_message "Installing additional software"
 
 #software from 'normal' repositories+
+packer -S --noconfirm --noedit "rslsync" >> $OUTPUT_FILE
+
 PACKAGES=( bash-completion vim keepassxc )
 PACKAGES+=( evince firefox youtube-dl )
-PACKAGES+=( gimp compton )
+PACKAGES+=( gimp compton ranger )
 PACKAGES+=( gparted cmus )
-PACKAGES+=( htop irssi )
-PACKAGES+=( feh )
+PACKAGES+=( htop irssi mutt )
+PACKAGES+=( feh rofi )
 PACKAGES+=( xorg-xset libnotify xautolock )
 PACKAGES+=( redshift sane screenfetch scrot )
 PACKAGES+=( simplescreenrecorder sysstat )
@@ -156,7 +158,7 @@ systemctl enable org.cups.cupsd.service
 systemctl start org.cups.cupsd.service
 
 #Sound
-PACKAGES=( pulseaudio pulseaudio-alsa )
+PACKAGES=( libalsa pulseaudio pulseaudio-alsa pamixer )
 PACKAGES+=( alsa-utils alsa-firmware )
 PACKAGES+=( gst-plugins-good gst-plugins-bad gst-plugins-ugly )
 print_install PACKAGES[@] $OUTPUT_FILE
