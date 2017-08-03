@@ -18,7 +18,10 @@ print_message "Creating user folders"
 [ -d $HOME/Pictures ] || mkdir -p $HOME/Pictures
 [ -d $HOME/Videos ] || mkdir -p $HOME/Videos
 
-sudo mkdir -p  /usr/lib/i3blocks
+until sudo mkdir -p  /usr/lib/i3blocks
+do 
+    printf "\nPlease try again\n"
+done
 mkdir -p $HOME/.config/i3
 mkdir -p $HOME/.config/i3blocks
 
@@ -154,7 +157,10 @@ PACKAGES+=( unrar unzip )
 PACKAGES+=( cups-pdf hplip )
 print_install PACKAGES[@] $OUTPUT_FILE
 
-systemctl enable org.cups.cupsd.service
+until systemctl enable org.cups.cupsd.service
+do 
+    printf "\nPlease try again\n"
+done
 systemctl start org.cups.cupsd.service
 
 #Sound
