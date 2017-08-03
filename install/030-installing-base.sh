@@ -30,6 +30,7 @@ print_message "Updating mirrorlist"
 PACKAGES=( reflector )
 print_install PACKAGES[@] $OUTPUT_FILE
 
+print_message "Ranking mirrors"
 sudo reflector -l 100 -f 50 --sort rate --threads 4 --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist && sudo cp /tmp/mirrorlist /etc/pacman.d
 
 cat /etc/pacman.d/mirrorlist

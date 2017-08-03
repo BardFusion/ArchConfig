@@ -80,13 +80,18 @@ function print_install
     declare -a TO_INSTALL=("${!1}")
     for i in "${TO_INSTALL[@]}"
     do
-        printf "Installing package $i "
-        if [[ $EUID -ne 0 ]]
+        if pacman -Qs $i > /dev/null
         then
-            sudo pacman -S --noconfirm $i >> $2 
-        else 
-            pacman -S --noconfirm $i >> $2
-        fi        
+            printf "Skipping $i"
+        else            
+            printf "Installing $i "
+            if [[ $EUID -ne 0 ]]
+            then
+                sudo pacman -S --noconfirm $i >> $2 
+            else 
+                pacman -S --noconfirm $i >> $2
+            fi   
+        fi     
         printf "\n"
     done
 
