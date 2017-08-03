@@ -12,7 +12,8 @@ function print_message
     local print_width=$(expr ${#message} \* 3)
     local print_width=$(expr $print_width / 2)
     local padding_horizontal="$(printf "%0.s " $(seq 1 $message_size))"
-    local padding_vertical="$(printf "%0.s=" $(seq 1 $print_width))$padding_horizontal="
+    local padding_vertical_side="$(printf "%0.s=" $(seq 1 $message_size))"
+    local padding_vertical="$(printf "%0.s=" $(seq 1 $print_width))$padding_vertical_side="
 
     # Top row 
     printf "\n$padding_vertical\n"
@@ -50,7 +51,8 @@ function print_multiline_message
     local message_size=$(expr $message_size / 2)
     local print_width=$(expr $print_width / 2)
     local padding_horizontal="$(printf "%0.s " $(seq 1 $message_size))"
-    local padding_vertical="$(printf "%0.s=" $(seq 1 $print_width))$padding_horizontal="
+    local padding_vertical_side="$(printf "%0.s=" $(seq 1 $message_size))"
+    local padding_vertical="$(printf "%0.s=" $(seq 1 $print_width))$padding_vertical_side="
 
     # Top row 
     printf "\n$padding_vertical\n"
@@ -72,7 +74,8 @@ function print_multiline_message
 # and the second argument is the output file
 function print_install
 {
-    for i in ${$1[@]}
+    TO_INSTALL=$1
+    for i in ${TO_INSTALL[@]}
     do
         print_message "Installing package $i"
         if [[ $EUID -ne 0 ]]
