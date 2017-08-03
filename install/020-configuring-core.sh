@@ -3,7 +3,9 @@
 set -e
 
 source ./999-print-functions.sh
-boot_type=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
+BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
+PACKAGES=()
+OUTPUT_FILE=/home/install.log
 
 clear
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> /home/install.log
@@ -39,7 +41,8 @@ sed -i "s/localhost./tmp./g" /etc/hosts
 sed -i "s/localhost/localhost ${HOST_NAME}/g" /etc/hosts
 sed -i "s/tmp./localhost./g" /etc/hosts
 
-pacman -S --noconfirm networkmanager git wget >> /home/install.log
+PACKAGES=( networkmanager git wget )
+print_install $PACKAGES $OUTPUT_FILE
 printf "\n"
 systemctl enable NetworkManager
 
@@ -48,7 +51,7 @@ print_message "Complete"
 clear
 print_message "Installing bootloader"
 
-if [[ "$boot_type" == "BIOS" ]]
+if [[ "$BOOT_TYPE" == "BIOS" ]]
 then
     print_message "Generating cpio init"
 
@@ -62,7 +65,7 @@ print_message "Available devices"
 lsblk
 printf "\n"
 
-if [[ "$boot_type" == "UEFI" ]]
+if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
     read -p "Enter the root partition: " DEVICE_ID
     read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
@@ -71,7 +74,8 @@ then
     bootctl install >> /home/install.log
     if [[ "$INTEL_INSTALL" == "y" ]]
     then 
-        pacman -S --noconfirm intel-ucode >> /home/install.log
+        PACKAGES=( intel-ucode )
+        print_install $PACKAGES $OUTPUT_FILE
         echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /intel-ucode.img\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
     else
         echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
@@ -81,7 +85,8 @@ else
     read -p "Enter the device for bootloader install: " DEVICE_ID
     printf "\n"
 
-    pacman -S --noconfirm grub >> /home/install.log
+    PACKAGES=( grub )
+    print_install $PACKAGES $OUTPUT_FILE
     grub-install --target=i386-pc --recheck $DEVICE_ID >> /home/install.log
     grub-mkconfig -o /boot/grub/grub.cfg
 fi

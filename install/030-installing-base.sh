@@ -9,13 +9,17 @@ print_message "Installing and configuring base system"
 read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
 
 clear
-print_message "Creating all folders"
+print_message "Creating user folders"
 
 [ -d $HOME/Documents ] || mkdir -p $HOME/Documents
 [ -d $HOME/Downloads ] || mkdir -p $HOME/Downloads
 [ -d $HOME/Music ] || mkdir -p $HOME/Music
 [ -d $HOME/Pictures ] || mkdir -p $HOME/Pictures
 [ -d $HOME/Videos ] || mkdir -p $HOME/Videos
+
+sudo mkdir -p  /usr/lib/i3blocks
+mkdir -p $HOME/.config/i3
+mkdir -p $HOME/.config/i3blocks
 
 print_message "Complete"
 
@@ -96,22 +100,16 @@ print_message "Complete"
 clear
 print_message "Moving config files"
 
-sudo mkdir -p  /usr/lib/i3blocks
-sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
-
-mkdir -p $HOME/.config/i3
-mkdir -p $HOME/.config/i3blocks
+cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
+cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
+cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
 cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
+sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
 cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
 cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
-chmod +x $HOME/.config/i3/lock.sh
-cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
-
 cp $HOME/ArchConfig/config/.xinitrc $HOME/
 cp $HOME/ArchConfig/config/.bash_profile $HOME/
 cp $HOME/ArchConfig/config/.Xdefaults $HOME/
-cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
-cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
 
 print_message "Complete"
 

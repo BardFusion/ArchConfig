@@ -11,14 +11,14 @@ function print_message
     local message_size=$(expr $message_size / 2)
     local print_width=$(expr ${#message} \* 3)
     local print_width=$(expr $print_width / 2)
-    local padding_horizontal="$(printf "%0.s=" $(seq 1 $message_size))"
+    local padding_horizontal="$(printf "%0.s " $(seq 1 $message_size))"
     local padding_vertical="$(printf "%0.s=" $(seq 1 $print_width))$padding_horizontal="
 
     # Top row 
     printf "\n$padding_vertical\n"
     
     # Message
-    printf "$padding_horizontal $message $padding_horizontal\n"
+    printf "$padding_horizontal $message\n"
 
     # Bottom row
     printf "$padding_vertical\n\n"
@@ -49,20 +49,37 @@ function print_multiline_message
     local message_size=$(expr $print_width / 3 - 1)
     local message_size=$(expr $message_size / 2)
     local print_width=$(expr $print_width / 2)
-    local padding_horizontal="$(printf "%0.s=" $(seq 1 $message_size))"
+    local padding_horizontal="$(printf "%0.s " $(seq 1 $message_size))"
     local padding_vertical="$(printf "%0.s=" $(seq 1 $print_width))$padding_horizontal="
 
     # Top row 
     printf "\n$padding_vertical\n"
     
     # Message 1
-    printf "$padding_horizontal $message_1 $padding_horizontal\n"
+    printf "$padding_horizontal $message_1\n"
 
     # Message 2
-    printf "$padding_horizontal $message_2 $padding_horizontal\n"
+    printf "$padding_horizontal $message_2\n"
 
     # Bottom row
     printf "$padding_vertical\n\n"
 
     sleep 0.75
+}
+
+# Install a set of packages including a prompt
+# The first argument is an array of packages
+# and the second argument is the output file
+function print_install
+{
+    for i in ${$1[@]}
+    do
+        print_message "Installing package $i"
+        if [[ $EUID -ne 0 ]]
+        then
+            sudo pacman -S --noconfirm networkmanager $i >> $2 
+        else 
+            pacman -S --noconfirm networkmanager $i >> $2
+        fi        
+    done
 }
