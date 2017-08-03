@@ -78,10 +78,10 @@ print_install PACKAGES[@] $OUTPUT_FILE
 
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 mkdir /tmp/packer
-wget https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=packer
+wget https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=packer >> $OUTPUT_FILE
 mv PKGBUILD\?h\=packer /tmp/packer/PKGBUILD
 cd /tmp/packer
-makepkg -i /tmp/packer --noconfirm
+makepkg -i /tmp/packer --noconfirm >> $OUTPUT_FILE
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 
 print_message "Complete"
@@ -89,7 +89,7 @@ print_message "Complete"
 clear
 print_message "Installing i3 window manager with gaps"
 
-packer -S --noconfirm --noedit "i3-gaps-git"
+packer -S --noconfirm --noedit "i3-gaps-git" >> $OUTPUT_FILE
 
 # Additional required i3 software
 PACKAGES=( i3blocks i3lock i3status )
