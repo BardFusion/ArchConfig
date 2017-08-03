@@ -72,6 +72,8 @@ then
     read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
     printf "\n"
 
+    PACKAGES=( efibootmgr )
+    print_install PACKAGES[@] $OUTPUT_FILE
     bootctl install >> /home/install.log
     if [[ "$INTEL_INSTALL" == "y" ]]
     then 
