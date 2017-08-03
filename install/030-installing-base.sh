@@ -120,16 +120,15 @@ print_message "Installing additional software"
 #software from 'normal' repositories+
 PACKAGES=( bash-completion vim keepassxc )
 PACKAGES+=( evince firefox youtube-dl )
-PACKAGES+=( gimp gksu glances compton )
-PACKAGES+=( gnome-font-viewer )
-PACKAGES+=( gparted cmus python-netifaces )
-PACKAGES+=( hardinfo hddtemp htop irssi python-requests )
-PACKAGES+=( lsb-release )
-PACKAGES+=( numlockx xorg-xset libnotify xautolock )
-PACKAGES+=( redshift ristretto sane screenfetch scrot )
-PACKAGES+=( simple-scan simplescreenrecorder sysstat )
-PACKAGES+=( transmission-cli transmission-gtk rxvt-unicode )
-PACKAGES+=( vnstat unclutter network-manager-applet )
+PACKAGES+=( gimp compton )
+PACKAGES+=( gparted cmus )
+PACKAGES+=( htop irssi )
+PACKAGES+=( feh )
+PACKAGES+=( xorg-xset libnotify xautolock )
+PACKAGES+=( redshift sane screenfetch scrot )
+PACKAGES+=( simplescreenrecorder sysstat )
+PACKAGES+=( transmission-cli rxvt-unicode )
+PACKAGES+=( vnstat unclutter )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 sudo systemctl enable vnstat
@@ -148,22 +147,18 @@ then
 fi
 
 #Utilities
-PACKAGES=( arandr gvfs volumeicon udevil )
-PACKAGES+=( unrar unzip sharutils )
-PACKAGES+=( cups-pdf hplip system-config-printer )
+PACKAGES=( udevil )
+PACKAGES+=( unrar unzip )
+PACKAGES+=( cups-pdf hplip )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 systemctl enable org.cups.cupsd.service
 systemctl start org.cups.cupsd.service
 
 #Sound
-PACKAGES=( pulseaudio pulseaudio-alsa pavucontrol )
+PACKAGES=( pulseaudio pulseaudio-alsa )
 PACKAGES+=( alsa-utils alsa-firmware )
 PACKAGES+=( gst-plugins-good gst-plugins-bad gst-plugins-ugly )
-print_install PACKAGES[@] $OUTPUT_FILE
-
-#Fonts
-PACKAGES=( ttf-ubuntu-font-family ttf-droid ttf-inconsolata )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"

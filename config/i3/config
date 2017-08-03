@@ -223,3 +223,6 @@ exec --no-startup-id compton
 
 # Start redshift color manager
 exec --no-startup-id redshift
+
+# Start unclutter cursor hide
+exec --no-startup-id unclutter
