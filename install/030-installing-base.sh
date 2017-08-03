@@ -139,7 +139,7 @@ sudo systemctl start vnstat
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
 	# Laptop power savings
-    PACKAGES=( tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight acpi )
+    PACKAGES=( tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight )
     print_install PACKAGES[@] $OUTPUT_FILE
 
 	sudo systemctl enable tlp.service
@@ -158,7 +158,7 @@ systemctl enable org.cups.cupsd.service
 systemctl start org.cups.cupsd.service
 
 #Sound
-PACKAGES=( libalsa pulseaudio pulseaudio-alsa pamixer )
+PACKAGES=( pulseaudio pulseaudio-alsa pamixer )
 PACKAGES+=( alsa-utils alsa-firmware )
 PACKAGES+=( gst-plugins-good gst-plugins-bad gst-plugins-ugly )
 print_install PACKAGES[@] $OUTPUT_FILE

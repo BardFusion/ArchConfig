@@ -83,7 +83,7 @@ function print_install
         if pacman -Qs $i > /dev/null
         then
             printf "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
-            printf "Skipping $i"
+            printf "Skipping $i\n"
             printf "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         else            
             printf "Installing $i "
