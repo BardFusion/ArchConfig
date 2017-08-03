@@ -45,7 +45,7 @@ print_message "Installing XORG Server"
 print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
 read -p "Choose the target GPU driver (default = NONE): " GPU_TYPE
 
-PACKAGES=( xorg-server xorg-apps xorg-xinit )
+PACKAGES=( freetype2 libglvnd xorg-server xorg-apps xorg-xinit )
 case $GPU_TYPE in
     1)
         PACKAGES+=( xf86-video-ati )
@@ -118,9 +118,9 @@ clear
 print_message "Installing additional software"
 
 #software from 'normal' repositories+
-PACKAGES=( curl bash-completion vim keepassxc )
+PACKAGES=( bash-completion vim keepassxc )
 PACKAGES+=( evince firefox youtube-dl )
-PACKAGES+=( gimp git gksu glances compton )
+PACKAGES+=( gimp gksu glances compton )
 PACKAGES+=( gnome-font-viewer python-psutil )
 PACKAGES+=( gparted cmus mpc python-netifaces )
 PACKAGES+=( hardinfo hddtemp htop irssi python-requests )
