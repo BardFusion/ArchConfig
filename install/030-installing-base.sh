@@ -142,7 +142,7 @@ sudo systemctl start vnstat
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
 	# Laptop power savings
-    PACKAGES=( tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight )
+    PACKAGES=( tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight acpi )
     print_install PACKAGES[@] $OUTPUT_FILE
 
 	sudo systemctl enable tlp.service
