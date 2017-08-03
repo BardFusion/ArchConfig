@@ -74,15 +74,15 @@ function print_multiline_message
 # and the second argument is the output file
 function print_install
 {
-    TO_INSTALL=$1
-    for i in ${TO_INSTALL[@]}
+    declare -a TO_INSTALL=("${!1}")
+    for i in "${TO_INSTALL[@]}"
     do
         print_message "Installing package $i"
         if [[ $EUID -ne 0 ]]
         then
-            sudo pacman -S --noconfirm networkmanager $i >> $2 
+            sudo pacman -S --noconfirm $i >> $2 
         else 
-            pacman -S --noconfirm networkmanager $i >> $2
+            pacman -S --noconfirm $i >> $2
         fi        
     done
 }

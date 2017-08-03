@@ -42,7 +42,7 @@ sed -i "s/localhost/localhost ${HOST_NAME}/g" /etc/hosts
 sed -i "s/tmp./localhost./g" /etc/hosts
 
 PACKAGES=( networkmanager git wget )
-print_install $PACKAGES $OUTPUT_FILE
+print_install PACKAGES[@] $OUTPUT_FILE
 printf "\n"
 systemctl enable NetworkManager
 
@@ -75,7 +75,7 @@ then
     if [[ "$INTEL_INSTALL" == "y" ]]
     then 
         PACKAGES=( intel-ucode )
-        print_install $PACKAGES $OUTPUT_FILE
+        print_install PACKAGES[@] $OUTPUT_FILE
         echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /intel-ucode.img\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
     else
         echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
@@ -86,7 +86,7 @@ else
     printf "\n"
 
     PACKAGES=( grub )
-    print_install $PACKAGES $OUTPUT_FILE
+    print_install PACKAGES[@] $OUTPUT_FILE
     grub-install --target=i386-pc --recheck $DEVICE_ID >> /home/install.log
     grub-mkconfig -o /boot/grub/grub.cfg
 fi
