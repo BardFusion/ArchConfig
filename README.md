@@ -33,11 +33,13 @@ blablabla this is now the result
     * uBlock origin [Extension]
     * Compact Dark [Theme]
     * NoScript [Extension]
+    * Restart
     * Preferences:
-        1. 
-        2. 
-        3. 
-        4. 
-        5. 
-        6. 
+        New tab         -   Show blank page
+        NoScript        -   Bottom of page              -   Hide messages about blocked scripts
+        General         -   When Firefox starts         -   Show a blank page 
+        Search          -   Disable search suggestions
+        Applications    -   PDF                         -   Always ask
+        Privacy         -   Firefox will                -   Never remember history
+        Final           -   Restart
 19. Mutt email install / config                             ###     TODO ###
