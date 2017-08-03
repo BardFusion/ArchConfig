@@ -30,11 +30,11 @@ print_message "Updating mirrorlist"
 PACKAGES=( reflector )
 print_install PACKAGES[@] $OUTPUT_FILE
 
-sudo reflector -l 100 -f 50 --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist && sudo cp /tmp/mirrorlist /etc/pacman.d
+sudo reflector -l 100 -f 50 --sort rate --threads 4 --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist && sudo cp /tmp/mirrorlist /etc/pacman.d
 
 cat /etc/pacman.d/mirrorlist
 
-sudo pacman -Syu
+sudo pacman -Syu >> $OUTPUT_FILE
 
 print_message "Complete"
 
@@ -162,7 +162,7 @@ PACKAGES+=( gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly g
 print_install PACKAGES[@] $OUTPUT_FILE
 
 #Fonts
-PACKAGES=( noto-fonts ttf-ubuntu-font-family ttf-droid --noconfirm ttf-inconsolata )
+PACKAGES=( noto-fonts ttf-ubuntu-font-family ttf-droid ttf-inconsolata )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"

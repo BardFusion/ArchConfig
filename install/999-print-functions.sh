@@ -87,6 +87,8 @@ function print_install
         else 
             pacman -S --noconfirm $i >> $2
         fi        
-        printf "[complete]\n"
+        printf "\n"
     done
+
+    sleep 0.75
 }
