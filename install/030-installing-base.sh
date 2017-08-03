@@ -3,6 +3,7 @@
 set -e
 
 source ./ArchConfig/install/999-print-functions.sh
+OUTPUT_FILE=$HOME/base-install.log
 
 clear
 print_message "Installing and configuring base system"
@@ -26,7 +27,8 @@ print_message "Complete"
 clear
 print_message "Updating mirrorlist"
 
-sudo pacman -S --noconfirm --needed reflector
+PACKAGES=( reflector )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 sudo reflector -l 100 -f 50 --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist && sudo cp /tmp/mirrorlist /etc/pacman.d
 
@@ -39,30 +41,26 @@ print_message "Complete"
 clear
 print_message "Installing XORG Server"
 
-print_multiline_message "Available targets:" "1. ATI\t2. NVIDIA\t3. INTEL\t4. VIRTUALBOX\t5. NONE"
-read -p "Choose the target GPU driver: " GPU_TYPE
+print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
+read -p "Choose the target GPU driver (default = NONE): " GPU_TYPE
 
+PACKAGES=( xorg-server xorg-apps xorg-xinit )
 case $GPU_TYPE in
     1)
-        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit
-        sudo pacman -S --noconfirm --needed xf86-video-ati 
+        PACKAGES+=( xf86-video-ati )
         ;;
     2)
-        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit
-        sudo pacman -S --noconfirm --needed xf86-video-nouveau
+        PACKAGES+=( xf86-video-nouveau )
         ;;
     3)
-        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit
-        sudo pacman -S --noconfirm --needed xf86-video-intel
+        PACKAGES+=( xf86-video-intel )  
         ;;
     4)
-        sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit 
-        sudo pacman -S virtualbox-guest-utils
+        PACKAGES+=( virtualbox-guest-utils ) 
         ;; 
-	5)
-		sudo pacman -S --noconfirm --needed xorg-server xorg-apps xorg-xinit
-		;;
 esac
+print_install PACKAGES[@] $OUTPUT_FILE
+
 
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
@@ -75,7 +73,8 @@ print_message "Complete"
 clear
 print_message "Installing Packer AUR helper"
 
-sudo pacman -S --noconfirm --needed curl expac grep jshon sed git
+PACKAGES=( curl expac grep jshon sed )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 mkdir /tmp/packer
@@ -93,7 +92,8 @@ print_message "Installing i3 window manager with gaps"
 packer -S --noconfirm --noedit "i3-gaps-git"
 
 # Additional required i3 software
-sudo pacman -S --noconfirm --needed i3blocks i3lock i3status
+PACKAGES=( i3blocks i3lock i3status )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"
 
@@ -117,18 +117,19 @@ clear
 print_message "Installing additional software"
 
 #software from 'normal' repositories+
-sudo pacman -S --noconfirm --needed curl bash-completion vim keepassxc
-sudo pacman -S --noconfirm --needed evince firefox youtube-dl
-sudo pacman -S --noconfirm --needed gimp git gksu glances compton
-sudo pacman -S --noconfirm --needed gnome-font-viewer python-psutil
-sudo pacman -S --noconfirm --needed gparted cmus mpc python-netifaces
-sudo pacman -S --noconfirm --needed hardinfo hddtemp htop irssi python-requests
-sudo pacman -S --noconfirm --needed lm_sensors lsb-release mpv
-sudo pacman -S --noconfirm --needed numlockx xorg-xset libnotify xautolock
-sudo pacman -S --noconfirm --needed redshift ristretto sane screenfetch scrot 
-sudo pacman -S --noconfirm --needed simple-scan simplescreenrecorder sysstat 
-sudo pacman -S --noconfirm --needed transmission-cli transmission-gtk rxvt-unicode
-sudo pacman -S --noconfirm --needed vnstat wget unclutter network-manager-applet
+PACKAGES=( curl bash-completion vim keepassxc )
+PACKAGES+=( evince firefox youtube-dl )
+PACKAGES+=( gimp git gksu glances compton )
+PACKAGES+=( gnome-font-viewer python-psutil )
+PACKAGES+=( gparted cmus mpc python-netifaces )
+PACKAGES+=( hardinfo hddtemp htop irssi python-requests )
+PACKAGES+=( lm_sensors lsb-release mpv )
+PACKAGES+=( numlockx xorg-xset libnotify xautolock )
+PACKAGES+=( redshift ristretto sane screenfetch scrot )
+PACKAGES+=( simple-scan simplescreenrecorder sysstat )
+PACKAGES+=( transmission-cli transmission-gtk rxvt-unicode )
+PACKAGES+=( vnstat wget unclutter network-manager-applet )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 sudo systemctl enable vnstat
 sudo systemctl start vnstat
@@ -136,7 +137,8 @@ sudo systemctl start vnstat
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
 	# Laptop power savings
-	sudo pacman -S --noconfirm --needed tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight acpi
+    PACKAGES=( tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight acpi )
+    print_install PACKAGES[@] $OUTPUT_FILE
 
 	sudo systemctl enable tlp.service
 	sudo systemctl enable tlp-sleep.service
@@ -145,32 +147,23 @@ then
 fi
 
 #Utilities
-sudo pacman -S --noconfirm --needed feh
-sudo pacman -S --noconfirm --needed arandr
-sudo pacman -S --noconfirm --needed xorg-xrandr
-sudo pacman -S --noconfirm --needed gvfs
-sudo pacman -S --noconfirm --needed volumeicon
-sudo pacman -S --noconfirm --needed rofi 
-sudo pacman -S --noconfirm --needed udevil 
-
-# installation of zippers and unzippers
-sudo pacman -S --noconfirm --needed unrar zip unzip sharutils
-
-sudo pacman -S --noconfirm --needed cups cups-pdf ghostscript gsfonts libcups hplip system-config-printer 
+PACKAGES=( feh arandr xorg-xrandr gvfs volumeicon rofi udevil )
+PACKAGES+=( unrar zip unzip sharutils )
+PACKAGES+=( cups cups-pdf ghostscript gsfonts libcups hplip system-config-printer )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 systemctl enable org.cups.cupsd.service
 systemctl start org.cups.cupsd.service
 
 #Sound
-sudo pacman -S --noconfirm --needed pulseaudio pulseaudio-alsa pavucontrol
-sudo pacman -S --noconfirm --needed alsa-utils alsa-plugins alsa-lib alsa-firmware
-sudo pacman -S --noconfirm --needed gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly gstreamer
+PACKAGES=( pulseaudio pulseaudio-alsa pavucontrol )
+PACKAGES+=( alsa-utils alsa-plugins alsa-lib alsa-firmware )
+PACKAGES+=( gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly gstreamer )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 #Fonts
-sudo pacman -S --noconfirm --needed noto-fonts 
-sudo pacman -S --noconfirm --needed ttf-ubuntu-font-family
-sudo pacman -S --noconfirm --needed ttf-droid --noconfirm
-sudo pacman -S --noconfirm --needed ttf-inconsolata
+PACKAGES=( noto-fonts ttf-ubuntu-font-family ttf-droid --noconfirm ttf-inconsolata )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"
 

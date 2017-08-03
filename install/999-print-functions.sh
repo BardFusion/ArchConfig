@@ -56,6 +56,7 @@ function print_multiline_message
 
     # Top row 
     printf "\n$padding_vertical\n"
+    printf "$padding_vertical\n"
     
     # Message 1
     printf "$padding_horizontal $message_1\n"
@@ -64,6 +65,7 @@ function print_multiline_message
     printf "$padding_horizontal $message_2\n"
 
     # Bottom row
+    printf "$padding_vertical\n"
     printf "$padding_vertical\n\n"
 
     sleep 0.75
@@ -74,15 +76,17 @@ function print_multiline_message
 # and the second argument is the output file
 function print_install
 {
+    printf "\n"
     declare -a TO_INSTALL=("${!1}")
     for i in "${TO_INSTALL[@]}"
     do
-        print_message "Installing package $i"
+        printf "Installing package $i "
         if [[ $EUID -ne 0 ]]
         then
             sudo pacman -S --noconfirm $i >> $2 
         else 
             pacman -S --noconfirm $i >> $2
         fi        
+        printf "[complete]\n"
     done
 }

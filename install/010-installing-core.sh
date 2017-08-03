@@ -4,10 +4,11 @@ set -e
 
 source ./999-print-functions.sh
 boot_type=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
+OUTPUT_FILE=core-install.log
 
 clear
-print_multiline_message "Beginning $boot_type installation" "output is captured in the file 'install.log'"
-print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core install started" >> install.log
+print_multiline_message "Beginning $boot_type installation" "output is captured in the file $OUTPUT_FILE"
+print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core install started" >> $OUTPUT_FILE
 
 loadkeys us
 
@@ -28,21 +29,21 @@ print_message "Formatting file systems"
 
 if [[ "$boot_type" == "UEFI" ]]
 then
-    mkfs.vfat "${DEVICE_ID}1" >> install.log 
+    mkfs.vfat "${DEVICE_ID}1" >> $OUTPUT_FILE 
 
-    mkswap "${DEVICE_ID}2" >> install.log
+    mkswap "${DEVICE_ID}2" >> $OUTPUT_FILE
     swapon "${DEVICE_ID}2"
 
-    mkfs.ext4 "${DEVICE_ID}3" >> install.log
-    mkfs.ext4 "${DEVICE_ID}4" >> install.log
-    mkfs.ext4 "${DEVICE_ID}5" >> install.log   
+    mkfs.ext4 "${DEVICE_ID}3" >> $OUTPUT_FILE
+    mkfs.ext4 "${DEVICE_ID}4" >> $OUTPUT_FILE
+    mkfs.ext4 "${DEVICE_ID}5" >> $OUTPUT_FILE   
 else
-    mkswap "${DEVICE_ID}1" >> install.log
+    mkswap "${DEVICE_ID}1" >> $OUTPUT_FILE
     swapon "${DEVICE_ID}1"
 
-    mkfs.ext4 "${DEVICE_ID}2" >> install.log
-    mkfs.ext4 "${DEVICE_ID}3" >> install.log
-    mkfs.ext4 "${DEVICE_ID}4" >> install.log
+    mkfs.ext4 "${DEVICE_ID}2" >> $OUTPUT_FILE
+    mkfs.ext4 "${DEVICE_ID}3" >> $OUTPUT_FILE
+    mkfs.ext4 "${DEVICE_ID}4" >> $OUTPUT_FILE
 fi
 
 print_message "Mounting file systems"
@@ -69,18 +70,18 @@ print_message "Complete"
 clear
 print_message "Installing base system"
 
-pacstrap /mnt base base-devel >> install.log
+pacstrap /mnt base base-devel >> $OUTPUT_FILE
 genfstab -U /mnt >> /mnt/etc/fstab
 
 print_message "Complete"
 
 cp 020-configuring-core.sh /mnt
 cp 999-print-functions.sh /mnt
-mv install.log /mnt/home
+mv $OUTPUT_FILE /mnt/home
 arch-chroot /mnt ./020-configuring-core.sh
 clear
 print_message "Cleaning up"
-print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/install.log
+print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/$OUTPUT_FILE
 rm /mnt/020-configuring-core.sh
 rm /mnt/999-print-functions.sh
 print_message "Complete"

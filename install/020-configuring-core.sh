@@ -4,8 +4,9 @@ set -e
 
 source ./999-print-functions.sh
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
+OUTPUT_FILE=/home/core-install.log
 PACKAGES=()
-OUTPUT_FILE=/home/install.log
+
 
 clear
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> /home/install.log
