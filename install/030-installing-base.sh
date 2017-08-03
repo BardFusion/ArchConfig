@@ -45,7 +45,7 @@ print_message "Installing XORG Server"
 print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
 read -p "Choose the target GPU driver (default = NONE): " GPU_TYPE
 
-PACKAGES=( freetype2 libglvnd xorg-server xorg-apps xorg-xinit )
+PACKAGES=( xorg-server xorg-xinit )
 case $GPU_TYPE in
     1)
         PACKAGES+=( xf86-video-ati )
@@ -74,7 +74,7 @@ print_message "Complete"
 clear
 print_message "Installing Packer AUR helper"
 
-PACKAGES=( curl expac grep jshon sed )
+PACKAGES=( expac jshon )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 [ -d /tmp/packer ] && rm -rf /tmp/packer
@@ -121,15 +121,15 @@ print_message "Installing additional software"
 PACKAGES=( bash-completion vim keepassxc )
 PACKAGES+=( evince firefox youtube-dl )
 PACKAGES+=( gimp gksu glances compton )
-PACKAGES+=( gnome-font-viewer python-psutil )
-PACKAGES+=( gparted cmus mpc python-netifaces )
+PACKAGES+=( gnome-font-viewer )
+PACKAGES+=( gparted cmus python-netifaces )
 PACKAGES+=( hardinfo hddtemp htop irssi python-requests )
-PACKAGES+=( lm_sensors lsb-release mpv )
+PACKAGES+=( lsb-release )
 PACKAGES+=( numlockx xorg-xset libnotify xautolock )
 PACKAGES+=( redshift ristretto sane screenfetch scrot )
 PACKAGES+=( simple-scan simplescreenrecorder sysstat )
 PACKAGES+=( transmission-cli transmission-gtk rxvt-unicode )
-PACKAGES+=( vnstat wget unclutter network-manager-applet )
+PACKAGES+=( vnstat unclutter network-manager-applet )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 sudo systemctl enable vnstat
@@ -148,9 +148,9 @@ then
 fi
 
 #Utilities
-PACKAGES=( feh arandr xorg-xrandr gvfs volumeicon rofi udevil )
-PACKAGES+=( unrar zip unzip sharutils )
-PACKAGES+=( cups cups-pdf ghostscript gsfonts libcups hplip system-config-printer )
+PACKAGES=( arandr gvfs volumeicon udevil )
+PACKAGES+=( unrar unzip sharutils )
+PACKAGES+=( cups-pdf hplip system-config-printer )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 systemctl enable org.cups.cupsd.service
@@ -158,12 +158,12 @@ systemctl start org.cups.cupsd.service
 
 #Sound
 PACKAGES=( pulseaudio pulseaudio-alsa pavucontrol )
-PACKAGES+=( alsa-utils alsa-plugins alsa-lib alsa-firmware )
-PACKAGES+=( gst-plugins-good gst-plugins-bad gst-plugins-base gst-plugins-ugly gstreamer )
+PACKAGES+=( alsa-utils alsa-firmware )
+PACKAGES+=( gst-plugins-good gst-plugins-bad gst-plugins-ugly )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 #Fonts
-PACKAGES=( noto-fonts ttf-ubuntu-font-family ttf-droid ttf-inconsolata )
+PACKAGES=( ttf-ubuntu-font-family ttf-droid ttf-inconsolata )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"
