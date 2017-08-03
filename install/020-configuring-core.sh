@@ -119,7 +119,6 @@ printf "\n"
 
 cd "/home/$NEW_USER_NAME"
 git clone https://github.com/BardFusion/ArchConfig.git >> /home/install.log
-chmod +x "/home/$NEW_USER_NAME/ArchConfig/install/030-installing-base.sh"
 chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
 cp "/home/$NEW_USER_NAME/ArchConfig/install/.bash_profile" ./
 
