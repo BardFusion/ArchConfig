@@ -22,6 +22,7 @@
 	* mutt						[EMAIL]
 	* wget						[DOWNLOAD]
 	* rslsync					[SYNC]				[AUR]
+	* openssh					[COMMAND]
 # Monitoring
 	* htop						[PROCESSES]
 	* smartmontools				[STORAGE]

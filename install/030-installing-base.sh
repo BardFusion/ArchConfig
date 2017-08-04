@@ -82,7 +82,7 @@ case $GPU_TYPE in
 esac
 print_install PACKAGES[@] $OUTPUT_FILE
 
-print_message "Installing i3 window manager with gaps"
+print_message "i3 window manager with gaps [AUR]"
 
 packer -S --noconfirm --noedit "i3-gaps-git" >> $OUTPUT_FILE
 
@@ -100,8 +100,8 @@ print_message "Complete"
 
 clear
 
-
-print_message "Resilio sync"
+print_message "Installing desktop software"
+print_message "Resilio sync [AUR]"
 
 #software from 'normal' repositories+
 packer -S --noconfirm --noedit "rslsync" >> $OUTPUT_FILE
@@ -115,7 +115,7 @@ systemctl --user enable rslsync.service
 print_message "Complete"
 
 print_message "System"
-PACKAGES=( bash-completion vim keepassxc htop smartmontools ethtool sysstat screenfetch udevil )
+PACKAGES=( bash-completion htop smartmontools ethtool sysstat screenfetch udevil )
 if [[ "$BOOT_TYPE" == "BIOS" ]]
 then
     PACKAGES+=( cfdisk )
@@ -158,7 +158,7 @@ PACKAGES=( irssi mutt wget rslsync )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Workflow"
-PACKAGES=( git rxvt-unicode unrar unzip vim keepassxc libreoffice-fresh ranger )
+PACKAGES=( rxvt-unicode unrar unzip vim keepassxc libreoffice-fresh ranger openssh )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Media"
