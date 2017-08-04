@@ -140,9 +140,9 @@ then
     then 
         PACKAGES=( intel-ucode )
         print_install PACKAGES[@] $OUTPUT_FILE
-        echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /intel-ucode.img\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
+        echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /intel-ucode.img\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID}3 rw" > /boot/loader/entries/arch.conf
     else
-        echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID} rw" > /boot/loader/entries/arch.conf
+        echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${DEVICE_ID}3 rw" > /boot/loader/entries/arch.conf
     fi
     echo -e "default arch\ntimeout 4\neditor 0" > /boot/loader/loader.conf
 else
