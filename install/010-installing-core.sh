@@ -3,7 +3,7 @@
 set -e
 
 source ./999-print-functions.sh
-boot_type=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
+BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=core-install.log
 
 clear
