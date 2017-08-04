@@ -128,4 +128,5 @@ fi
 print_message "Complete"
 
 clear
-print_multiline_message "System installed succesfully" "exit to continue"
+print_message "System installed succesfully" 
+sleep 1

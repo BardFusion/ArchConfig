@@ -131,8 +131,7 @@ packer -S --noconfirm --noedit "rslsync" >> $OUTPUT_FILE
 mkdir -p $HOME/.config/rslsync
 cp $HOME/ArchConfig/config/rslsync.conf $HOME/.config/rslsync/
 sed -i "s/\/var\/lib\/rslsync/\/home\/$USER\/.config\/rslsync/g" $HOME/.config/rslsync/rslsync.conf
-sed -i "s\/var\/run\/resilio\/resilio.pid/\/home\/$USER\/.config\/rslsync\/resilio.pid/g" $HOME/.config/rslsync/rslsync.conf
-sed -i 's/0.0.0.0/127.0.0.1/g' $HOME/.config/rslsync/rslsync.conf
+sed -i "s/\/var\/run\/resilio\/resilio.pid/\/home\/$USER\/.config\/rslsync\/resilio.pid/g" $HOME/.config/rslsync/rslsync.conf
 
 touch $HOME/.config/rslsync/resilio.pid
 
