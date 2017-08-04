@@ -29,24 +29,7 @@ do
 done
 mkdir -p $HOME/.config/i3
 mkdir -p $HOME/.config/i3blocks
-
-print_message "Moving config files"
-
-if [[ ${#GPU_TYPE} != 0 ]]
-then 
-    cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
-fi
-
-cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
-cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
-cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
-cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
-cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
-cp $HOME/ArchConfig/config/.xinitrc $HOME/
-cp $HOME/ArchConfig/config/.bash_profile $HOME/
-cp $HOME/ArchConfig/config/.Xdefaults $HOME/
-
-print_message "Complete"
+mkdir -p $HOME/.config/rslsync
 
 clear
 print_message "Updating mirrorlist"
@@ -103,7 +86,7 @@ print_message "Installing i3 window manager with gaps"
 
 packer -S --noconfirm --noedit "i3-gaps-git" >> $OUTPUT_FILE
 
-print_message "Desktop software"
+print_message "Additional software"
 PACKAGES=( i3blocks i3lock i3status compton feh rofi libnotify xautolock redshift unclutter )
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
@@ -112,18 +95,16 @@ then
     PACKAGES+=( xorg-xbacklight )
 fi
 print_install PACKAGES[@] $OUTPUT_FILE
-sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
 
 print_message "Complete"
 
 clear
-print_message "Installing additional software"
 
-print_message "Installing resilio sync"
+
+print_message "Resilio sync"
 
 #software from 'normal' repositories+
 packer -S --noconfirm --noedit "rslsync" >> $OUTPUT_FILE
-mkdir -p $HOME/.config/rslsync
 cp $HOME/ArchConfig/config/rslsync.conf $HOME/.config/rslsync/
 sed -i "s/\/var\/lib\/rslsync/\/home\/$USER\/.config\/rslsync/g" $HOME/.config/rslsync/rslsync.conf
 sed -i "s/\/var\/run\/resilio\/resilio.pid/\/home\/$USER\/.config\/rslsync\/resilio.pid/g" $HOME/.config/rslsync/rslsync.conf
@@ -134,7 +115,7 @@ systemctl --user enable rslsync.service
 print_message "Complete"
 
 print_message "System"
-PACKAGES=( bash-completion vim keepassxc htop smartmontools ethtool sysstat screenfeth udevil )
+PACKAGES=( bash-completion vim keepassxc htop smartmontools ethtool sysstat screenfetch udevil )
 if [[ "$BOOT_TYPE" == "BIOS" ]]
 then
     PACKAGES+=( cfdisk )
@@ -189,6 +170,27 @@ PACKAGES=( firefox )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"
+
+print_message "Moving config files"
+
+if [[ ${#GPU_TYPE} != 0 ]]
+then 
+    cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
+fi
+
+sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
+
+cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
+cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
+cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
+cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
+cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
+cp $HOME/ArchConfig/config/.xinitrc $HOME/
+cp $HOME/ArchConfig/config/.bash_profile $HOME/
+cp $HOME/ArchConfig/config/.Xdefaults $HOME/
+
+print_message "Complete"
+
 
 clear
 print_message "Rebooting, please wait..."
