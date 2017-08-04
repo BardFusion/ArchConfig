@@ -112,8 +112,6 @@ sed -i "s/\/var\/run\/resilio\/resilio.pid/\/home\/$USER\/.config\/rslsync\/resi
 touch $HOME/.config/rslsync/resilio.pid
 systemctl --user enable rslsync.service
 
-print_message "Complete"
-
 print_message "System"
 PACKAGES=( bash-completion htop smartmontools ethtool sysstat screenfetch udevil )
 if [[ "$BOOT_TYPE" == "BIOS" ]]
@@ -150,11 +148,11 @@ then
 fi
 
 print_message "Audio"
-PACKAGES=( gst-plugins-good gst-plugins-bad gst-plugins-ugly pulseaudio-alsa alsa-firmware pulseaudio pamixer alsa-utils )
+PACKAGES=( gst-plugins-good gst-plugins-bad gst-plugins-ugly pulseaudio-alsa alsa-firmware pamixer alsa-utils )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Communication"
-PACKAGES=( irssi mutt wget rslsync )
+PACKAGES=( irssi mutt )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Workflow"

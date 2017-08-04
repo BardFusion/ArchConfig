@@ -7,7 +7,7 @@ boot_type=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=core-install.log
 
 clear
-print_multiline_message "Beginning $boot_type installation" "output is captured in the file $OUTPUT_FILE"
+print_multiline_message "Beginning $BOOT_TYPE installation" "output is captured in the file $OUTPUT_FILE"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core install started" >> $OUTPUT_FILE
 
 loadkeys us
@@ -17,7 +17,7 @@ lsblk
 printf "\n"
 read -p "Enter the device to use: " DEVICE_ID
 
-if [[ "$boot_type" == "UEFI" ]]
+if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
     gdisk $DEVICE_ID
 else
@@ -27,7 +27,7 @@ fi
 clear
 print_message "Formatting file systems"
 
-if [[ "$boot_type" == "UEFI" ]]
+if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
     mkfs.vfat "${DEVICE_ID}1" >> $OUTPUT_FILE 
 
@@ -48,7 +48,7 @@ fi
 
 print_message "Mounting file systems"
 
-if [[ "$boot_type" == "UEFI" ]]
+if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
     mount "${DEVICE_ID}3" /mnt
     mkdir /mnt/boot
@@ -78,7 +78,7 @@ print_message "Complete"
 cp 020-configuring-core.sh /mnt
 cp 999-print-functions.sh /mnt
 mv $OUTPUT_FILE /mnt/home
-arch-chroot /mnt ./020-configuring-core.sh
+arch-chroot /mnt ./020-configuring-core.sh ${DEVICE_ID}3
 clear
 print_message "Cleaning up"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/$OUTPUT_FILE
