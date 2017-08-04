@@ -2,11 +2,12 @@
 
 set -e
 
+source ./999-print-functions.sh
+
 clear
 print_message "Root mounted to $1"
 sleep 100
 
-source ./999-print-functions.sh
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=/home/core-install.log
 PACKAGES=( git )
