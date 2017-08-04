@@ -2,12 +2,14 @@
 
 set -e
 
+DEVICE_ID=$1
+NEW_USER_NAME=$2
+HOST_NAME=$3
+INTEL_INSTALL=$4
+GPU_TYPE=$5
+LAPTOP_INSTALL=$6
+
 source ./999-print-functions.sh
-
-clear
-print_message "Root mounted to $1"
-sleep 100
-
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=/home/core-install.log
 PACKAGES=( git )
@@ -17,20 +19,6 @@ clear
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> /home/install.log
 print_message "Core configuration"
 
-read -p "Enter the desired hostname: " HOST_NAME
-
-print_message "Available devices"
-
-lsblk
-printf "\n"
-if [[ "$BOOT_TYPE" == "UEFI" ]]
-then
-    read -p "Enter the root partition: " DEVICE_ID
-    read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
-else
-    read -p "Enter the device for bootloader install: " DEVICE_ID
-fi
-
 print_message "Enter root password"
 
 until passwd
@@ -38,9 +26,8 @@ do
     printf "\n\nError, please try again...\n"
 done
 
-print_message "Adding new user"
+print_message "Adding $NEW_USER_NAME"
 
-read -p "Username: " NEW_USER_NAME
 useradd -m -g users -G wheel,storage,power -s /bin/bash $NEW_USER_NAME
 
 until passwd $NEW_USER_NAME
@@ -94,6 +81,43 @@ PACKAGES=( networkmanager wget )
 print_install PACKAGES[@] $OUTPUT_FILE
 printf "\n"
 systemctl enable NetworkManager
+
+print_message "Complete"
+
+clear
+print_message "Installing XORG"
+
+PACKAGES=( xorg-server xorg-xinit )
+case $GPU_TYPE in
+    1)
+        PACKAGES+=( xf86-video-ati )
+        ;;
+    2)
+        PACKAGES+=( xf86-video-nouveau )
+        ;;
+    3)
+        PACKAGES+=( xf86-video-intel )  
+        ;;
+    4)
+        PACKAGES+=( virtualbox-guest-utils ) 
+        ;; 
+esac
+if [[ "$LAPTOP_INSTALL" == "y" ]]
+then 
+	cp /home/$NEW_USER_NAME/ArchConfig/config/30-touchpad.conf /etc/X11/xorg.conf.d/
+    PACKAGES+=( xorg-xbacklight tlp tlp-rdw acpi_call acpi )
+
+    systemctl enable tlp.service
+	systemctl enable tlp-sleep.service
+	systemctl mask systemd-rfkill.service
+	systemctl mask systemd-rfkill.socket
+fi
+print_install PACKAGES[@] $OUTPUT_FILE
+
+if [[ ${#GPU_TYPE} != 0 ]]
+then 
+    cp /home/$NEW_USER_NAME/ArchConfig/config/compton.conf /home/$NEW_USER_NAME/.config/
+fi
 
 print_message "Complete"
 

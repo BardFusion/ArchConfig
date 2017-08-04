@@ -12,6 +12,13 @@ print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core install started" >>
 
 loadkeys us
 
+read -p "Hostname: " HOST_NAME
+read -p "Username: " NEW_USER_NAME
+
+print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
+read -p "Choose the target GPU driver (default = NONE): " GPU_TYPE
+read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
+
 print_message "Available devices"
 lsblk
 printf "\n"
@@ -19,6 +26,7 @@ read -p "Enter the device to use: " DEVICE_ID
 
 if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
+    read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
     gdisk $DEVICE_ID
 else
     cfdisk $DEVICE_ID
@@ -78,7 +86,7 @@ print_message "Complete"
 cp 020-configuring-core.sh /mnt
 cp 999-print-functions.sh /mnt
 mv $OUTPUT_FILE /mnt/home
-arch-chroot /mnt ./020-configuring-core.sh ${DEVICE_ID}3
+arch-chroot /mnt ./020-configuring-core.sh $DEVICE_ID $NEW_USER_NAME $HOST_NAME $INTEL_INSTALL $GPU_TYPE $LAPTOP_INSTALL
 clear
 print_message "Cleaning up"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/$OUTPUT_FILE

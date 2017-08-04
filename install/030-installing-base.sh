@@ -8,11 +8,6 @@ OUTPUT_FILE=$HOME/base-install.log
 
 clear
 print_message "Installing and configuring base system"
-read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
-read -p "Install printer support? (y/N): " PRINTER_INSTALL
-
-print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
-read -p "Choose the target GPU driver (default = NONE): " GPU_TYPE
 
 clear
 print_message "Creating user folders"
@@ -65,35 +60,12 @@ print_message "Complete"
 clear
 print_message "Installing desktop environment"
 
-PACKAGES=( xorg-server xorg-xinit )
-case $GPU_TYPE in
-    1)
-        PACKAGES+=( xf86-video-ati )
-        ;;
-    2)
-        PACKAGES+=( xf86-video-nouveau )
-        ;;
-    3)
-        PACKAGES+=( xf86-video-intel )  
-        ;;
-    4)
-        PACKAGES+=( virtualbox-guest-utils ) 
-        ;; 
-esac
-print_install PACKAGES[@] $OUTPUT_FILE
-
 print_message "i3 window manager with gaps [AUR]"
 
 packer -S --noconfirm --noedit "i3-gaps-git" >> $OUTPUT_FILE
 
 print_message "Additional software"
 PACKAGES=( i3blocks i3lock i3status compton feh rofi libnotify xautolock redshift unclutter )
-if [[ "$LAPTOP_INSTALL" == "y" ]]
-then 
-	# Custom LibInput touchpad driver settings 
-	sudo cp $HOME/ArchConfig/config/30-touchpad.conf /etc/X11/xorg.conf.d/
-    PACKAGES+=( xorg-xbacklight )
-fi
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"
@@ -120,32 +92,16 @@ then
 else
     PACKAGES+=( gdisk efibootmgr )
 fi
-if [[ "$PRINTER_INSTALL" == "y" ]]
-then 
-    PACKAGES+=( cups-pdf hplip sane )
-fi
-if [[ "$LAPTOP_INSTALL" == "y" ]]
-then 
-    PACKAGES+=( tlp tlp-rdw acpi_call acpi )
-fi
-
 print_install PACKAGES[@] $OUTPUT_FILE
 
-if [[ "$LAPTOP_INSTALL" == "y" ]]
-then 
-    sudo systemctl enable tlp.service
-	sudo systemctl enable tlp-sleep.service
-	sudo systemctl mask systemd-rfkill.service
-	sudo systemctl mask systemd-rfkill.socket
-fi
-if [[ "$PRINTER_INSTALL" == "y" ]]
-then 
-    until systemctl enable org.cups.cupsd.service
-    do 
-        printf "\nPlease try again\n"
-    done
-    systemctl start org.cups.cupsd.service    
-fi
+print_message "Printer"
+PACKAGES+=( cups-pdf hplip sane )
+print_install PACKAGES[@] $OUTPUT_FILE
+until systemctl enable org.cups.cupsd.service
+do 
+    printf "\nPlease try again\n"
+done
+systemctl start org.cups.cupsd.service    
 
 print_message "Audio"
 PACKAGES=( gst-plugins-good gst-plugins-bad gst-plugins-ugly pulseaudio-alsa alsa-firmware pamixer alsa-utils )
@@ -170,11 +126,6 @@ print_install PACKAGES[@] $OUTPUT_FILE
 print_message "Complete"
 
 print_message "Moving config files"
-
-if [[ ${#GPU_TYPE} != 0 ]]
-then 
-    cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
-fi
 
 sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
 
