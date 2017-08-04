@@ -134,6 +134,7 @@ sed -i "s/\/var\/lib\/rslsync/\/home\/$USER\/.config\/rslsync/g" $HOME/.config/r
 sed -i "s/\/var\/run\/resilio\/resilio.pid/\/home\/$USER\/.config\/rslsync\/resilio.pid/g" $HOME/.config/rslsync/rslsync.conf
 
 touch $HOME/.config/rslsync/resilio.pid
+systemctl --user enable rslsync.service
 
 print_message "Complete"
 
@@ -150,16 +151,13 @@ else
     PACKAGES+=( gdisk )
 fi
 PACKAGES+=( htop irssi mutt cmus )
-PACKAGES+=( feh rofi mpv )
+PACKAGES+=( feh rofi mpv libreoffice-fresh )
 PACKAGES+=( libnotify xautolock )
 PACKAGES+=( redshift sane screenfetch scrot )
-PACKAGES+=( simplescreenrecorder sysstat )
+PACKAGES+=( sysstat )
 PACKAGES+=( transmission-cli rxvt-unicode )
-PACKAGES+=( vnstat unclutter )
+PACKAGES+=( unclutter )
 print_install PACKAGES[@] $OUTPUT_FILE
-
-sudo systemctl enable vnstat
-sudo systemctl start vnstat
 
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
