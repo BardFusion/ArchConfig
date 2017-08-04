@@ -5,7 +5,8 @@ set -e
 source ./999-print-functions.sh
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=/home/core-install.log
-PACKAGES=()
+PACKAGES=( git )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 clear
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> /home/install.log
@@ -84,7 +85,7 @@ sed -i "s/localhost./tmp./g" /etc/hosts
 sed -i "s/localhost/localhost ${HOST_NAME}/g" /etc/hosts
 sed -i "s/tmp./localhost./g" /etc/hosts
 
-PACKAGES=( networkmanager git wget )
+PACKAGES=( networkmanager wget )
 print_install PACKAGES[@] $OUTPUT_FILE
 printf "\n"
 systemctl enable NetworkManager
