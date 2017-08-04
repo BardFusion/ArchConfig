@@ -80,7 +80,7 @@ function print_install
     declare -a TO_INSTALL=("${!1}")
     for i in "${TO_INSTALL[@]}"
     do
-        if pacman -Qs $i > /dev/null && [ "$i" != "rofi" ] && [ "$i" != "acpi" ]
+        if pacman -Qs $i > /dev/null && [ "$i" != "rofi" ] && [ "$i" != "acpi" ] && [ "$i" != "mpv" ]
         then
             printf "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
             printf "\tSkipping $i\n"

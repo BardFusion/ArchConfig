@@ -14,6 +14,17 @@ blablabla this is now the result
 6. Rofi theme tweaking                                      ###     TODO ###
 7. KeePass install                                          ### DONE ###
 8. RSLSync install / config                                 ###     MANUAL-CONFIG ###    
+    * mkdir -p ~/.config/rslsync
+    * Copy /etc/rslsync.conf to ~/.config/rslsync/
+    * touch ~/.config/rslsync/resilio.pid
+    * change
+	1. Device name
+	2. Listen change to localhost only
+	3. change storage path to ~/.config/rslsync/
+	4. change pid\_file location to ~/.config/rslsync/resilio.pid
+	5. login at localhost:8888
+	6. fill in account
+	7. enter folder links
 9. arxisfjd editor science install / config                 ###     TODO ###
 10. Compton optimization                                    ### DONE ###
 11. additional keybindings                                  ### DONE ###
