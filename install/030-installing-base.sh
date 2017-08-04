@@ -95,7 +95,7 @@ fi
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Printer"
-PACKAGES+=( cups-pdf hplip sane )
+PACKAGES=( cups-pdf hplip sane )
 print_install PACKAGES[@] $OUTPUT_FILE
 until systemctl enable org.cups.cupsd.service
 do 
