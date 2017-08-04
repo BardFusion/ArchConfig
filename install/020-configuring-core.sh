@@ -7,9 +7,52 @@ BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=/home/core-install.log
 PACKAGES=()
 
-
 clear
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> /home/install.log
+print_message "Core configuration"
+
+read -p "Enter the desired hostname: " HOST_NAME
+
+print_message "Available devices"
+
+lsblk
+printf "\n"
+if [[ "$BOOT_TYPE" == "UEFI" ]]
+then
+    read -p "Enter the root partition: " DEVICE_ID
+    read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
+else
+    read -p "Enter the device for bootloader install: " DEVICE_ID
+fi
+
+print_message "Enter root password"
+
+until passwd
+do 
+    printf "\n\nError, please try again...\n"
+done
+
+print_message "Adding new user"
+
+read -p "Username: " NEW_USER_NAME
+useradd -m -g users -G wheel,storage,power -s /bin/bash $NEW_USER_NAME
+
+until passwd $NEW_USER_NAME
+do 
+    printf "\nPlease try again\n"
+done
+sed -i "0,/# %wheel/s//%wheel/" /etc/sudoers
+
+printf "\n"
+
+cd "/home/$NEW_USER_NAME"
+git clone https://github.com/BardFusion/ArchConfig.git >> /home/install.log
+chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
+cp "/home/$NEW_USER_NAME/ArchConfig/install/.bash_profile" ./
+
+print_message "Complete"
+
+clear
 print_message "Configuring locales"
 
 sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/g' /etc/locale.gen
@@ -35,7 +78,6 @@ print_message "Complete"
 clear
 print_message "Configuring network"
 
-read -p "Enter the desired hostname: " HOST_NAME
 echo $HOST_NAME > /etc/hostname
 
 sed -i "s/localhost./tmp./g" /etc/hosts 
@@ -61,17 +103,8 @@ then
     print_message "Complete"
 fi
 
-print_message "Available devices"
-
-lsblk
-printf "\n"
-
 if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
-    read -p "Enter the root partition: " DEVICE_ID
-    read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
-    printf "\n"
-
     PACKAGES=( efibootmgr )
     print_install PACKAGES[@] $OUTPUT_FILE
     bootctl install >> /home/install.log
@@ -85,42 +118,11 @@ then
     fi
     echo -e "default arch\ntimeout 4\neditor 0" > /boot/loader/loader.conf
 else
-    read -p "Enter the device for bootloader install: " DEVICE_ID
-    printf "\n"
-
     PACKAGES=( grub )
     print_install PACKAGES[@] $OUTPUT_FILE
     grub-install --target=i386-pc --recheck $DEVICE_ID >> /home/install.log
     grub-mkconfig -o /boot/grub/grub.cfg
 fi
-
-print_message "Complete"
-
-clear
-print_message "Enter root password"
-
-until passwd
-do 
-    printf "\nPlease try again\n"
-done
-
-print_message "Adding new user"
-
-read -p "Username: " NEW_USER_NAME
-useradd -m -g users -G wheel,storage,power -s /bin/bash $NEW_USER_NAME
-
-until passwd $NEW_USER_NAME
-do 
-    printf "\nPlease try again\n"
-done
-sed -i "0,/# %wheel/s//%wheel/" /etc/sudoers
-
-printf "\n"
-
-cd "/home/$NEW_USER_NAME"
-git clone https://github.com/BardFusion/ArchConfig.git >> /home/install.log
-chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
-cp "/home/$NEW_USER_NAME/ArchConfig/install/.bash_profile" ./
 
 print_message "Complete"
 

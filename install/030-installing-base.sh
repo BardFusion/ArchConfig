@@ -9,6 +9,10 @@ OUTPUT_FILE=$HOME/base-install.log
 clear
 print_message "Installing and configuring base system"
 read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
+read -p "Install printer support? (y/N): " PRINTER_INSTALL
+
+print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
+read -p "Choose the target GPU driver (default = NONE): " GPU_TYPE
 
 clear
 print_message "Creating user folders"
@@ -45,9 +49,6 @@ print_message "Complete"
 
 clear
 print_message "Installing XORG Server"
-
-print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
-read -p "Choose the target GPU driver (default = NONE): " GPU_TYPE
 
 PACKAGES=( xorg-server xorg-xinit )
 case $GPU_TYPE in
@@ -105,9 +106,13 @@ print_message "Complete"
 clear
 print_message "Moving config files"
 
+if [[ ${#GPU_TYPE} != 0 ]]
+then 
+    cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
+fi
+
 cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
 cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
-cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
 cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
 sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
 cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
@@ -160,14 +165,20 @@ fi
 #Utilities
 PACKAGES=( udevil )
 PACKAGES+=( unrar unzip )
-PACKAGES+=( cups-pdf hplip )
+if [[ "$PRINTER_INSTALL" == "y" ]]
+then 
+    PACKAGES+=( cups-pdf hplip )
+fi
 print_install PACKAGES[@] $OUTPUT_FILE
 
-until systemctl enable org.cups.cupsd.service
-do 
-    printf "\nPlease try again\n"
-done
-systemctl start org.cups.cupsd.service
+if [[ "$PRINTER_INSTALL" == "y" ]]
+then 
+    until systemctl enable org.cups.cupsd.service
+    do 
+        printf "\nPlease try again\n"
+    done
+    systemctl start org.cups.cupsd.service    
+fi
 
 #Sound
 PACKAGES=( pulseaudio pulseaudio-alsa pamixer )
