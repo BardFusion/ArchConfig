@@ -3,6 +3,7 @@
 set -e
 
 source ./ArchConfig/install/999-print-functions.sh
+BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=$HOME/base-install.log
 
 clear
@@ -126,8 +127,13 @@ packer -S --noconfirm --noedit "rslsync" >> $OUTPUT_FILE
 PACKAGES=( bash-completion vim keepassxc )
 PACKAGES+=( evince firefox youtube-dl )
 PACKAGES+=( gimp compton ranger )
-PACKAGES+=( gdisk cfdisk cmus )
-PACKAGES+=( htop irssi mutt )
+if [[ "$BOOT_TYPE" == "BIOS" ]]
+then
+    PACKAGES+=( cfdisk )
+else
+    PACKAGES+=( gdisk )
+fi
+PACKAGES+=( htop irssi mutt cmus )
 PACKAGES+=( feh rofi mpv )
 PACKAGES+=( xorg-xset libnotify xautolock )
 PACKAGES+=( redshift sane screenfetch scrot )
