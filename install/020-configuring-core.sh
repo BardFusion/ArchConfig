@@ -106,8 +106,6 @@ fi
 
 if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
-    PACKAGES=( efibootmgr )
-    print_install PACKAGES[@] $OUTPUT_FILE
     bootctl install >> /home/install.log
     if [[ "$INTEL_INSTALL" == "y" ]]
     then 

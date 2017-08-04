@@ -30,6 +30,22 @@ done
 mkdir -p $HOME/.config/i3
 mkdir -p $HOME/.config/i3blocks
 
+print_message "Moving config files"
+
+if [[ ${#GPU_TYPE} != 0 ]]
+then 
+    cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
+fi
+
+cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
+cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
+cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
+cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
+cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
+cp $HOME/ArchConfig/config/.xinitrc $HOME/
+cp $HOME/ArchConfig/config/.bash_profile $HOME/
+cp $HOME/ArchConfig/config/.Xdefaults $HOME/
+
 print_message "Complete"
 
 clear
@@ -44,35 +60,6 @@ sudo reflector -l 100 -f 50 --sort rate --threads 4 --save /tmp/mirrorlist.new &
 cat /etc/pacman.d/mirrorlist
 
 sudo pacman -Syu >> $OUTPUT_FILE
-
-print_message "Complete"
-
-clear
-print_message "Installing XORG Server"
-
-PACKAGES=( xorg-server xorg-xinit )
-case $GPU_TYPE in
-    1)
-        PACKAGES+=( xf86-video-ati )
-        ;;
-    2)
-        PACKAGES+=( xf86-video-nouveau )
-        ;;
-    3)
-        PACKAGES+=( xf86-video-intel )  
-        ;;
-    4)
-        PACKAGES+=( virtualbox-guest-utils ) 
-        ;; 
-esac
-print_install PACKAGES[@] $OUTPUT_FILE
-
-
-if [[ "$LAPTOP_INSTALL" == "y" ]]
-then 
-	# Custom LibInput touchpad driver settings 
-	sudo cp $HOME/ArchConfig/config/30-touchpad.conf /etc/X11/xorg.conf.d/
-fi
 
 print_message "Complete"
 
@@ -93,37 +80,45 @@ makepkg -i /tmp/packer --noconfirm >> $OUTPUT_FILE
 print_message "Complete"
 
 clear
+print_message "Installing desktop environment"
+
+PACKAGES=( xorg-server xorg-xinit )
+case $GPU_TYPE in
+    1)
+        PACKAGES+=( xf86-video-ati )
+        ;;
+    2)
+        PACKAGES+=( xf86-video-nouveau )
+        ;;
+    3)
+        PACKAGES+=( xf86-video-intel )  
+        ;;
+    4)
+        PACKAGES+=( virtualbox-guest-utils ) 
+        ;; 
+esac
+print_install PACKAGES[@] $OUTPUT_FILE
+
 print_message "Installing i3 window manager with gaps"
 
 packer -S --noconfirm --noedit "i3-gaps-git" >> $OUTPUT_FILE
 
-# Additional required i3 software
-PACKAGES=( i3blocks i3lock i3status )
-print_install PACKAGES[@] $OUTPUT_FILE
-
-print_message "Complete"
-
-clear
-print_message "Moving config files"
-
-if [[ ${#GPU_TYPE} != 0 ]]
+print_message "Desktop software"
+PACKAGES=( i3blocks i3lock i3status compton feh rofi libnotify xautolock redshift unclutter )
+if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
-    cp $HOME/ArchConfig/config/compton.conf $HOME/.config/
+	# Custom LibInput touchpad driver settings 
+	sudo cp $HOME/ArchConfig/config/30-touchpad.conf /etc/X11/xorg.conf.d/
+    PACKAGES+=( xorg-xbacklight )
 fi
-
-cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
-cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
-cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
+print_install PACKAGES[@] $OUTPUT_FILE
 sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
-cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
-cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
-cp $HOME/ArchConfig/config/.xinitrc $HOME/
-cp $HOME/ArchConfig/config/.bash_profile $HOME/
-cp $HOME/ArchConfig/config/.Xdefaults $HOME/
 
 print_message "Complete"
 
 clear
+print_message "Installing additional software"
+
 print_message "Installing resilio sync"
 
 #software from 'normal' repositories+
@@ -138,48 +133,32 @@ systemctl --user enable rslsync.service
 
 print_message "Complete"
 
-clear
-print_message "Installing additional software"
-
-PACKAGES=( bash-completion vim keepassxc )
-PACKAGES+=( evince firefox youtube-dl )
-PACKAGES+=( gimp compton ranger )
+print_message "System"
+PACKAGES=( bash-completion vim keepassxc htop smartmontools ethtool sysstat screenfeth udevil )
 if [[ "$BOOT_TYPE" == "BIOS" ]]
 then
     PACKAGES+=( cfdisk )
 else
-    PACKAGES+=( gdisk )
+    PACKAGES+=( gdisk efibootmgr )
 fi
-PACKAGES+=( htop irssi mutt cmus )
-PACKAGES+=( feh rofi mpv libreoffice-fresh )
-PACKAGES+=( libnotify xautolock )
-PACKAGES+=( redshift sane screenfetch scrot )
-PACKAGES+=( sysstat )
-PACKAGES+=( transmission-cli rxvt-unicode )
-PACKAGES+=( unclutter )
+if [[ "$PRINTER_INSTALL" == "y" ]]
+then 
+    PACKAGES+=( cups-pdf hplip sane )
+fi
+if [[ "$LAPTOP_INSTALL" == "y" ]]
+then 
+    PACKAGES+=( tlp tlp-rdw acpi_call acpi )
+fi
+
 print_install PACKAGES[@] $OUTPUT_FILE
 
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
-	# Laptop power savings
-    PACKAGES=( tlp tlp-rdw acpi_call smartmontools ethtool xorg-xbacklight acpi )
-    print_install PACKAGES[@] $OUTPUT_FILE
-
-	sudo systemctl enable tlp.service
+    sudo systemctl enable tlp.service
 	sudo systemctl enable tlp-sleep.service
 	sudo systemctl mask systemd-rfkill.service
 	sudo systemctl mask systemd-rfkill.socket
 fi
-
-#Utilities
-PACKAGES=( udevil )
-PACKAGES+=( unrar unzip )
-if [[ "$PRINTER_INSTALL" == "y" ]]
-then 
-    PACKAGES+=( cups-pdf hplip )
-fi
-print_install PACKAGES[@] $OUTPUT_FILE
-
 if [[ "$PRINTER_INSTALL" == "y" ]]
 then 
     until systemctl enable org.cups.cupsd.service
@@ -189,10 +168,24 @@ then
     systemctl start org.cups.cupsd.service    
 fi
 
-#Sound
-PACKAGES=( pulseaudio pulseaudio-alsa pamixer )
-PACKAGES+=( alsa-utils alsa-firmware )
-PACKAGES+=( gst-plugins-good gst-plugins-bad gst-plugins-ugly )
+print_message "Audio"
+PACKAGES=( gst-plugins-good gst-plugins-bad gst-plugins-ugly pulseaudio-alsa alsa-firmware pulseaudio pamixer alsa-utils )
+print_install PACKAGES[@] $OUTPUT_FILE
+
+print_message "Communication"
+PACKAGES=( irssi mutt wget rslsync )
+print_install PACKAGES[@] $OUTPUT_FILE
+
+print_message "Workflow"
+PACKAGES=( git rxvt-unicode unrar unzip vim keepassxc libreoffice-fresh ranger )
+print_install PACKAGES[@] $OUTPUT_FILE
+
+print_message "Media"
+PACKAGES=( mpv cmus evince transmission-cli scrot gimp youtube-dl )
+print_install PACKAGES[@] $OUTPUT_FILE
+
+print_message "Web"
+PACKAGES=( firefox )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"
