@@ -32,8 +32,11 @@ git clone https://github.com/BardFusion/ArchConfig.git >> $OUTPUT_FILE
 chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
 cp "/home/$NEW_USER_NAME/ArchConfig/install/.bash_profile" ./
 
-echo "root:$ROOT_PASSWORD" | chpasswd
-echo "$NEW_USER_NAME:$USER_PASSWORD" | chpasswd
+echo $ROOT_PASSWORD | passwd --stdin
+echo $USER_PASSWORD | passwd $NEW_USER_NAME --stdin
+
+# echo "root:$ROOT_PASSWORD" | chpasswd
+# echo "$NEW_USER_NAME:$USER_PASSWORD" | chpasswd
 
 print_message "Complete"
 print_message "Configuring locales"
