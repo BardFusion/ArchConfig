@@ -13,9 +13,11 @@ print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core install started" >>
 loadkeys us
 
 read -p "Hostname: " HOST_NAME
-read -p -s "Root password: " ROOT_PASSWORD
 read -p "Username: " NEW_USER_NAME
-read -p -s "User password: " USER_PASSWORD
+printf "User password: "
+read -s USER_PASSWORD
+printf "Root password: "
+read -s ROOT_PASSWORD
 read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
 read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
 read -p "Install printer support? (y/N): " PRINTER_INSTALL
