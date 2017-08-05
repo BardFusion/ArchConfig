@@ -22,8 +22,8 @@ clear
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> $OUTPUT_FILE
 print_message "Core configuration"
 
-usermod --password $ROOT_PASSWORD root
-usermod --password $USER_PASSWORD $NEW_USER_NAME
+# echo "root:$ROOT_PASSWORD" | chpasswd
+# echo "$NEW_USER_NAME:$USER_PASSWORD" | chpasswd
 
 print_message "Adding $NEW_USER_NAME"
 
@@ -34,6 +34,9 @@ cd "/home/$NEW_USER_NAME"
 git clone https://github.com/BardFusion/ArchConfig.git >> $OUTPUT_FILE
 chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
 cp "/home/$NEW_USER_NAME/ArchConfig/install/.bash_profile" ./
+
+usermod --password $ROOT_PASSWORD root
+usermod --password $USER_PASSWORD $NEW_USER_NAME
 
 print_message "Complete"
 
