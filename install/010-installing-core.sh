@@ -28,6 +28,8 @@ lsblk
 printf "\n"
 read -p "Enter the device to use: " DEVICE_ID
 
+OPTIONS=( $DEVICE_ID $NEW_USER_NAME $HOST_NAME $INTEL_INSTALL $GPU_TYPE $LAPTOP_INSTALL $PRINTER_INSTALL $ROOT_PASSWORD $USER_PASSWORD )
+
 clear
 print_message "Partitioning disk"
 
@@ -98,7 +100,7 @@ print_message "Complete"
 cp 020-configuring-core.sh /mnt
 cp 999-print-functions.sh /mnt
 mv $OUTPUT_FILE /mnt/home
-arch-chroot /mnt ./020-configuring-core.sh $DEVICE_ID $NEW_USER_NAME $ROOT_PASSWORD $INTEL_INSTALL $GPU_TYPE $LAPTOP_INSTALL $PRINTER_INSTALL $HOST_NAME $USER_PASSWORD
+arch-chroot /mnt ./020-configuring-core.sh "${OPTIONS[@]}"
 clear
 print_message "Cleaning up"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/$OUTPUT_FILE
