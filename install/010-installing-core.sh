@@ -16,8 +16,10 @@ read -p "Hostname: " HOST_NAME
 read -p "Username: " NEW_USER_NAME
 printf "User password: "
 read -s USER_PASSWORD
+printf "\n"
 printf "Root password: "
 read -s ROOT_PASSWORD
+printf "\n"
 read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
 read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
 read -p "Install printer support? (y/N): " PRINTER_INSTALL
