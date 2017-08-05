@@ -2,17 +2,15 @@
 
 set -e
 
-OPTIONS=("$@")
-
-DEVICE_ID=${OPTIONS[1]}
-NEW_USER_NAME=${OPTIONS[2]}
-HOST_NAME=${OPTIONS[3]}
-INTEL_INSTALL=${OPTIONS[4]}
-GPU_TYPE=${OPTIONS[5]}
-LAPTOP_INSTALL=${OPTIONS[6]}
-PRINTER_INSTALL=${OPTIONS[7]}
-ROOT_PASSWORD=${OPTIONS[8]}
-USER_PASSWORD=${OPTIONS[9]}
+DEVICE_ID=$(sed '1q;d' options.conf)
+ROOT_PASSWORD=$(sed '2q;d' options.conf)
+NEW_USER_NAME=$(sed '3q;d' options.conf)
+USER_PASSWORD=$(sed '4q;d' options.conf)
+HOST_NAME=$(sed '5q;d' options.conf)
+GPU_TYPE=$(sed '6q;d' options.conf)
+INTEL_INSTALL=$(sed '7q;d' options.conf)
+LAPTOP_INSTALL=$(sed '8q;d' options.conf)
+PRINTER_INSTALL=$(sed '9q;d' options.conf)
 
 source ./999-print-functions.sh
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
@@ -152,6 +150,9 @@ else
     grub-install --target=i386-pc --recheck $DEVICE_ID >> $OUTPUT_FILE
     grub-mkconfig -o /boot/grub/grub.cfg
 fi
+
+echo "123" > /options.conf
+rm /options.conf
 
 print_message "Complete"
 print_message "System installed succesfully" 
