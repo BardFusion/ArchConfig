@@ -87,6 +87,7 @@ case $GPU_TYPE in
         PACKAGES+=( virtualbox-guest-utils ) 
         ;; 
 esac
+print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"
 
@@ -108,6 +109,7 @@ then
     print_message "Installing laptop specific packages"
 	cp /home/$NEW_USER_NAME/ArchConfig/config/30-touchpad.conf /etc/X11/xorg.conf.d/
     PACKAGES+=( xorg-xbacklight tlp tlp-rdw acpi_call acpi )
+    print_install PACKAGES[@] $OUTPUT_FILE
 
     systemctl enable tlp.service
 	systemctl enable tlp-sleep.service
@@ -115,7 +117,6 @@ then
 	systemctl mask systemd-rfkill.socket
     print_message "Complete"
 fi
-print_install PACKAGES[@] $OUTPUT_FILE
 
 if [[ ${#GPU_TYPE} != 0 ]]
 then 
