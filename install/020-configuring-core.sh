@@ -10,9 +10,10 @@ GPU_TYPE=$5
 LAPTOP_INSTALL=$6
 PRINTER_INSTALL=$7
 ROOT_PASSWORD=$3
-USER_PASSWORD=$9
+USER_PASSWORD=${9}
 echo "=============="
 echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD"
+echo -e "$USER_PASSWORD\n$USER_PASSWORD"
 echo "=============="
 sleep 100
 
