@@ -11,8 +11,9 @@ LAPTOP_INSTALL=$6
 PRINTER_INSTALL=$7
 ROOT_PASSWORD=$8
 USER_PASSWORD=$9
-
+echo "=============="
 echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD"
+echo "=============="
 sleep 100
 
 source ./999-print-functions.sh
