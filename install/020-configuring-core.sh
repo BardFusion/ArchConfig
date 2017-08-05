@@ -12,6 +12,9 @@ PRINTER_INSTALL=$7
 ROOT_PASSWORD=$8
 USER_PASSWORD=$9
 
+echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD"
+sleep 100
+
 source ./999-print-functions.sh
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=/home/core-install.log
@@ -32,8 +35,8 @@ git clone https://github.com/BardFusion/ArchConfig.git >> $OUTPUT_FILE
 chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
 cp "/home/$NEW_USER_NAME/ArchConfig/install/.bash_profile" ./
 
-echo -e "${ROOT_PASSWORD}\n${ROOT_PASSWORD}" | passwd
-echo -e "${USER_PASSWORD}\n${USER_PASSWORD}" | passwd $NEW_USER_NAME
+echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd
+echo -e "$USER_PASSWORD\n$USER_PASSWORD" | passwd $NEW_USER_NAME
 
 print_message "Complete"
 print_message "Configuring locales"
