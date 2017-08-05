@@ -32,8 +32,10 @@ git clone https://github.com/BardFusion/ArchConfig.git >> $OUTPUT_FILE
 chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
 cp "/home/$NEW_USER_NAME/ArchConfig/install/.bash_profile" ./
 
-echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd
+#echo -e "$ROOT_PASSWORD\n$ROOT_PASSWORD" | passwd
+passwd
 echo -e "$USER_PASSWORD\n$USER_PASSWORD" | passwd $NEW_USER_NAME
+echo $USER_PASSWORD | passwd --stdin $NEW_USER_NAME
 
 # echo "root:$ROOT_PASSWORD" | chpasswd
 # echo "$NEW_USER_NAME:$USER_PASSWORD" | chpasswd
