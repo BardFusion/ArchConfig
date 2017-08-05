@@ -110,11 +110,13 @@ cp 999-print-functions.sh /mnt
 mv options.conf /mnt
 mv $OUTPUT_FILE /mnt/home
 arch-chroot /mnt ./020-configuring-core.sh
-clear
+
 print_message "Cleaning up"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/$OUTPUT_FILE
 rm /mnt/020-configuring-core.sh
 rm /mnt/999-print-functions.sh
+echo " " > /mnt/options.conf
+rm /mnt/options.conf
 print_message "Complete"
 
 clear
