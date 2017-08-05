@@ -8,8 +8,6 @@ OUTPUT_FILE=$HOME/base-install.log
 
 clear
 print_message "Installing and configuring base system"
-
-clear
 print_message "Creating user folders"
 
 [ -d $HOME/Documents ] || mkdir -p $HOME/Documents
@@ -26,7 +24,7 @@ mkdir -p $HOME/.config/i3
 mkdir -p $HOME/.config/i3blocks
 mkdir -p $HOME/.config/rslsync
 
-clear
+print_message "Complete"
 print_message "Updating mirrorlist"
 
 PACKAGES=( reflector )
@@ -40,8 +38,6 @@ cat /etc/pacman.d/mirrorlist
 sudo pacman -Syu >> $OUTPUT_FILE
 
 print_message "Complete"
-
-clear
 print_message "Installing Packer AUR helper"
 
 PACKAGES=( expac jshon )
@@ -56,8 +52,6 @@ makepkg -i /tmp/packer --noconfirm >> $OUTPUT_FILE
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 
 print_message "Complete"
-
-clear
 print_message "Installing desktop environment"
 
 print_message "i3 window manager with gaps [AUR]"
@@ -69,9 +63,6 @@ PACKAGES=( i3blocks i3lock i3status compton feh rofi libnotify xautolock redshif
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Complete"
-
-clear
-
 print_message "Installing desktop software"
 print_message "Resilio sync [AUR]"
 
