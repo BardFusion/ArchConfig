@@ -14,31 +14,36 @@ loadkeys us
 
 read -p "Hostname: " HOST_NAME
 read -p "Username: " NEW_USER_NAME
+read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
+read -p "Install printer support? (y/N): " PRINTER_INSTALL
 
 print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
 read -p "Choose the target GPU driver (default = NONE): " GPU_TYPE
-read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
 
 print_message "Available devices"
 lsblk
 printf "\n"
 read -p "Enter the device to use: " DEVICE_ID
 
+clear
+print_message "Partitioning disk"
+
 if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
     read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
-    sgdisk -og $DEVICE_ID
-    sgdisk -n 1:2048:1050623 -c 1:"EFI System Partition" -t 1:ef00 $DEVICE_ID
-    sgdisk -n 2:1050624:9439231 -c 2:"Swap space" -t 2:8200 $DEVICE_ID
-    sgdisk -n 3:9439232:51382271 -c 3:"Linux root" -t 3:8300 $DEVICE_ID
-    sgdisk -n 4:51382272:72353791 -c 4:"Linux var" -t 4:8300 $DEVICE_ID
+    sgdisk -og $DEVICE_ID >> $OUTPUT_FILE
+    sgdisk -n 1:2048:1050623 -c 1:"EFI System Partition" -t 1:ef00 $DEVICE_ID >> $OUTPUT_FILE
+    sgdisk -n 2:1050624:9439231 -c 2:"Swap space" -t 2:8200 $DEVICE_ID >> $OUTPUT_FILE
+    sgdisk -n 3:9439232:51382271 -c 3:"Linux root" -t 3:8300 $DEVICE_ID >> $OUTPUT_FILE
+    sgdisk -n 4:51382272:72353791 -c 4:"Linux var" -t 4:8300 $DEVICE_ID >> $OUTPUT_FILE
     END_SECTOR=`sgdisk -E $DEVICE_ID`
-    sgdisk -n 5:72353792:$END_SECTOR -c 5:"Linux home" -t 5:8e00 $DEVICE_ID
-    sgdisk -p $DEVICE_ID
-    sleep 100
+    sgdisk -n 5:72353792:$END_SECTOR -c 5:"Linux home" -t 5:8300 $DEVICE_ID >> $OUTPUT_FILE
+    sgdisk -p $DEVICE_ID >> $OUTPUT_FILE
 else
     cfdisk $DEVICE_ID
 fi
+
+print_message "Complete"
 
 clear
 print_message "Formatting file systems"
@@ -61,6 +66,8 @@ else
     mkfs.ext4 "${DEVICE_ID}3" >> $OUTPUT_FILE
     mkfs.ext4 "${DEVICE_ID}4" >> $OUTPUT_FILE
 fi
+
+print_message "Complete"
 
 print_message "Mounting file systems"
 
@@ -94,7 +101,7 @@ print_message "Complete"
 cp 020-configuring-core.sh /mnt
 cp 999-print-functions.sh /mnt
 mv $OUTPUT_FILE /mnt/home
-arch-chroot /mnt ./020-configuring-core.sh $DEVICE_ID $NEW_USER_NAME $HOST_NAME $INTEL_INSTALL $GPU_TYPE $LAPTOP_INSTALL
+arch-chroot /mnt ./020-configuring-core.sh $DEVICE_ID $NEW_USER_NAME $HOST_NAME $INTEL_INSTALL $GPU_TYPE $LAPTOP_INSTALL $PRINTER_INSTALL
 clear
 print_message "Cleaning up"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/$OUTPUT_FILE

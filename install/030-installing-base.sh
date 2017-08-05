@@ -92,16 +92,7 @@ then
 else
     PACKAGES+=( gdisk efibootmgr )
 fi
-print_install PACKAGES[@] $OUTPUT_FILE
-
-print_message "Printer"
-PACKAGES=( cups-pdf hplip sane )
-print_install PACKAGES[@] $OUTPUT_FILE
-until systemctl enable org.cups.cupsd.service
-do 
-    printf "\nPlease try again\n"
-done
-systemctl start org.cups.cupsd.service    
+print_install PACKAGES[@] $OUTPUT_FILE 
 
 print_message "Audio"
 PACKAGES=( gst-plugins-good gst-plugins-bad gst-plugins-ugly pulseaudio-alsa alsa-firmware pamixer alsa-utils )
