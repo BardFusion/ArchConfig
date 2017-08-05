@@ -89,7 +89,7 @@ PACKAGES=( gst-plugins-good gst-plugins-bad gst-plugins-ugly pulseaudio-alsa als
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Communication"
-PACKAGES=( irssi mutt )
+PACKAGES=( irssi thunderbird )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Workflow"

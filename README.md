@@ -8,7 +8,7 @@ blablabla this is now the result
 0. Inspect / copy files from laptop that are different      ### DONE ###
 1. I3BLOCKS install / config                                ### DONE ###
 2. Redshift install / config                                ### DONE ###
-3. General base install review packages needed              ###     TODO ###
+3. General base install review packages needed              ### DONE ###
 4. Ranger install / config                                  ###     TODO ###
 5. uxrvt theme tweaking                                     ###     TODO ###
 6. Rofi theme tweaking                                      ###     TODO ###
@@ -45,4 +45,6 @@ blablabla this is now the result
         Applications    -   PDF                         -   Always ask
         Privacy         -   Firefox will                -   Never remember history
         Final           -   Restart
-19. Mutt email install / config                             ###     TODO ###
+19. Thunderbird email config                                ###     MANUAL-CONFIG ###
+    * Set layout to vertical
+    * Add email accounts

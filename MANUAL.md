@@ -19,7 +19,7 @@
 	* ranger					[FILES]	
 # Communication
 	* irssi						[IRC]
-	* mutt						[EMAIL]
+	* thunderbird				[EMAIL]
 	* wget						[DOWNLOAD]
 	* rslsync					[SYNC]				[AUR]
 	* openssh					[COMMAND]
