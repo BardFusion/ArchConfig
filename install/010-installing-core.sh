@@ -27,7 +27,15 @@ read -p "Enter the device to use: " DEVICE_ID
 if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
     read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
-    gdisk $DEVICE_ID
+    sgdisk -og $DEVICE_ID
+    sgdisk -n 1:2048:1050623 -c 1:"EFI System Partition" -t 1:ef00 $DEVICE_ID
+    sgdisk -n 2:1050624:9439231 -c 2:"Swap space" -t 2:8200 $DEVICE_ID
+    sgdisk -n 3:9439232:51382271 -c 3:"Linux root" -t 3:8300 $DEVICE_ID
+    sgdisk -n 4:51382272:72353791 -c 4:"Linux var" -t 4:8300 $DEVICE_ID
+    END_SECTOR=`sgdisk -E $DEVICE_ID`
+    sgdisk -n 5:72353792:$END_SECTOR -c 5:"Linux home" -t 5:8e00 $DEVICE_ID
+    sgdisk -p $DEVICE_ID
+    sleep 100
 else
     cfdisk $DEVICE_ID
 fi
