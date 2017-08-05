@@ -13,8 +13,11 @@ print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core install started" >>
 loadkeys us
 
 read -p "Hostname: " HOST_NAME
+read -p "Root password: " ROOT_PASSWORD
 read -p "Username: " NEW_USER_NAME
+read -p "User password: " USER_PASSWORD
 read -p "Are you installing on a laptop? (y/N): " LAPTOP_INSTALL
+read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
 read -p "Install printer support? (y/N): " PRINTER_INSTALL
 
 print_multiline_message "Available targets:" "1. ATI 2. NVIDIA 3. INTEL 4. VIRTUALBOX"
@@ -30,7 +33,6 @@ print_message "Partitioning disk"
 
 if [[ "$BOOT_TYPE" == "UEFI" ]]
 then
-    read -p "Are you using an intel processor? (y/N): " INTEL_INSTALL
     sgdisk -og $DEVICE_ID >> $OUTPUT_FILE
     sgdisk -n 1:2048:1050623 -c 1:"EFI System Partition" -t 1:ef00 $DEVICE_ID >> $OUTPUT_FILE
     sgdisk -n 2:1050624:9439231 -c 2:"Swap space" -t 2:8200 $DEVICE_ID >> $OUTPUT_FILE
@@ -101,7 +103,7 @@ print_message "Complete"
 cp 020-configuring-core.sh /mnt
 cp 999-print-functions.sh /mnt
 mv $OUTPUT_FILE /mnt/home
-arch-chroot /mnt ./020-configuring-core.sh $DEVICE_ID $NEW_USER_NAME $HOST_NAME $INTEL_INSTALL $GPU_TYPE $LAPTOP_INSTALL $PRINTER_INSTALL
+arch-chroot /mnt ./020-configuring-core.sh $DEVICE_ID $NEW_USER_NAME $HOST_NAME $INTEL_INSTALL $GPU_TYPE $LAPTOP_INSTALL $PRINTER_INSTALL $ROOT_PASSWORD $USER_PASSWORD
 clear
 print_message "Cleaning up"
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Finished, rebooting system" >> /mnt/home/$OUTPUT_FILE

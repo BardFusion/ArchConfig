@@ -9,6 +9,8 @@ INTEL_INSTALL=$4
 GPU_TYPE=$5
 LAPTOP_INSTALL=$6
 PRINTER_INSTALL=$7
+ROOT_PASSWORD=$8
+USER_PASSWORD=$9
 
 source ./999-print-functions.sh
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
@@ -20,24 +22,13 @@ clear
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> $OUTPUT_FILE
 print_message "Core configuration"
 
-print_message "Enter root password"
-
-until passwd
-do 
-    printf "\n\nError, please try again...\n"
-done
+usermod --password $ROOT_PASSWORD root
+usermod --password $USER_PASSWORD $NEW_USER_NAME
 
 print_message "Adding $NEW_USER_NAME"
 
 useradd -m -g users -G wheel,storage,power -s /bin/bash $NEW_USER_NAME
-
-until passwd $NEW_USER_NAME
-do 
-    printf "\nPlease try again\n"
-done
 sed -i "0,/# %wheel/s//%wheel/" /etc/sudoers
-
-printf "\n"
 
 cd "/home/$NEW_USER_NAME"
 git clone https://github.com/BardFusion/ArchConfig.git >> $OUTPUT_FILE
