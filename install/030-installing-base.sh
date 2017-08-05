@@ -52,19 +52,12 @@ makepkg -i /tmp/packer --noconfirm >> $OUTPUT_FILE
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 
 print_message "Complete"
-print_message "Installing desktop environment"
-
-print_message "i3 window manager with gaps [AUR]"
+print_message "Installing i3 window manager with gaps [AUR]"
 
 packer -S --noconfirm --noedit "i3-gaps-git" >> $OUTPUT_FILE
 
-print_message "Additional software"
-PACKAGES=( i3blocks i3lock i3status compton feh rofi libnotify xautolock redshift unclutter )
-print_install PACKAGES[@] $OUTPUT_FILE
-
 print_message "Complete"
-print_message "Installing desktop software"
-print_message "Resilio sync [AUR]"
+print_message "Installing Resilio sync [AUR]"
 
 #software from 'normal' repositories+
 packer -S --noconfirm --noedit "rslsync" >> $OUTPUT_FILE
@@ -75,6 +68,8 @@ sed -i "s/\/var\/run\/resilio\/resilio.pid/\/home\/$USER\/.config\/rslsync\/resi
 touch $HOME/.config/rslsync/resilio.pid
 systemctl --user enable rslsync.service
 
+print_message "Complete"
+print_message "Installing remaining software"
 print_message "System"
 PACKAGES=( bash-completion htop smartmontools ethtool sysstat screenfetch udevil )
 if [[ "$BOOT_TYPE" == "BIOS" ]]
@@ -84,6 +79,10 @@ else
     PACKAGES+=( gdisk efibootmgr )
 fi
 print_install PACKAGES[@] $OUTPUT_FILE 
+
+print_message "Desktop"
+PACKAGES=( i3blocks i3lock i3status compton feh rofi libnotify xautolock redshift unclutter )
+print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Audio"
 PACKAGES=( gst-plugins-good gst-plugins-bad gst-plugins-ugly pulseaudio-alsa alsa-firmware pamixer alsa-utils )

@@ -152,9 +152,6 @@ else
     grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
-echo "123" > /options.conf
-rm /options.conf
-
 print_message "Complete"
 print_message "System installed succesfully" 
 sleep 1
