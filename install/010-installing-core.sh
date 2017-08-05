@@ -46,8 +46,6 @@ else
 fi
 
 print_message "Complete"
-
-clear
 print_message "Formatting file systems"
 
 if [[ "$BOOT_TYPE" == "UEFI" ]]
@@ -70,7 +68,6 @@ else
 fi
 
 print_message "Complete"
-
 print_message "Mounting file systems"
 
 if [[ "$BOOT_TYPE" == "UEFI" ]]
@@ -91,8 +88,6 @@ else
 fi
 
 print_message "Complete"
-
-clear
 print_message "Installing base system"
 
 pacstrap /mnt base base-devel >> $OUTPUT_FILE

@@ -15,17 +15,14 @@ USER_PASSWORD=$9
 source ./999-print-functions.sh
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 OUTPUT_FILE=/home/core-install.log
-PACKAGES=( git )
-print_install PACKAGES[@] $OUTPUT_FILE
 
 clear
 print_multiline_message "$(date +%d-%m-%Y---%H:%M:%S)" "Core configuration started" >> $OUTPUT_FILE
 print_message "Core configuration"
+PACKAGES=( git )
+print_install PACKAGES[@] $OUTPUT_FILE
 
-# echo "root:$ROOT_PASSWORD" | chpasswd
-# echo "$NEW_USER_NAME:$USER_PASSWORD" | chpasswd
-
-print_message "Adding $NEW_USER_NAME"
+print_message "Adding user '$NEW_USER_NAME'"
 
 useradd -m -g users -G wheel,storage,power -s /bin/bash $NEW_USER_NAME
 sed -i "0,/# %wheel/s//%wheel/" /etc/sudoers
@@ -35,12 +32,10 @@ git clone https://github.com/BardFusion/ArchConfig.git >> $OUTPUT_FILE
 chown -R $NEW_USER_NAME:users "/home/$NEW_USER_NAME/ArchConfig" 
 cp "/home/$NEW_USER_NAME/ArchConfig/install/.bash_profile" ./
 
-usermod --password $ROOT_PASSWORD root
-usermod --password $USER_PASSWORD $NEW_USER_NAME
+echo "root:$ROOT_PASSWORD" | chpasswd
+echo "$NEW_USER_NAME:$USER_PASSWORD" | chpasswd
 
 print_message "Complete"
-
-clear
 print_message "Configuring locales"
 
 sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/g' /etc/locale.gen
@@ -54,16 +49,12 @@ export LANG=en_US.UTF-8
 echo -e "KEYMAP=us\nFONT=lat9w-16" > /etc/vconsole.conf
 
 print_message "Complete"
-
-clear
 print_message "Configuring time"
 
 ln -sf /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 hwclock --systohc --utc
 
 print_message "Complete"
-
-clear
 print_message "Configuring network"
 
 echo $HOST_NAME > /etc/hostname
@@ -78,8 +69,6 @@ printf "\n"
 systemctl enable NetworkManager
 
 print_message "Complete"
-
-clear
 print_message "Installing XORG"
 
 PACKAGES=( xorg-server xorg-xinit )
@@ -102,7 +91,6 @@ print_message "Complete"
 
 if [[ "$PRINTER_INSTALL" == "y" ]]
 then
-    clear
     print_message "Installing printer support"
     PACKAGES=( cups-pdf hplip sane )
     print_install PACKAGES[@] $OUTPUT_FILE
@@ -116,7 +104,6 @@ fi
 
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
-    clear
     print_message "Installing laptop specific packages"
 	cp /home/$NEW_USER_NAME/ArchConfig/config/30-touchpad.conf /etc/X11/xorg.conf.d/
     PACKAGES+=( xorg-xbacklight tlp tlp-rdw acpi_call acpi )
@@ -134,7 +121,6 @@ then
     cp /home/$NEW_USER_NAME/ArchConfig/config/compton.conf /home/$NEW_USER_NAME/.config/
 fi
 
-clear
 print_message "Installing bootloader"
 
 if [[ "$BOOT_TYPE" == "BIOS" ]]
@@ -166,7 +152,5 @@ else
 fi
 
 print_message "Complete"
-
-clear
 print_message "System installed succesfully" 
 sleep 1
