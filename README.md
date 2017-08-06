@@ -9,15 +9,15 @@ blablabla this is now the result
 1. I3BLOCKS install / config                                ### DONE ###
 2. Redshift install / config                                ### DONE ###
 3. General base install review packages needed              ### DONE ###
-4. Ranger install / config                                  ###     TODO ###
-5. uxrvt theme tweaking                                     ###     TODO ###
+4. Ranger config                                            ###     TODO ###
+5. Terminator theme tweaking                                ### DONE ###
 6. Rofi theme tweaking                                      ###     TODO ###
 7. KeePass install                                          ### DONE ###
 8. RSLSync install / config                                 ###     MANUAL-CONFIG ### 
 	* login at localhost:8888
 	* fill in account
 	* enter folder links
-9. arxisfjd editor science install / config                 ###     TODO ###
+9. LaTeX editor science install / config                    ###     TODO ###
 10. Compton optimization                                    ### DONE ###
 11. additional keybindings                                  ### DONE ###
     a. sound                                                ### DONE ###
@@ -29,7 +29,7 @@ blablabla this is now the result
 13. scrap conky from install if possible                    ### DONE ###
 14. inspect i3-extras git                                   ###     TODO ###
 15. Laptop specific delimitations                           ### DONE ###
-16. IRSSI install / config                                  ###     MANUAL-CONFIG ###
+16. IRSSI config                                            ###     MANUAL-CONFIG ###
 17. mpv / youtubedl install /config                         ### DONE ###
 18. firefox install / config                                ###     MANUAL-CONFIG ###
     * HTTPS Everywhere [Extension]

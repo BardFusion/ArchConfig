@@ -107,7 +107,7 @@ fi
 if [[ "$LAPTOP_INSTALL" == "y" ]]
 then 
     print_message "Installing laptop specific packages"
-	cp /home/$NEW_USER_NAME/ArchConfig/config/30-touchpad.conf /etc/X11/xorg.conf.d/
+	cp /home/$NEW_USER_NAME/ArchConfig/config/input/30-touchpad.conf /etc/X11/xorg.conf.d/
     PACKAGES=( xorg-xbacklight tlp tlp-rdw acpi_call acpi )
     print_install PACKAGES[@] $OUTPUT_FILE
 
@@ -121,7 +121,7 @@ fi
 if [[ ${#GPU_TYPE} != 0 ]]
 then 
     mkdir -p /home/$NEW_USER_NAME/.config
-    cp /home/$NEW_USER_NAME/ArchConfig/config/compton.conf /home/$NEW_USER_NAME/.config/
+    cp /home/$NEW_USER_NAME/ArchConfig/config/compton/compton.conf /home/$NEW_USER_NAME/.config/
     chown -R $NEW_USER_NAME:users /home/$NEW_USER_NAME/.config
 fi
 

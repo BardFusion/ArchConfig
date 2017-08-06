@@ -10,7 +10,7 @@
 	* youtube-dl				[DOWNLOAD]
 # Workflow tasks
 	* git						[SYNC]
-	* rxvt-unicode				[TERMINAL]
+	* terminator				[TERMINAL]
 	* unrar						[ARCHIVE]
 	* unzip						[ARCHIVE]	
 	* vim						[TEXT]

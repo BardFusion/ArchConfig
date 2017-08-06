@@ -68,10 +68,7 @@ set $rd     #c52a2a
 #############################################
 
 # start a terminal
-bindsym $mod+Return exec urxvt
-
-# Open the file manager
-bindsym $mod+f exec urxvt -e ranger
+bindsym $mod+Return exec terminator
 
 # lock the session
 bindsym $mod+l exec --no-startup-id /home/jasper/.config/i3/lock.sh

@@ -23,6 +23,7 @@ done
 mkdir -p $HOME/.config/i3
 mkdir -p $HOME/.config/i3blocks
 mkdir -p $HOME/.config/rslsync
+mkdir -p $HOME/.config/terminator/
 
 print_message "Complete"
 print_message "Updating mirrorlist"
@@ -61,7 +62,7 @@ print_message "Installing Resilio sync [AUR]"
 
 #software from 'normal' repositories+
 packer -S --noconfirm --noedit "rslsync" >> $OUTPUT_FILE
-cp $HOME/ArchConfig/config/rslsync.conf $HOME/.config/rslsync/
+cp $HOME/ArchConfig/config/resilio/rslsync.conf $HOME/.config/rslsync/
 sed -i "s/\/var\/lib\/rslsync/\/home\/$USER\/.config\/rslsync/g" $HOME/.config/rslsync/rslsync.conf
 sed -i "s/\/var\/run\/resilio\/resilio.pid/\/home\/$USER\/.config\/rslsync\/resilio.pid/g" $HOME/.config/rslsync/rslsync.conf
 
@@ -93,7 +94,7 @@ PACKAGES=( irssi thunderbird )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Workflow"
-PACKAGES=( rxvt-unicode unrar unzip vim keepassxc libreoffice-fresh ranger openssh )
+PACKAGES=( terminator unrar unzip vim keepassxc libreoffice-fresh ranger openssh )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Media"
@@ -111,13 +112,13 @@ print_message "Moving config files"
 sudo cp $HOME/ArchConfig/config/i3blocks/scripts/* /usr/lib/i3blocks/
 
 cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
-cp $HOME/ArchConfig/config/redshift.conf $HOME/.config/
+cp $HOME/ArchConfig/config/redshift/redshift.conf $HOME/.config/
+cp $HOME/ArchConfig/config/terminator/config $HOME/.config/terminator/
 cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
 cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
 cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
-cp $HOME/ArchConfig/config/.xinitrc $HOME/
-cp $HOME/ArchConfig/config/.bash_profile $HOME/
-cp $HOME/ArchConfig/config/.Xdefaults $HOME/
+cp $HOME/ArchConfig/config/xorg/.xinitrc $HOME/
+cp $HOME/ArchConfig/config/bash/.bash_profile $HOME/
 
 print_message "Complete"
 
