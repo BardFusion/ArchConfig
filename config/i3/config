@@ -26,16 +26,32 @@ smart_borders on
 #                  Colors                   #
 #############################################
 
-set $bgcolour   #93A1A1
-set $fgcolour   #002B36
-set $fgcolour2  #657B83
+set $bg_active                  #16C2FB
+set $bg_inactive                #007095
+set bg_urgent                   #FF2800
 
-# Window Colours
-#                               border        background      text            indicator
-  client.focused                $bgcolour     $bgcolour       $fgcolour       $fgcolour
-  client.focused_inactive       $bgcolour     $bgcolour       $fgcolour       $fgcolour
-  client.unfocused              $bgcolour     $bgcolour       $fgcolour       $fgcolour
-  client.urgent                 $bgcolour     $bgcolour       $fgcolour       $fgcolour
+set $border_active              #16C2FB
+set $border_inactive            $bg_inactive
+set $border_urgent              #B27B78
+
+set $text_active                #FDFEFF
+set $text_inactive              #212121
+
+set $bg_active_workspace        #383E47
+set $bg_inactive_workspace      #C48D62
+
+set $bg_bar                     #383E47
+set $indicator                  #03C0FF
+
+set $rofi_bg                    #007095
+set $rofi_fg                    #000000
+set $rofi_selected              #FFFFFF
+
+# window colors         border              background          text                 indicator
+client.focused          $border_active      $bg_active          $text_active         $border_active
+client.unfocused        $border_inactive    $bg_inactive        $text_inactive       $border_inactive
+client.focused_inactive $border_inactive    $bg_inactive        $text_inactive       $border_inactive
+client.urgent           $border_urgent      $bg_urgent          $text-color          $border_urgent
 
 #############################################
 #                Shortcuts                  #
@@ -77,7 +93,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # start rofi launcher
-bindsym  $mod+d exec rofi -show run -lines 5 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bc "$base01" -bg "$base01" -fg "$base07" -hlbg "$base01" -hlfg "#9575cd" font "System San FRancisco Display 20"
+bindsym  $mod+d exec rofi -show run -lines 5 -eh 2 -opacity "50" -bw 0 -bc "$bg_active" -bg "$rofi_bg" -fg "$rofi_fg" -hlbg "$rofi_selected" -hlfg "$rofi_fg" -font "System San Francisco Display 16"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%  && pkill -RTMIN+1 i3blocks #pulseaudio-ctl up
@@ -173,18 +189,16 @@ bar {
 	status_command i3blocks
 	tray_output none
 	position top
+        strip_workspace_numbers yes
+        separator_symbol ">>"
 
         colors {
-        background $bgcolour
-        statusline $fgcolour
-        separator $fgcolour2
-#                               border          background      text                                
-        focused_workspace       $bgcolour       $bgcolour       $fgcolour
-        active_workspace        $bgcolour       $bgcolour       $fgcolour
-        inactive_workspace      $bgcolour       $bgcolour       $fgcolour2
-        urgent_workspace        $bgcolour       $bgcolour       $fgcolour
-        binding_mode            $bgcolour       $bgcolour       $fgcolour
-        }
+                background $bg_bar
+#                                       border                  background              text     
+                focused_workspace       $bg_active              $bg_active_workspace    $text_active
+                inactive_workspace      $bg_inactive_workspace  $bg_inactive_workspace  $text_inactive
+                active_workspace        $bg_inactive_workspace  $bg_inactive_workspace  $text_inactive
+ 	}
 }
 
 #############################################
