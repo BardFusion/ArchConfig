@@ -26,32 +26,34 @@ smart_borders on
 #                  Colors                   #
 #############################################
 
-set $bg_active                  #16C2FB
-set $bg_inactive                #007095
-set bg_urgent                   #FF2800
+set $bg_active                  #3B3228
+set $bg_inactive                #7E705A
+set bg_urgent                   #CB6077
 
-set $border_active              #16C2FB
+set $border_active              $bg_active
 set $border_inactive            $bg_inactive
-set $border_urgent              #B27B78
+set $border_urgent              $bg_urgent
 
-set $text_active                #FDFEFF
-set $text_inactive              #212121
+set $text_active                #F5EEEB
+set $text_inactive              #D0C8C6
+set $text_urgent                #BEB55B
 
-set $bg_active_workspace        #383E47
-set $bg_inactive_workspace      #C48D62
+set $bg_active_workspace        $bg_active
+set $bg_inactive_workspace      $bg_inactive
+set $bg_urgent_workspace        $bg_urgent
 
-set $bg_bar                     #3B3228
-set $indicator                  #03C0FF
+set $bg_bar                     $bg_active
+set $indicator                  $text_active
 
-set $rofi_bg                    #3B3228
-set $rofi_fg                    #D0C8C6
-set $rofi_selected              #7E705A
+set $rofi_bg                    $bg_active
+set $rofi_selected              $text_active
+set $rofi_fg                    $text_inactive
 
 # window colors         border              background          text                 indicator
 client.focused          $border_active      $bg_active          $text_active         $border_active
 client.unfocused        $border_inactive    $bg_inactive        $text_inactive       $border_inactive
 client.focused_inactive $border_inactive    $bg_inactive        $text_inactive       $border_inactive
-client.urgent           $border_urgent      $bg_urgent          $text-color          $border_urgent
+client.urgent           $border_urgent      $bg_urgent          $text_urgent         $border_urgent
 
 #############################################
 #                Shortcuts                  #
@@ -93,7 +95,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # start rofi launcher
-bindsym  $mod+d exec rofi -show run -lines 5 -eh 2 -opacity "50" -bw 0 -bc "$bg_active" -bg "$rofi_bg" -fg "$rofi_fg" -hlbg "$rofi_selected" -hlfg "$rofi_fg" -font "System San Francisco Display 16"
+bindsym  $mod+d exec rofi -show run -bc "$bg_active" -bg "$rofi_bg" -fg "$rofi_fg" -hlbg "$rofi_selected" -hlfg "$rofi_fg" -font "System San Francisco Display 16"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%  && pkill -RTMIN+1 i3blocks #pulseaudio-ctl up
@@ -190,14 +192,17 @@ bar {
 	tray_output none
 	position top
         strip_workspace_numbers yes
-        separator_symbol "nnn"
 
         colors {
                 background $bg_bar
+                statusline $text_active
+                separator $text_inactive
+
 #                                       border                  background              text     
                 focused_workspace       $bg_active              $bg_active_workspace    $text_active
                 inactive_workspace      $bg_inactive_workspace  $bg_inactive_workspace  $text_inactive
                 active_workspace        $bg_inactive_workspace  $bg_inactive_workspace  $text_inactive
+                urgent_workspace        $bg_urgent              $bg_urgent_workspace    $text_urgent                
  	}
 }
 
