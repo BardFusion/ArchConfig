@@ -42,9 +42,6 @@ set $bg_active_workspace        $bg_active
 set $bg_inactive_workspace      $bg_inactive
 set $bg_urgent_workspace        $bg_urgent
 
-set $bg_bar                     $bg_active
-set $indicator                  $text_active
-
 set $rofi_bg                    $bg_active
 set $rofi_selected              $text_active
 set $rofi_fg                    $text_inactive
@@ -194,15 +191,15 @@ bar {
         strip_workspace_numbers yes
 
         colors {
-                background $bg_bar
-                statusline $text_active
-                separator $text_inactive
-
-#                                       border                  background              text     
-                focused_workspace       $bg_active              $bg_active_workspace    $text_active
-                inactive_workspace      $bg_inactive_workspace  $bg_inactive_workspace  $text_inactive
-                active_workspace        $bg_inactive_workspace  $bg_inactive_workspace  $text_inactive
-                urgent_workspace        $bg_urgent              $bg_urgent_workspace    $text_urgent                
+                background #3B3228
+                statusline #F5EEEB
+                separator #D0C8C6
+                    
+                focused_workspace       #3B3228 #3B3228 #F5EEEB
+                active_workspace        #7E705A #7E705A #D0C8C6
+                inactive_workspace      #7E705A #7E705A #D0C8C6                
+                urgent_workspace        #CB6077 #CB6077 #BEB55B
+                binding_mode            #CB6077 #CB6077 #BEB55B                
  	}
 }
 
