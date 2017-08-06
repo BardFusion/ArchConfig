@@ -34,7 +34,7 @@ blablabla this is now the result
 18. firefox install / config                                ###     MANUAL-CONFIG ###
     * HTTPS Everywhere [Extension]
     * uBlock origin [Extension]
-    * Compact Dark [Theme]
+    * FT Deep dark [Theme]
     * NoScript [Extension]
     * Restart
     * Preferences:
