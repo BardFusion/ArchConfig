@@ -26,8 +26,9 @@ smart_borders on
 #                  Colors                   #
 #############################################
 
-set $bgcolour #93A1A1
-set $fgcolour #002B36
+set $bgcolour   #93A1A1
+set $fgcolour   #002B36
+set $fgcolour2  #657B83
 
 # Window Colours
 #                               border        background      text            indicator
@@ -172,6 +173,18 @@ bar {
 	status_command i3blocks
 	tray_output none
 	position top
+
+        colors {
+        background $bgcolour
+        statusline $fgcolour
+        separator $fgcolour2
+#                               border          background      text                                
+        focused_workspace       $bgcolour       $bgcolour       $fgcolour
+        active_workspace        $bgcolour       $bgcolour       $fgcolour
+        inactive_workspace      $bgcolour       $bgcolour       $fgcolour2
+        urgent_workspace        $bgcolour       $bgcolour       $fgcolour
+        binding_mode            $bgcolour       $bgcolour       $fgcolour
+        }
 }
 
 #############################################
