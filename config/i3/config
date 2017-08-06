@@ -17,7 +17,7 @@ set $wallpaper ~/Pictures/wallpapers/10-13.jpg
 for_window [class="^.*"] border pixel 0
 
 # Gaps defaults
-gaps inner 20
+gaps inner 10
 gaps outer 5
 smart_gaps on
 smart_borders on
@@ -26,31 +26,17 @@ smart_borders on
 #                  Colors                   #
 #############################################
 
-set $bg_active                  #3B3228
-set $bg_inactive                #7E705A
-set bg_urgent                   #CB6077
+set $bg_active          #3B3228
+set $bg_inactive        #7E705A
+set bg_urgent           #CB6077
 
-set $border_active              $bg_active
-set $border_inactive            $bg_inactive
-set $border_urgent              $bg_urgent
+set $text_active        #F5EEEB
+set $text_inactive      #D0C8C6
+set $text_urgent        #BEB55B
 
-set $text_active                #F5EEEB
-set $text_inactive              #D0C8C6
-set $text_urgent                #BEB55B
-
-set $bg_active_workspace        $bg_active
-set $bg_inactive_workspace      $bg_inactive
-set $bg_urgent_workspace        $bg_urgent
-
-set $rofi_bg                    $bg_active
-set $rofi_selected              $text_active
-set $rofi_fg                    $text_inactive
-
-# window colors         border              background          text                 indicator
-client.focused          $border_active      $bg_active          $text_active         $border_active
-client.unfocused        $border_inactive    $bg_inactive        $text_inactive       $border_inactive
-client.focused_inactive $border_inactive    $bg_inactive        $text_inactive       $border_inactive
-client.urgent           $border_urgent      $bg_urgent          $text_urgent         $border_urgent
+set $rofi_bg            $bg_active
+set $rofi_selected      $text_active
+set $rofi_fg            $text_inactive
 
 #############################################
 #                Shortcuts                  #
@@ -89,7 +75,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t urgent -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # start rofi launcher
 bindsym  $mod+d exec rofi -show run -bc "$bg_active" -bg "$rofi_bg" -fg "$rofi_fg" -hlbg "$rofi_selected" -hlfg "$rofi_fg" -font "System San Francisco Display 16"
@@ -188,7 +174,6 @@ bar {
 	status_command i3blocks
 	tray_output none
 	position top
-        strip_workspace_numbers yes
 
         colors {
                 background #3B3228
