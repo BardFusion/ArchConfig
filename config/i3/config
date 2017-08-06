@@ -26,42 +26,15 @@ smart_borders on
 #                  Colors                   #
 #############################################
 
-#alexbooker i3 colors
-set $base00 #101218
-set $base01 #2F343F
-set $base02 #1F242F
-set $base03 #7780a1
-set $base04 #C0C5CE
-set $base05 #d1d4e0
-set $base06 #C9CCDB
-set $base07 #ffffff
-set $base08 #ee829f
-set $base09 #f99170
-set $base0A #ffefcc
-set $base0B #a5ffe1
-set $base0C #97e0ff
-set $base0D #97bbf7
-set $base0E #c0b7f9
-set $base0F #fcc09e
-
-# color defines for zenburn styled i3
-set $bg     #000000
-set $fg     #ffa500
-set $hi     #ff1a1a
-set $ac     #a0afa0
-set $tx     #040404
-set $ia     #8f8f8f
-set $be     #8faf9f
-set $yw     #ffff00
-set $gn     #00b300
-set $rd     #c52a2a
+set $bgcolour #93A1A1
+set $fgcolour #002B36
 
 # Window Colours
-#                         border  background text    indicator
-  client.focused          $base01 $base01    $base07 $base0F
-  client.focused_inactive $base02 $base02    $base03 $base0F
-  client.unfocused        $base02 $base02    $base03 $base0F
-  client.urgent           $base02 $base08    $base00 $base0F
+#                               border        background      text            indicator
+  client.focused                $bgcolour     $bgcolour       $fgcolour       $fgcolour
+  client.focused_inactive       $bgcolour     $bgcolour       $fgcolour       $fgcolour
+  client.unfocused              $bgcolour     $bgcolour       $fgcolour       $fgcolour
+  client.urgent                 $bgcolour     $bgcolour       $fgcolour       $fgcolour
 
 #############################################
 #                Shortcuts                  #
@@ -199,16 +172,6 @@ bar {
 	status_command i3blocks
 	tray_output none
 	position top
-	colors {
-		separator 	$base03
-		background 	$base01
-    		statusline 	$base05
-		#			border	        background	text
-		focused_workspace	$base01         $base01    	$base07
-		active_workspace	$base01         $base02    	$base03
-		inactive_workspace	$base01         $base01    	$base03
-		urgent_workspace	$base01         $base01    	$base08
-  }
 }
 
 #############################################
