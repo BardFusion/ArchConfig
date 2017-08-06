@@ -40,12 +40,12 @@ set $text_inactive              #212121
 set $bg_active_workspace        #383E47
 set $bg_inactive_workspace      #C48D62
 
-set $bg_bar                     #383E47
+set $bg_bar                     #3B3228
 set $indicator                  #03C0FF
 
-set $rofi_bg                    #007095
-set $rofi_fg                    #000000
-set $rofi_selected              #FFFFFF
+set $rofi_bg                    #3B3228
+set $rofi_fg                    #D0C8C6
+set $rofi_selected              #7E705A
 
 # window colors         border              background          text                 indicator
 client.focused          $border_active      $bg_active          $text_active         $border_active
@@ -190,7 +190,7 @@ bar {
 	tray_output none
 	position top
         strip_workspace_numbers yes
-        separator_symbol ">>"
+        separator_symbol "nnn"
 
         colors {
                 background $bg_bar
