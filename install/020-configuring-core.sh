@@ -118,13 +118,6 @@ then
     print_message "Complete"
 fi
 
-if [[ ${#GPU_TYPE} != 0 ]]
-then 
-    mkdir -p /home/$NEW_USER_NAME/.config
-    cp /home/$NEW_USER_NAME/ArchConfig/config/compton/compton.conf /home/$NEW_USER_NAME/.config/
-    chown -R $NEW_USER_NAME:users /home/$NEW_USER_NAME/.config
-fi
-
 print_message "Installing bootloader"
 
 if [[ "$BOOT_TYPE" == "BIOS" ]]
