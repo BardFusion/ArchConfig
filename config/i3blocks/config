@@ -39,11 +39,11 @@ interval=2
 min_width=150
 align=center
 
-[bandwidth]
-instance=out
-interval=2
-min_width=150
-align=center
+# [bandwidth]
+# instance=out
+# interval=2
+# min_width=150
+# align=center
 
 # [space]
 # label=ROOT
@@ -61,9 +61,21 @@ interval=2
 min_width=90
 align=center
 
-[microphone]
-label=MIC
+# [microphone]
+# label=MIC
+# interval=5
+# min_width=90
+# align=center
+
+[brightness]
+label=BRT
 interval=5
+min_width=90
+align=center
+
+[battery]
+label=BAT
+interval=30
 min_width=90
 align=center
 
@@ -76,18 +88,6 @@ align=center
 [temperature]
 interval=10
 min_width=50
-align=center
-
-[battery]
-label=BAT
-interval=30
-min_width=90
-align=center
-
-[brightness]
-label=BRT
-interval=5
-min_width=90
 align=center
 
 [memory]
