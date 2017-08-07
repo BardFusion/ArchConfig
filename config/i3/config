@@ -26,17 +26,31 @@ smart_borders on
 #                  Colors                   #
 #############################################
 
-set $bg_active          #3B3228
-set $bg_inactive        #7E705A
-set bg_urgent           #CB6077
+set $base00 #2d2d2d
+set $base01 #393939
+set $base02 #515151
+set $base03 #747369
+set $base04 #a09f93
+set $base05 #d3d0c8
+set $base06 #e8e6df
+set $base07 #f2f0ec
+set $base08 #f2777a
+set $base09 #f99157
+set $base0A #ffcc66
+set $base0B #99cc99
+set $base0C #66cccc
+set $base0D #6699cc
+set $base0E #cc99cc
+set $base0F #d27b53
 
-set $text_active        #F5EEEB
-set $text_inactive      #D0C8C6
-set $text_urgent        #BEB55B
-
-set $rofi_bg            $bg_active
-set $rofi_selected      $text_active
-set $rofi_fg            $text_inactive
+# Basic color configuration using the Base16 variables for windows and borders.
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0D $base0D
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
 
 #############################################
 #                Shortcuts                  #
@@ -78,7 +92,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t urgent -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # start rofi launcher
-bindsym  $mod+d exec rofi -show run -bc "$bg_active" -bg "$rofi_bg" -fg "$rofi_fg" -hlbg "$rofi_selected" -hlfg "$rofi_fg" -font "System San Francisco Display 16"
+bindsym  $mod+d exec rofi -show run -font "System San Francisco Display 16"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%  && pkill -RTMIN+1 i3blocks #pulseaudio-ctl up
@@ -172,20 +186,21 @@ mode "$mode_gaps_outer" {
 # Bar
 bar {
 	status_command i3blocks
-	tray_output none
+	tray_output primary
 	position top
 
         colors {
-                background #3B3228
-                statusline #F5EEEB
-                separator #D0C8C6
-                    
-                focused_workspace       #3B3228 #3B3228 #F5EEEB
-                active_workspace        #7E705A #7E705A #D0C8C6
-                inactive_workspace      #7E705A #7E705A #D0C8C6                
-                urgent_workspace        #CB6077 #CB6077 #BEB55B
-                binding_mode            #CB6077 #CB6077 #BEB55B                
- 	}
+        background $base00
+        separator  $base01
+        statusline $base04
+
+        # State             Border  BG      Text
+        focused_workspace   $base05 $base0D $base00
+        active_workspace    $base05 $base03 $base00
+        inactive_workspace  $base03 $base01 $base05
+        urgent_workspace    $base08 $base08 $base00
+        binding_mode        $base00 $base0A $base00
+    }
 }
 
 #############################################

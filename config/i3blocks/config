@@ -28,32 +28,32 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=10
 markup=none
 
-[network]
-interval=10
-min_width=110
-align=center
+# [network]
+# interval=10
+# min_width=110
+# align=center
 
-[bandwidth]
-instance=in
-interval=2
-min_width=150
-align=center
+# [bandwidth]
+# instance=in
+# interval=2
+# min_width=150
+# align=center
 
-[bandwidth]
-instance=out
-interval=2
-min_width=150
-align=center
+# [bandwidth]
+# instance=out
+# interval=2
+# min_width=150
+# align=center
 
-[space]
-label=ROOT
-instance=/;perc
-interval=60
+# [space]
+# label=ROOT
+# instance=/;perc
+# interval=60
 
-[space]
-label=HOME
-instance=/home;perc
-interval=60
+# [space]
+# label=HOME
+# instance=/home;perc
+# interval=60
 
 [audio]
 label=VOL

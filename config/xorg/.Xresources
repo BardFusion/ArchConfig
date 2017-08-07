@@ -1,0 +1,52 @@
+! special
+*.foreground:   #d3d0c8
+*.background:   #2d2d2d
+*.cursorColor:  #d3d0c8
+
+! black
+*.color0:       #2d2d2d
+*.color8:       #747369
+
+! red
+*.color1:       #f2777a
+*.color9:       #f2777a
+
+! green
+*.color2:       #99cc99
+*.color10:      #99cc99
+
+! yellow
+*.color3:       #ffcc66
+*.color11:      #ffcc66
+
+! blue
+*.color4:       #6699cc
+*.color12:      #6699cc
+
+! magenta
+*.color5:       #cc99cc
+*.color13:      #cc99cc
+
+! cyan
+*.color6:       #66cccc
+*.color14:      #66cccc
+
+! white
+*.color7:       #d3d0c8
+*.color15:      #f2f0ec
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+! Use extended color scheme
+rofi.color-enabled:                  true
+! Color scheme for normal row
+rofi.color-normal:                   argb:002D2D2D,  #D3D0C8 , argb:002D2D2D,  #FFCC66 ,  #2D2D2D
+! Color scheme for urgent row
+rofi.color-urgent:                   argb:002D2D2D,  #FFCC66 , argb:002D2D2D,  #FFCC66 ,  #2D2D2D
+! Color scheme for active row
+rofi.color-active:                   argb:002D2D2D,  #6699CC , argb:002D2D2D,  #6699CC ,  #2D2D2D
+! Color scheme window
+rofi.color-window:                   argb:ee2D2D2D,  #FFCC66 ,  #FFCC66
+! Separator style (none, dash, solid)
+rofi.separator-style:                solid

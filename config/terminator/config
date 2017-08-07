@@ -1,19 +1,19 @@
 [global_config]
+  title_transmit_fg_color = "#d3d0c8"
+  title_transmit_bg_color = "#2d2d2d"
+  title_inactive_fg_color = "#d3d0c8"
+  title_inactive_bg_color = "#747369"
   title_font = Noto Sans 14
   title_use_system_font = False
-  title_transmit_fg_color = "#d0c8c6"
-  title_transmit_bg_color = "#3b3228"
-  title_inactive_fg_color = "#d0c8c6"
-  title_inactive_bg_color = "#7e705a"
 
 [profiles]
   [[default]]
-    palette = "#3b3228:#cb6077:#beb55b:#f4bc87:#8ab3b5:#a89bb9:#7bbda4:#d0c8c6:#7e705a:#cb6077:#beb55b:#f4bc87:#8ab3b5:#a89bb9:#7bbda4:#f5eeeb"
-    foreground_color = "#d0c8c6"
-    background_color = "#3b3228"
+    palette = "#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#d3d0c8:#747369:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#f2f0ec"
+    foreground_color = "#d3d0c8"
+    background_color = "#2d2d2d"
     background_darkness = 0.85
     background_type = transparent
-    cursor_color = "#d0c8c6"
+    cursor_color = "#d3d0c8"
     font = Noto Mono 12
     use_system_font = False
 

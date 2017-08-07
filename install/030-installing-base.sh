@@ -118,6 +118,7 @@ cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
 cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
 cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
 cp $HOME/ArchConfig/config/xorg/.xinitrc $HOME/
+cp $HOME/ArchConfig/config/xorg/.Xresources $HOME/
 cp $HOME/ArchConfig/config/bash/.bash_profile $HOME/
 
 print_message "Complete"
