@@ -77,7 +77,7 @@ fi
 print_install PACKAGES[@] $OUTPUT_FILE 
 
 print_message "Desktop"
-PACKAGES=( i3 compton feh rofi libnotify redshift unclutter )
+PACKAGES=( i3 compton feh rofi libnotify redshift unclutter xautolock )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Audio"

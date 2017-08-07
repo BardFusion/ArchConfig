@@ -22,13 +22,17 @@ blablabla this is now the result
 11. additional keybindings                                  ### DONE ###
     a. sound                                                ### DONE ###
     b. brightness                                           ### DONE ###
-    c. workspaces                                           ###     TODO ###
-        i. additional workspace configs                     ###     TODO ###
-        ii. application specific workspaces                 ###     TODO ###
+    c. workspaces                                           ### DONE ###
+        i. additional workspace configs                     ### DONE ###
+        ii. application specific workspaces                 ### DONE ###
 12. i3wm manual on website check                            ###     TODO ###
 13. scrap conky from install if possible                    ### DONE ###
 15. Laptop specific delimitations                           ### DONE ###
 16. IRSSI config                                            ###     MANUAL-CONFIG ###
+    * /network add -nick nullpointerdeception Twitch
+    * /server add -auto -network Twitch irc.chat.twitch.tv 6667 oauth:???
+    * color the nicks
+        https://github.com/irssi/scripts.irssi.org/blob/master/scripts/nickcolor.pl
 17. mpv / youtubedl install /config                         ### DONE ###
 18. firefox install / config                                ###     MANUAL-CONFIG ###
     * HTTPS Everywhere [Extension]
