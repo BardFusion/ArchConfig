@@ -72,8 +72,6 @@ bar {
 #                Shortcuts                  #
 #############################################
 
-bindsym $mod+Return exec --no-startup-id ~/.config/i3/terminator.sh
-bindsym $mod+b exec --no-startup-id ~/.config/i3/firefox.sh
 bindsym $mod+l exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+q kill
 bindsym $mod+Left focus left
@@ -96,6 +94,13 @@ bindsym $alt+Left resize shrink width 10 px or 10 ppt
 bindsym $alt+Down resize grow height 10 px or 10 ppt
 bindsym $alt+Up resize shrink height 10 px or 10 ppt
 bindsym $alt+Right resize grow width 10 px or 10 ppt
+
+bindsym $mod+Return exec --no-startup-id ~/.config/i3/terminator.sh
+bindsym $mod+b exec --no-startup-id ~/.config/i3/firefox.sh
+bindsym $mod+g exec --no-startup-id ~/.config/i3/gimp.sh
+bindsym $mod+m exec --no-startup-id ~/.config/i3/thunderbird.sh
+bindsym $mod+k exec --no-startup-id ~/.config/i3/keepass.sh
+bindsym $mod+s exec --no-startup-id ~/.config/i3/stream.sh
 
 #############################################
 #                Workspaces                 #
@@ -123,6 +128,14 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 assign [class="Terminator"] 1
 assign [class="Firefox"] 2
+assign [class="Evince"] 3
+assign [class="libreoffice-writer"] 3
+assign [class="libreoffice-calc"] 3
+assign [class="libreoffice-impress"] 3
+assign [class="Gimp"] 4
+assign [class="Thunderbird"] 5
+assign [class="keepassxc"] 6
+assign [class="mpv"] 7
 
 #############################################
 #                Autostart                  #

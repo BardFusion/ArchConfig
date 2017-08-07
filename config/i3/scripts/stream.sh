@@ -1,0 +1,1 @@
+terminator --command="mpv --fs `xclip -o` && sleep 1"

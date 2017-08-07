@@ -110,7 +110,8 @@ cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
 cp $HOME/ArchConfig/config/redshift/redshift.conf $HOME/.config/
 cp $HOME/ArchConfig/config/terminator/config $HOME/.config/terminator/
 cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
-cp $HOME/ArchConfig/config/i3/* $HOME/.config/i3/
+cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
+cp $HOME/ArchConfig/config/i3/scripts/* $HOME/.config/i3/
 cp $HOME/ArchConfig/config/xorg/.xinitrc $HOME/
 cp $HOME/ArchConfig/config/xorg/.Xresources $HOME/
 cp $HOME/ArchConfig/config/bash/.bash_profile $HOME/
