@@ -16,6 +16,8 @@
     cursor_color = "#d3d0c8"
     font = Noto Mono 12
     use_system_font = False
+    scrollbar_position = hidden
+    show_titlebar = False
 
 [layouts]
   [[default]]
