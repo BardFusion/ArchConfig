@@ -77,7 +77,7 @@ fi
 print_install PACKAGES[@] $OUTPUT_FILE 
 
 print_message "Desktop"
-PACKAGES=( i3 feh rofi libnotify xautolock redshift unclutter )
+PACKAGES=( i3 compton feh rofi libnotify redshift unclutter )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Audio"
@@ -93,7 +93,7 @@ PACKAGES=( terminator unrar unzip vim keepassxc libreoffice-fresh ranger openssh
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Media"
-PACKAGES=( mpv cmus evince transmission-cli scrot gimp youtube-dl )
+PACKAGES=( mpv cmus evince transmission-cli scrot gimp youtube-dl imagemagick )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Web"
@@ -110,7 +110,7 @@ cp -r $HOME/ArchConfig/config/wallpapers $HOME/Pictures/
 cp $HOME/ArchConfig/config/redshift/redshift.conf $HOME/.config/
 cp $HOME/ArchConfig/config/terminator/config $HOME/.config/terminator/
 cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
-cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
+cp $HOME/ArchConfig/config/i3/* $HOME/.config/i3/
 cp $HOME/ArchConfig/config/xorg/.xinitrc $HOME/
 cp $HOME/ArchConfig/config/xorg/.Xresources $HOME/
 cp $HOME/ArchConfig/config/bash/.bash_profile $HOME/

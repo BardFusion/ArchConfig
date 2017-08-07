@@ -73,7 +73,7 @@ bar {
 #############################################
 
 bindsym $mod+Return exec --no-startup-id ~/.config/i3/terminator.sh
-bindsym $mod+l exec --no-startup-id i3lock
+bindsym $mod+l exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+q kill
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -84,7 +84,7 @@ bindsym $mod+v split v
 bindsym $mod+Shift+f fullscreen toggle
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -t urgent -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t urgent -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+d exec rofi -show run -font "System San Francisco Display 16"
 bindsym Ctrl+$alt+Up exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym Ctrl+$alt+Down exec --no-startup-id pactl set-sink-volume 0 -5%
@@ -130,4 +130,5 @@ assign [class="Firefox"] 2
 exec --no-startup-id feh --bg-scale $wallpaper
 exec --no-startup-id redshift
 exec --no-startup-id unclutter
-exec --no-startup-id xautolock -time 1 -locker i3lock
+exec --no-startup-id compton
+exec --no-startup-id xautolock -time 1 -locker ~/.config/i3/lock.sh
