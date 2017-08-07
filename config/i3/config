@@ -73,7 +73,7 @@ bar {
 #############################################
 
 bindsym $mod+Return exec --no-startup-id ~/.config/i3/terminator.sh
-bindsym $mod+l exec --no-startup-id ~/.config/i3/lock.sh
+bindsym $mod+l exec --no-startup-id i3lock
 bindsym $mod+Shift+q kill
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -130,4 +130,4 @@ assign [class="Firefox"] 2
 exec --no-startup-id feh --bg-scale $wallpaper
 exec --no-startup-id redshift
 exec --no-startup-id unclutter
-exec --no-startup-id xautolock -time 1 -locker ~/.config/i3/lock.sh
+exec --no-startup-id xautolock -time 1 -locker i3lock

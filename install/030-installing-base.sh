@@ -77,7 +77,7 @@ fi
 print_install PACKAGES[@] $OUTPUT_FILE 
 
 print_message "Desktop"
-PACKAGES=( i3 compton feh rofi libnotify xautolock redshift unclutter )
+PACKAGES=( i3 feh rofi libnotify xautolock redshift unclutter )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Audio"
@@ -111,7 +111,6 @@ cp $HOME/ArchConfig/config/redshift/redshift.conf $HOME/.config/
 cp $HOME/ArchConfig/config/terminator/config $HOME/.config/terminator/
 cp $HOME/ArchConfig/config/i3blocks/config $HOME/.config/i3blocks/
 cp $HOME/ArchConfig/config/i3/config $HOME/.config/i3/
-cp $HOME/ArchConfig/config/i3/lock.sh $HOME/.config/i3/
 cp $HOME/ArchConfig/config/xorg/.xinitrc $HOME/
 cp $HOME/ArchConfig/config/xorg/.Xresources $HOME/
 cp $HOME/ArchConfig/config/bash/.bash_profile $HOME/
