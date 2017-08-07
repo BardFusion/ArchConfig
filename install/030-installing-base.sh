@@ -53,11 +53,6 @@ makepkg -i /tmp/packer --noconfirm >> $OUTPUT_FILE
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 
 print_message "Complete"
-print_message "Installing i3 window manager with gaps [AUR]"
-
-packer -S --noconfirm --noedit "i3-gaps-git" >> $OUTPUT_FILE
-
-print_message "Complete"
 print_message "Installing Resilio sync [AUR]"
 
 #software from 'normal' repositories+
@@ -82,7 +77,7 @@ fi
 print_install PACKAGES[@] $OUTPUT_FILE 
 
 print_message "Desktop"
-PACKAGES=( i3blocks i3lock i3status compton feh rofi libnotify xautolock redshift unclutter )
+PACKAGES=( i3 i3blocks compton feh rofi libnotify xautolock redshift unclutter )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Audio"
