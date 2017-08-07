@@ -67,7 +67,7 @@ systemctl --user enable rslsync.service
 print_message "Complete"
 print_message "Installing remaining software"
 print_message "System"
-PACKAGES=( bash-completion htop smartmontools ethtool sysstat screenfetch udevil )
+PACKAGES=( bash-completion htop smartmontools ethtool sysstat screenfetch udevil xclip )
 if [[ "$BOOT_TYPE" == "BIOS" ]]
 then
     PACKAGES+=( cfdisk )
@@ -77,7 +77,7 @@ fi
 print_install PACKAGES[@] $OUTPUT_FILE 
 
 print_message "Desktop"
-PACKAGES=( i3 i3blocks compton feh rofi libnotify xautolock redshift unclutter )
+PACKAGES=( i3 compton feh rofi libnotify xautolock redshift unclutter )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Audio"

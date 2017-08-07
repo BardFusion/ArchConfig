@@ -96,6 +96,11 @@ bindsym Left resize shrink width 10 px or 10 ppt
 bindsym Down resize grow height 10 px or 10 ppt
 bindsym Up resize shrink height 10 px or 10 ppt
 bindsym Right resize grow width 10 px or 10 ppt
+
+#############################################
+#                Workspaces                 #
+#############################################
+
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -116,6 +121,7 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+assign [class="Terminator"] 1
 
 #############################################
 #                Autostart                  #
