@@ -73,6 +73,7 @@ bar {
 #############################################
 
 bindsym $mod+Return exec --no-startup-id ~/.config/i3/terminator.sh
+bindsym $mod+b exec --no-startup-id ~/.config/i3/firefox.sh
 bindsym $mod+l exec --no-startup-id ~/.config/i3/lock.sh
 bindsym $mod+Shift+q kill
 bindsym $mod+Left focus left
