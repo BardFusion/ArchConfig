@@ -97,7 +97,6 @@ bindsym $alt+Right resize grow width 10 px or 10 ppt
 
 bindsym $mod+Return exec --no-startup-id ~/.config/i3/terminator.sh
 bindsym $mod+b exec --no-startup-id ~/.config/i3/firefox.sh
-bindsym $mod+g exec --no-startup-id ~/.config/i3/gimp.sh
 bindsym $mod+m exec --no-startup-id ~/.config/i3/thunderbird.sh
 bindsym $mod+k exec --no-startup-id ~/.config/i3/keepass.sh
 bindsym $mod+s exec --no-startup-id ~/.config/i3/stream.sh
@@ -106,36 +105,42 @@ bindsym $mod+s exec --no-startup-id ~/.config/i3/stream.sh
 #                Workspaces                 #
 #############################################
 
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
-assign [class="Terminator"] 1
-assign [class="Firefox"] 2
-assign [class="Evince"] 3
-assign [class="libreoffice-writer"] 3
-assign [class="libreoffice-calc"] 3
-assign [class="libreoffice-impress"] 3
-assign [class="Gimp"] 4
-assign [class="Thunderbird"] 5
-assign [class="keepassxc"] 6
-assign [class="mpv"] 7
+set $1 Terminal
+set $2 Browser
+set $3 Media
+set $4 Mail
+set $5 Pass
+set $6 Add1
+set $7 Add2
+set $8 Add3
+set $9 Add4
+set $10 Add5
+
+bindsym $mod+1 workspace $1
+bindsym $mod+2 workspace $2
+bindsym $mod+3 workspace $3
+bindsym $mod+4 workspace $4
+bindsym $mod+5 workspace $5
+bindsym $mod+6 workspace $6
+bindsym $mod+7 workspace $7
+bindsym $mod+8 workspace $8
+bindsym $mod+9 workspace $9
+bindsym $mod+0 workspace $10
+bindsym $mod+Shift+1 move container to workspace $1
+bindsym $mod+Shift+2 move container to workspace $2
+bindsym $mod+Shift+3 move container to workspace $3
+bindsym $mod+Shift+4 move container to workspace $4
+bindsym $mod+Shift+5 move container to workspace $5
+bindsym $mod+Shift+6 move container to workspace $6
+bindsym $mod+Shift+7 move container to workspace $7
+bindsym $mod+Shift+8 move container to workspace $8
+bindsym $mod+Shift+9 move container to workspace $9
+bindsym $mod+Shift+0 move container to workspace $10
+assign [class="Terminator"] $1
+assign [class="Firefox"] $2
+assign [class="mpv"] $3
+assign [class="Thunderbird"] $4
+assign [class="keepassxc"] $5
 
 #############################################
 #                Autostart                  #
