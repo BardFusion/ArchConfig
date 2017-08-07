@@ -105,16 +105,16 @@ bindsym $mod+s exec --no-startup-id ~/.config/i3/stream.sh
 #                Workspaces                 #
 #############################################
 
-set $1 Terminal
-set $2 Browser
-set $3 Media
-set $4 Mail
-set $5 Pass
-set $6 Add1
-set $7 Add2
-set $8 Add3
-set $9 Add4
-set $10 Add5
+set $1 1:Terminal
+set $2 2:Browser
+set $3 3:Media
+set $4 4:Mail
+set $5 5
+set $6 6
+set $7 7
+set $8 8
+set $9 9
+set $10 10:Pass
 
 bindsym $mod+1 workspace $1
 bindsym $mod+2 workspace $2
@@ -140,7 +140,7 @@ assign [class="Terminator"] $1
 assign [class="Firefox"] $2
 assign [class="mpv"] $3
 assign [class="Thunderbird"] $4
-assign [class="keepassxc"] $5
+assign [class="keepassxc"] $10
 
 #############################################
 #                Autostart                  #
