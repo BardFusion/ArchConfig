@@ -11,7 +11,7 @@ blablabla this is now the result
 3. General base install review packages needed              ### DONE ###
 4. Ranger config                                            ###     TODO ###
 5. Terminator theme tweaking                                ### DONE ###
-6. Rofi theme tweaking                                      ###     TODO ###
+6. Rofi theme tweaking                                      ### DONE ###
 7. KeePass install                                          ### DONE ###
 8. RSLSync install / config                                 ###     MANUAL-CONFIG ### 
 	* login at localhost:8888
@@ -27,7 +27,6 @@ blablabla this is now the result
         ii. application specific workspaces                 ###     TODO ###
 12. i3wm manual on website check                            ###     TODO ###
 13. scrap conky from install if possible                    ### DONE ###
-14. inspect i3-extras git                                   ###     TODO ###
 15. Laptop specific delimitations                           ### DONE ###
 16. IRSSI config                                            ###     MANUAL-CONFIG ###
 17. mpv / youtubedl install /config                         ### DONE ###

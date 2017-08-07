@@ -67,7 +67,7 @@ systemctl --user enable rslsync.service
 print_message "Complete"
 print_message "Installing remaining software"
 print_message "System"
-PACKAGES=( bash-completion htop smartmontools ethtool sysstat screenfetch udevil xclip )
+PACKAGES=( bash-completion htop smartmontools ethtool sysstat screenfetch udevil xclip arandr )
 if [[ "$BOOT_TYPE" == "BIOS" ]]
 then
     PACKAGES+=( cfdisk )
