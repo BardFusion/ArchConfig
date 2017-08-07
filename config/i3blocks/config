@@ -45,15 +45,15 @@ interval=2
 min_width=150
 align=center
 
-[space]
-label=ROOT
-instance=/;perc
-interval=60
+# [space]
+# label=ROOT
+# instance=/;perc
+# interval=60
 
-[space]
-label=HOME
-instance=/home;perc
-interval=60
+# [space]
+# label=HOME
+# instance=/home;perc
+# interval=60
 
 [audio]
 label=VOL
@@ -63,12 +63,6 @@ align=center
 
 [microphone]
 label=MIC
-interval=5
-min_width=90
-align=center
-
-[brightness]
-label=BRT
 interval=5
 min_width=90
 align=center
@@ -87,6 +81,12 @@ align=center
 [battery]
 label=BAT
 interval=30
+min_width=90
+align=center
+
+[brightness]
+label=BRT
+interval=5
 min_width=90
 align=center
 
