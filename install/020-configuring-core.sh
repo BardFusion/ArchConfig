@@ -72,7 +72,7 @@ systemctl enable NetworkManager
 print_message "Complete"
 print_message "Installing XORG"
 
-PACKAGES=( xorg-server xorg-xinit xorg-xrdb )
+PACKAGES=( xorg-server xorg-xinit )
 case $GPU_TYPE in
     1)
         PACKAGES+=( xf86-video-ati )

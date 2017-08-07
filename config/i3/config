@@ -11,7 +11,7 @@ floating_modifier $mod
 set $mod Mod4
 
 # Wallpaper file
-set $wallpaper ~/Pictures/wallpapers/10-13.jpg
+set $wallpaper ~/Pictures/wallpapers/active.jpg
 
 # Required for i3-gaps to work correctly
 for_window [class="^.*"] border pixel 0
