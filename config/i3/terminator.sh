@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-if [ $(ps aux | grep -c terminator) -eq 1 ]; then
-    terminator
-else
+ps cax | grep terminator
+if [ $? -eq 0 ]
+then 
     i3-msg "[class=Terminator] focus"
+else
+    terminator
 fi

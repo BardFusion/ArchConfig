@@ -9,6 +9,7 @@ floating_modifier $mod
 
 #Mod Key
 set $mod Mod4
+set $alt Mod1
 
 # Wallpaper file
 set $wallpaper ~/Pictures/wallpapers/active.jpg
@@ -71,8 +72,7 @@ bar {
 #                Shortcuts                  #
 #############################################
 
-
-bindsym $mod+Return --no-startup-id ~/.config/i3/terminator.sh
+bindsym $mod+Return exec --no-startup-id ~/.config/i3/terminator.sh
 bindsym $mod+l exec --no-startup-id ~/.config/i3/lock.sh
 exec --no-startup-id xautolock -time 1 -locker ~/.config/i3/lock.sh
 bindsym $mod+Shift+q kill
@@ -86,16 +86,16 @@ bindsym $mod+Shift+f fullscreen toggle
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t urgent -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym  $mod+d exec rofi -show run -font "System San Francisco Display 16"
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym $mod+d exec rofi -show run -font "System San Francisco Display 16"
+bindsym Ctrl+$alt+Up exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym Ctrl+$alt+Down exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym Ctrl+$alt+m exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
-# bindsym Left resize shrink width 10 px or 10 ppt
-# bindsym Down resize grow height 10 px or 10 ppt
-# bindsym Up resize shrink height 10 px or 10 ppt
-# bindsym Right resize grow width 10 px or 10 ppt
+bindsym $alt+Left resize shrink width 10 px or 10 ppt
+bindsym $alt+Down resize grow height 10 px or 10 ppt
+bindsym $alt+Up resize shrink height 10 px or 10 ppt
+bindsym $alt+Right resize grow width 10 px or 10 ppt
 
 #############################################
 #                Workspaces                 #
