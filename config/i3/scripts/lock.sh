@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ !(-n "pidof i3lock" ) ]]
+if ! pgrep -x "i3lock" > /dev/null
 then
     # Take a screenshot
     scrot /tmp/screen_locked.png
