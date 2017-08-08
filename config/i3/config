@@ -106,16 +106,16 @@ bindsym $mod+s exec --no-startup-id ~/.config/i3/stream.sh
 #                Workspaces                 #
 #############################################
 
-set $1 "1:&#xf0f2;"
-set $2 "2:&#xf269;"
-set $3 "3:&#xf01c;"
+set $1 "1 : &#xf0f2;"
+set $2 "2 : &#xf269;"
+set $3 "3 : &#xf01c;"
 set $4 "4"
 set $5 "5"
 set $6 "6"
 set $7 "7"
 set $8 "8"
 set $9 "9"
-set $10 "10:&#xf084;"
+set $10 "10 : &#xf084;"
 
 bindsym $mod+1 workspace $1
 bindsym $mod+2 workspace $2
