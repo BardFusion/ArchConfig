@@ -61,3 +61,14 @@ blablabla this is now the result
 16. IRSSI config                                            ###     MANUAL-CONFIG ###
     * /network add -nick nullpointerdeception Twitch
     * /server add -auto -network Twitch irc.chat.twitch.tv 6667 oauth:???
+
+
+## FEDORA INSTALL
+
+1. Select language
+2. change keyboard to us international
+3. select disks / reclaim space
+4. install
+5. root password
+6. new user/password
+7. complete getting started
