@@ -148,5 +148,4 @@ assign [class="keepassxc"] $10
 exec --no-startup-id compton
 exec --no-startup-id redshift
 exec --no-startup-id feh --bg-scale $wallpaper
-exec --no-startup-id xautolock -time 5 -locker ~/.config/i3/lock.sh -notify 20 -notifier 'xset dpms force off'
-exec --no-startup-id xautolock -time 7 -locker "systemctl suspend"
+exec --no-startup-id xautolock -time 5 -locker ~/.config/i3/lock.sh -notify 10 -notifier 'xset dpms force off'

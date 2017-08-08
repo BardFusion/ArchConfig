@@ -13,10 +13,6 @@ blablabla this is now the result
 5. Terminator theme tweaking                                ### DONE ###
 6. Rofi theme tweaking                                      ### DONE ###
 7. KeePass install                                          ### DONE ###
-8. RSLSync install / config                                 ###     MANUAL-CONFIG ### 
-	* login at localhost:8888
-	* fill in account
-	* enter folder links
 9. LaTeX editor science install / config                    ###     TODO ###
 10. Compton optimization                                    ### DONE ###
 11. additional keybindings                                  ### DONE ###
@@ -28,10 +24,9 @@ blablabla this is now the result
 12. i3wm manual on website check                            ###     TODO ###
 13. scrap conky from install if possible                    ### DONE ###
 15. Laptop specific delimitations                           ### DONE ###
-16. IRSSI config                                            ###     MANUAL-CONFIG ###
-    * /network add -nick nullpointerdeception Twitch
-    * /server add -auto -network Twitch irc.chat.twitch.tv 6667 oauth:???
 17. mpv / youtubedl install /config                         ### DONE ###
+
+
 18. firefox install / config                                ###     MANUAL-CONFIG ###
     * HTTPS Everywhere [Extension]
     * uBlock origin [Extension]
@@ -46,9 +41,19 @@ blablabla this is now the result
         Applications    -   PDF                         -   Always ask
         Privacy         -   Firefox will                -   Never remember history
         Final           -   Restart
+
+8. RSLSync install / config                                 ###     MANUAL-CONFIG ### 
+	* login at localhost:8888
+	* fill in account
+	* enter folder links
+
 19. Thunderbird email config                                ###     MANUAL-CONFIG ###
     * Set layout to vertical
     * Add email accounts
 20. Network wifi                                            ###     MANUAL-CONFIG ###
     * nmtui activate network
     * wifi enter password
+
+16. IRSSI config                                            ###     MANUAL-CONFIG ###
+    * /network add -nick nullpointerdeception Twitch
+    * /server add -auto -network Twitch irc.chat.twitch.tv 6667 oauth:???
