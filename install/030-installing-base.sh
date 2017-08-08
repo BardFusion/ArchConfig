@@ -98,7 +98,7 @@ PACKAGES=( terminator unrar unzip vim keepassxc libreoffice-fresh ranger openssh
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Media"
-PACKAGES=( mpv cmus evince transmission-cli scrot gimp youtube-dl imagemagick )
+PACKAGES=( mpv cmus evince transmission-cli scrot gimp youtube-dl )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Web"
