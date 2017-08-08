@@ -1,2 +1,4 @@
-i3-msg workspace 3:Media
+#!/usr/bin/env bash
+
+i3-msg workspace 4
 mpv --fs $(xclip -o)

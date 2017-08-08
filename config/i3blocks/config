@@ -25,80 +25,76 @@
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
 command=/usr/lib/i3blocks/$BLOCK_NAME
-separator_block_width=10
+separator_block_width=40
 markup=none
 
-[network]
-interval=10
-min_width=110
-align=center
 
 [bandwidth]
 instance=in
 interval=2
-min_width=150
 align=center
 
 # [bandwidth]
 # instance=out
 # interval=2
-# min_width=150
 # align=center
+
+[network]
+interval=10
+align=center
 
 # [space]
 # label=ROOT
 # instance=/;perc
 # interval=60
+# align=center
 
 # [space]
 # label=HOME
 # instance=/home;perc
 # interval=60
+# align=center
 
 [audio]
-label=VOL
+label=
 interval=2
-min_width=90
 align=center
 
 # [microphone]
 # label=MIC
 # interval=5
-# min_width=90
 # align=center
 
 [brightness]
-label=BRT
+label=
 interval=5
-min_width=90
 align=center
 
 [battery]
-label=BAT
+label=
 interval=30
-min_width=90
 align=center
 
 [cpu]
-label=CPU
+label=
 interval=5
-min_width=90
 align=center
 
 [temperature]
+label=
 interval=10
-min_width=50
 align=center
 
 [memory]
-label=RAM
+label=
 instance=mem;used
 interval=30
-min_width=110
 align=center
 
 [date]
 interval=60
+align=center
 
 [time]
 interval=5
+align=center

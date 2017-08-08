@@ -2,7 +2,7 @@
 #                  General                  #
 #############################################
 # Font
-font pango:DejaVu Sans Mono 16
+font pango:FontAwesome 16
 
 # Floating modifier (mouse+$mod)
 floating_modifier $mod
@@ -53,10 +53,11 @@ bar {
 	status_command i3blocks
 	tray_output primary
 	position top
+    separator_symbol ">>"
 
         colors {
         background $base00
-        separator  $base01
+        separator  $base0D
         statusline $base04
 
         # Class             Border  BG      Text
@@ -95,7 +96,7 @@ bindsym $alt+Down resize grow height 10 px or 10 ppt
 bindsym $alt+Up resize shrink height 10 px or 10 ppt
 bindsym $alt+Right resize grow width 10 px or 10 ppt
 
-bindsym $mod+Return exec --no-startup-id ~/.config/i3/terminator.sh
+bindsym $mod+Return exec terminator
 bindsym $mod+b exec --no-startup-id ~/.config/i3/firefox.sh
 bindsym $mod+m exec --no-startup-id ~/.config/i3/thunderbird.sh
 bindsym $mod+k exec --no-startup-id ~/.config/i3/keepass.sh
@@ -105,16 +106,16 @@ bindsym $mod+s exec --no-startup-id ~/.config/i3/stream.sh
 #                Workspaces                 #
 #############################################
 
-set $1 1:Main
-set $2 2:Browse
-set $3 3:Media
-set $4 4:Mail
-set $5 5
-set $6 6
-set $7 7
-set $8 8
-set $9 9
-set $10 10:Pass
+set $1 "1:&#xf0f2;"
+set $2 "2:&#xf269;"
+set $3 "3:&#xf01c;"
+set $4 "4"
+set $5 "5"
+set $6 "6"
+set $7 "7"
+set $8 "8"
+set $9 "9"
+set $10 "10:&#xf084;"
 
 bindsym $mod+1 workspace $1
 bindsym $mod+2 workspace $2
@@ -137,7 +138,7 @@ bindsym $mod+Shift+8 move container to workspace $8
 bindsym $mod+Shift+9 move container to workspace $9
 bindsym $mod+Shift+0 move container to workspace $10
 assign [class="Firefox"] $2
-assign [class="Thunderbird"] $4
+assign [class="Thunderbird"] $3
 assign [class="keepassxc"] $10
 
 #############################################
@@ -145,7 +146,7 @@ assign [class="keepassxc"] $10
 #############################################
 
 exec --no-startup-id compton
-exec --no-startup-id unclutter
 exec --no-startup-id redshift
 exec --no-startup-id feh --bg-scale $wallpaper
-exec --no-startup-id xautolock -time 5 -locker ~/.config/i3/lock.sh
+exec --no-startup-id xautolock -time 5 -locker ~/.config/i3/lock.sh -notify 20 -notifier 'xset dpms force off'
+exec --no-startup-id xautolock -time 7 -locker "systemctl suspend"

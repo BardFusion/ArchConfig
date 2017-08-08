@@ -53,9 +53,13 @@ makepkg -i /tmp/packer --noconfirm >> $OUTPUT_FILE
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 
 print_message "Complete"
+print_message "Installing font-awesomw [AUR]"
+
+packer -S --noconfirm --noedit "ttf-font-awesome" >> $OUTPUT_FILE
+
+print_message "Complete"
 print_message "Installing Resilio sync [AUR]"
 
-#software from 'normal' repositories+
 packer -S --noconfirm --noedit "rslsync" >> $OUTPUT_FILE
 cp $HOME/ArchConfig/config/resilio/rslsync.conf $HOME/.config/rslsync/
 sed -i "s/\/var\/lib\/rslsync/\/home\/$USER\/.config\/rslsync/g" $HOME/.config/rslsync/rslsync.conf
@@ -77,7 +81,7 @@ fi
 print_install PACKAGES[@] $OUTPUT_FILE 
 
 print_message "Desktop"
-PACKAGES=( i3 compton feh rofi libnotify redshift unclutter xautolock )
+PACKAGES=( i3 compton feh rofi libnotify redshift xautolock )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Audio"

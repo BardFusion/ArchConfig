@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-ps cax | grep i3lock
-if [ $? -ne 0 ]
-then 
+if [[ !(-n "pidof i3lock" ) ]]
+then
     # Take a screenshot
     scrot /tmp/screen_locked.png
 
