@@ -23,7 +23,8 @@ done
 mkdir -p $HOME/.config/i3
 mkdir -p $HOME/.config/i3blocks
 mkdir -p $HOME/.config/rslsync
-mkdir -p $HOME/.config/terminator/
+mkdir -p $HOME/.config/terminator
+mkdir -p $HOME/.irssi/scripts/autorun
 
 print_message "Complete"
 print_message "Updating mirrorlist"
@@ -119,6 +120,9 @@ cp $HOME/ArchConfig/config/i3/scripts/* $HOME/.config/i3/
 cp $HOME/ArchConfig/config/xorg/.xinitrc $HOME/
 cp $HOME/ArchConfig/config/xorg/.Xresources $HOME/
 cp $HOME/ArchConfig/config/bash/.bash_profile $HOME/
+
+cp $HOME/ArchConfig/config/irssi/nickcolor.pl $HOME/.irssi/scripts/
+ln -s $HOME/.irssi/scripts/nickcolor.pl $HOME/.irssi/scripts/autorun/
 
 print_message "Complete"
 
