@@ -31,8 +31,6 @@ blablabla this is now the result
 16. IRSSI config                                            ###     MANUAL-CONFIG ###
     * /network add -nick nullpointerdeception Twitch
     * /server add -auto -network Twitch irc.chat.twitch.tv 6667 oauth:???
-    * color the nicks
-        https://github.com/irssi/scripts.irssi.org/blob/master/scripts/nickcolor.pl
 17. mpv / youtubedl install /config                         ### DONE ###
 18. firefox install / config                                ###     MANUAL-CONFIG ###
     * HTTPS Everywhere [Extension]
@@ -51,3 +49,6 @@ blablabla this is now the result
 19. Thunderbird email config                                ###     MANUAL-CONFIG ###
     * Set layout to vertical
     * Add email accounts
+20. Network wifi                                            ###     MANUAL-CONFIG ###
+    * nmtui activate network
+    * wifi enter password
