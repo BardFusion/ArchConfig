@@ -41,6 +41,8 @@ blablabla this is now the result
         Applications    -   PDF                         -   Always ask
         Privacy         -   Firefox will                -   Never remember history
         Final           -   Restart
+        Delete history
+        Delete bookmarks
 
 8. RSLSync install / config                                 ###     MANUAL-CONFIG ### 
 	* login at localhost:8888
