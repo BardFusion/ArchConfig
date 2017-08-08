@@ -49,6 +49,8 @@ blablabla this is now the result
 	* fill in account
 	* enter folder links
 
+9. keepass security lock after 240 seconds                  ###     MANUAL-CONFIG ###
+
 19. Thunderbird email config                                ###     MANUAL-CONFIG ###
     * Set layout to vertical
     * Add email accounts
