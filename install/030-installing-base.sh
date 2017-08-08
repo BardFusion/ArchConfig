@@ -54,7 +54,7 @@ makepkg -i /tmp/packer --noconfirm >> $OUTPUT_FILE
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 
 print_message "Complete"
-print_message "Installing font-awesomw [AUR]"
+print_message "Installing font-awesome [AUR]"
 
 packer -S --noconfirm --noedit "ttf-font-awesome" >> $OUTPUT_FILE
 
