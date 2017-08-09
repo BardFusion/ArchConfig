@@ -5,6 +5,8 @@ set -e
 source ./ArchConfig/install/999-print-functions.sh
 BOOT_TYPE=$([ -d /sys/firmware/efi ] && echo UEFI || echo BIOS)
 
+git clone https://github.com/BardFusion/ArchConfig.git
+
 su
 dnf check-update
 dnf upgrade
