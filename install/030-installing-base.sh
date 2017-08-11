@@ -54,6 +54,11 @@ makepkg -i /tmp/packer --noconfirm >> $OUTPUT_FILE
 [ -d /tmp/packer ] && rm -rf /tmp/packer
 
 print_message "Complete"
+print_message "Installing vs-code [AUR]"
+
+packer -S --noconfirm --noedit "visual-studio-code" >> $OUTPUT_FILE
+
+print_message "Complete"
 print_message "Installing font-awesome [AUR]"
 
 packer -S --noconfirm --noedit "ttf-font-awesome" >> $OUTPUT_FILE
@@ -82,7 +87,7 @@ fi
 print_install PACKAGES[@] $OUTPUT_FILE 
 
 print_message "Desktop"
-PACKAGES=( i3 compton feh rofi libnotify redshift xautolock )
+PACKAGES=( i3 feh rofi libnotify redshift xautolock )
 print_install PACKAGES[@] $OUTPUT_FILE
 
 print_message "Audio"

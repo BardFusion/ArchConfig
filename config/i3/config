@@ -97,6 +97,7 @@ bindsym $alt+Up resize shrink height 10 px or 10 ppt
 bindsym $alt+Right resize grow width 10 px or 10 ppt
 
 bindsym $mod+Return exec terminator
+bindsym $mod+c exec --no-startup-id ~/.config/i3/code.sh
 bindsym $mod+b exec --no-startup-id ~/.config/i3/firefox.sh
 bindsym $mod+m exec --no-startup-id ~/.config/i3/thunderbird.sh
 bindsym $mod+k exec --no-startup-id ~/.config/i3/keepass.sh
@@ -137,6 +138,7 @@ bindsym $mod+Shift+7 move container to workspace $7
 bindsym $mod+Shift+8 move container to workspace $8
 bindsym $mod+Shift+9 move container to workspace $9
 bindsym $mod+Shift+0 move container to workspace $10
+assign [class="Code"] $1
 assign [class="Firefox"] $2
 assign [class="Thunderbird"] $3
 assign [class="keepassxc"] $10
@@ -145,7 +147,6 @@ assign [class="keepassxc"] $10
 #                Autostart                  #
 #############################################
 
-exec --no-startup-id compton
 exec --no-startup-id redshift
 exec --no-startup-id feh --bg-scale $wallpaper
 exec --no-startup-id xautolock -time 5 -locker ~/.config/i3/lock.sh -notify 10 -notifier 'xset dpms force off'
